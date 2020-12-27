@@ -13,7 +13,7 @@
     border-bottom: 2px solid black;
 }
 
-h3 {
+.AboutSubHeaders {
     margin: 30px;
     padding: 20px;
     font-family: "Trebuchet MS", sans-serif;
@@ -22,7 +22,7 @@ h3 {
     text-transform: uppercase;
 }
 
-p {
+.AboutParagraph {
     display: block;
     margin: auto;
     width: 60%;

@@ -14,7 +14,7 @@ const ProjectComponent = props => {
                         waves />
                     <MDBCardBody>
                         <MDBCardTitle>{props.cardTitle}</MDBCardTitle>
-                        <h8 className="indigo-text"><strong>Field</strong></h8>
+                        <p className="indigo-text"><strong>{props.cardField}</strong></p>
                         <MDBCardText>{props.cardText}</MDBCardText>
                         <MDBBtn href={props.cardLink}>Learn More</MDBBtn>
                     </MDBCardBody>

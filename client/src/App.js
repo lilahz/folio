@@ -6,6 +6,7 @@ import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import LandingComponent from './Components/LandingComponent/LandingComponent';
 import ProjectCarouselComponent from './Components/ProjectComponent/ProjectCarouselComponent';
 import RegisterComponent from './Components/RegisterComponent/RegisterComponent';
+import RegisterForm from './Components/RegisterComponent/RegisterForm';
 import AllProjectsComponent from './Components/ProjectComponent/AllProjectsComponent';
 import AllJuniorsComponent from './Components/JuniorComponent/AllJuniorsComponent';
 import AboutComponent from './Components/AboutComponent/AboutComponent';

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row} from 'react-bootstrap';
 
-import './AboutComponent.css';
+import classes from './AboutComponent.module.css';
 import TeamComponent from './TeamComponent';
 
 import picAyelet from './images/ayelet.jpg';
@@ -14,15 +14,19 @@ const AboutComponent = () => {
             marginRight: "5%",
         }
         
-        return (
-       <div class="AboutDiv">
-           <h1 class="AboutHeader">About Us</h1>
-           <h3>Our Work</h3>
-           <p>Creating a platform that connects juniors to non-profits 
-               organizations and small businesses. The juniors will gain
+    return (
+       <div className={classes.AboutComponent}>
+           <h1 className={classes.AboutComponent}>About Us</h1>
+           <h3 className={classes.AboutComponent}>Our Work</h3>
+           <p className={classes.AboutComponent}>
+                Creating a platform that connects juniors to non-profits 
+                organizations and small businesses. The juniors will gain
                 the experience they lack of and the businesses will receive 
-                the services they need.</p>
-            <h3>Meet <b>PRO</b><span>jects </span>Team</h3>
+                the services they need.
+            </p>
+            <h3 className={classes.AboutComponent}>
+                Meet <b>PRO</b><span className={classes.AboutComponent}>jects </span>Team
+            </h3>
             <Row style={RowStyle}>
                 <TeamComponent className="col-sm-4"
                             cardImage={picOron}
@@ -43,10 +47,6 @@ const AboutComponent = () => {
                             cardFB="https://www.facebook.com/ayelet.biran"
                             cardLD="https://www.linkedin.com/in/ayelet-biran-46b4ab147/" />
             </Row>
-
-
-
-
        </div>
     )
 }

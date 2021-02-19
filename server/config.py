@@ -17,7 +17,7 @@ class DevelopmentConfig(Config):
     Configurations for the development environment - local environment
     """
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:yemi1234@localhost:5432/folio_db'
+    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/folio_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

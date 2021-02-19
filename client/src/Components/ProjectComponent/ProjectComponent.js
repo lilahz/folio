@@ -3,7 +3,7 @@ import {MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, M
 
 import './ProjectComponent.css';
 
-const ProjectComponent = () => {
+const ProjectComponent = props => {
     return (
         <div className="ProjectItem">
             <MDBCol style={{ maxWidth: "22rem"}}>
@@ -13,9 +13,10 @@ const ProjectComponent = () => {
                         src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                         waves />
                     <MDBCardBody>
-                        <MDBCardTitle>Card title</MDBCardTitle>
-                        <MDBCardText>Some quick example text to build on the card title and make up the bulk of the card's content.</MDBCardText>
-                        <MDBBtn href="#">Click</MDBBtn>
+                        <MDBCardTitle>{props.cardTitle}</MDBCardTitle>
+                        <h8 className="indigo-text"><strong>Field</strong></h8>
+                        <MDBCardText>{props.cardText}</MDBCardText>
+                        <MDBBtn href={props.cardLink}>Learn More</MDBBtn>
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>

@@ -26,7 +26,7 @@ class ProductionConfig(Config):
     Configurations for the production environment - external environment
     """
     DEBUG = False
-    # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', HERUKO_POSTGRES)
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', HERUKO_POSTGRES)
 
 
 config_by_mode = dict(dev=DevelopmentConfig, prod=ProductionConfig)

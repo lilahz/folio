@@ -63,9 +63,9 @@ class AllProjectComponent extends Component {
         else if (!isLoaded) {
             return <div>Loading...</div>}
         else { 
-            const field_array = ["Marketing", "App Development", "Web Development",
-                                "Logo Design", "Web Design", "Financial Aid", "Legal Aid", "Sales"]
-            const status_array = ["Not Started", "In Progress", "Completed"]
+            // const field_array = ["Marketing", "App Development", "Web Development",
+            //                     "Logo Design", "Web Design", "Financial Aid", "Legal Aid", "Sales"]
+            // const status_array = ["Not Started", "In Progress", "Completed"]
             
             const projects_array = (<Row style={RowStyle}>
                 {items.map((project) => (

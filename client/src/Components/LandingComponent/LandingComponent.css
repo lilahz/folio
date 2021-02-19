@@ -24,14 +24,14 @@
 }
 
 .LandingLeft p {
-    align-content: center;
+    align-self: center;
     max-width: 70%;
     padding-left: 20px;
 }
 
 .LandingLeft div {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     min-width: 40%;
     margin: 16px;
 }

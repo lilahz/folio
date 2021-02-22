@@ -13,7 +13,7 @@ from server.views.join_project_bp.view import join_project_bp
 
 def create_app(config_mode):
 
-    app = Flask(__name__, static_url_path='/', static_folder='client/build')
+    app = Flask(__name__, static_url_path='/', static_folder='../client/build')
     app.config.from_object(config_by_mode[config_mode])
 
     cors = CORS(app)

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Carousel, Row} from 'react-bootstrap';
-
 import ProjectComponent from './ProjectComponent';
-import './ProjectComponent.css';
+import '../ItemComponent.css';
 
 class ProjectCarouselComponent extends Component {
     constructor(props) {
@@ -64,22 +63,28 @@ class ProjectCarouselComponent extends Component {
             return (<div className="Carousel" style={this.state}>
             <h3>Our Open Projects</h3>
             <Carousel>
-                <Carousel.Item interval={1000}>
+                <Carousel.Item interval={1000} key={this.props.key}>
                     <Row style={RowStyle}>
                         {items.slice(0,3).map((project) => (
-                            <ProjectComponent cardTitle={project.company_name} cardText={project.description} cardLink="#"/>))}
+                            <ProjectComponent key={project.id} 
+                                cardTitle={project.company_name} 
+                                cardText={project.description} 
+                                cardField={project.field}/>
+                            ))}
                     </Row>
                 </Carousel.Item>
-                <Carousel.Item interval={500}>
+                <Carousel.Item interval={500} key={this.props.key}>
                     <Row style={RowStyle}>
                     {items.slice(3,6).map((project) => (
-                            <ProjectComponent cardTitle={project.company_name} cardText={project.description} cardLink="#"/>))}
+                            <ProjectComponent key={project.id} 
+                            cardTitle={project.company_name} cardText={project.description} cardField={project.field}/>))}
                     </Row>
                 </Carousel.Item>
-                <Carousel.Item >
+                <Carousel.Item key={this.props.key}>
                     <Row style={RowStyle}>
                     {items.slice(6,9).map((project) => (
-                            <ProjectComponent cardTitle={project.company_name} cardText={project.description} cardLink="#"/>))}
+                            <ProjectComponent key={project.id} 
+                            cardTitle={project.company_name} cardText={project.description} cardField={project.field}/>))}
                     </Row>
                 </Carousel.Item>
             </Carousel>

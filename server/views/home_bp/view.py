@@ -26,6 +26,7 @@ def get_all_projects():
     json_string = json.dumps([project.dump(Company.get_company_name_by_id(project.company_id)) for project in all_projects])
     return json_string
 
+
 home_bp.add_url_rule('/', 'home_page', home_page, methods=['GET'])
-home_bp.add_url_rule('/juniors', 'get_all_juniors', get_all_juniors, methods=['GET', 'POST'])
-home_bp.add_url_rule('/projects', 'get_all_projects', get_all_projects, methods=['GET', 'POST'])
+home_bp.add_url_rule('/juniors', 'get_all_juniors', get_all_juniors, methods=['GET'])
+home_bp.add_url_rule('/projects', 'get_all_projects', get_all_projects, methods=['GET'])

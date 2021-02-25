@@ -11,3 +11,8 @@ server/views/__pycache__/auth.cpython-39.pyc
 server/views/auth/__pycache__/auth_company.cpython-39.pyc
 server/views/auth/__pycache__/auth_junior.cpython-39.pyc
 server/views/auth/__pycache__/view.cpython-39.pyc
+client/package-lock.json
+.gitignore
+client/.eslintcache 
+client/node_modules/
+node_modules/

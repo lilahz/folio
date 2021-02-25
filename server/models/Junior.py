@@ -12,15 +12,16 @@ class Junior(UserMixin, db.Model):
     password_hash = db.Column(db.String(120), nullable=False)
     full_name = db.Column(db.String(120), nullable=False)
     phone_number = db.Column(db.Text)
+    field = db.Column(db.ARRAY(db.String(50))) 
     # image = db.Column()
-    # skills = db.Column(db)
     website = db.Column(db.String(120))
     about_me = db.Column(db.Text)
 
-    def __init__(self, email, full_name, phone_number, website, about_me):
+    def __init__(self, email, full_name, phone_number, field, website, about_me):
         self.email = email
         self.full_name = full_name
         self.phone_number = phone_number
+        self.field = field
         self.website = website
         self.about_me = about_me
 
@@ -45,5 +46,6 @@ class Junior(UserMixin, db.Model):
                 'email': self.email,
                 'full_name': self.full_name,
                 'phone_number': self.phone_number,
+                'field': self.field,
                 'website': self.website,
                 'about_me': self.about_me}

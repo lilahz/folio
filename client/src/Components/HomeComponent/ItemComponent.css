@@ -16,11 +16,28 @@
     color: #555454;
 }
 
-.ProjectItem {
+.Item {
     padding: 16px;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 48px;
     max-width: 30%;
-    max-height: 50%;
+    border-radius: 20%;
+    align-items: stretch;
 }
+
+.ItemBody {
+    height: 9em;
+}
+
+.ItemFooter {
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Modal {
+    overflow-y: scroll;
+
+} 

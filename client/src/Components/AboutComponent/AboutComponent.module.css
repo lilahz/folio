@@ -1,34 +1,37 @@
-.AboutDiv {
+.AboutComponent div {
     font-family: "Trebuchet MS", sans-serif;
     text-align: center;
 }
 
-.AboutHeader {
+.AboutComponent h1 {
     margin: 30px;
     padding: 20px;
     font-family: "Trebuchet MS", sans-serif;
     font-size: 3em;
     letter-spacing: -2px;
     text-transform: uppercase;
+    text-align: center;
     border-bottom: 2px solid black;
 }
 
-.AboutSubHeaders {
+.AboutComponent h3 {
     margin: 30px;
     padding: 20px;
     font-family: "Trebuchet MS", sans-serif;
     font-size: 2em;
     letter-spacing: -2px;
     text-transform: uppercase;
+    text-align: center;
 }
 
-.AboutParagraph {
+
+.AboutComponent p {
     display: block;
     margin: auto;
     width: 60%;
     font-size: 1em;
 }
 
-span {
+.AboutComponent span {
     font-size: 80%;
 }

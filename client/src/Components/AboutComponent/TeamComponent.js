@@ -2,16 +2,16 @@ import React from 'react';
 import {MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn} from 'mdbreact';
 import { FaFacebookSquare, FaLinkedin } from 'react-icons/fa';
 
-import './TeamComponent.css';
+import classes from './TeamComponent.module.css';
 
 const TeamComponent = props => {
 
     return (
-        <div className="TeamItem">
+        <div className={classes.TeamItem}>
             <MDBCol style={{ maxWidth: "22rem"}}>
                 <MDBCard style={{boxShadow: "0 8px 6px -6px #4d4d4d"}}>
                     <MDBCardImage 
-                        className="img-fluid" 
+                        className={classes.img_fluid} 
                         src={props.cardImage}
                         waves />
                     <MDBCardBody>

@@ -14,15 +14,15 @@ const RegisterForm = props => {
       about: ""
     })
 
-    const sendDetailsToServer = () => {
-      fetch('/')
-    }
+    // const sendDetailsToServer = () => {
+    //   fetch('/')
+    // }
 
-    const handleSubmitClicked = (e) => {
-      e.preventDefault();
-      if (state.password === state.confirm_password) {
-        sendDetailsToServer();
-      }
+    // const handleSubmitClicked = (e) => {
+    //   e.preventDefault();
+    //   if (state.password === state.confirm_password) {
+    //     sendDetailsToServer();
+    //   }
       console.log("current state ", state)
     }
 

@@ -23,8 +23,8 @@ const RegisterForm = props => {
     //   if (state.password === state.confirm_password) {
     //     sendDetailsToServer();
     //   }
-      console.log("current state ", state)
-    }
+    //   console.log("current state ", state)
+    // }
 
     return (
       <div>
@@ -145,7 +145,7 @@ const RegisterForm = props => {
             href="/register/junior"
             variant="outline-secondary"
             style={{margin: "8px"}}
-            onClick={handleSubmitClicked}
+            // onClick={handleSubmitClicked}
             block>
               submit
           </Button>

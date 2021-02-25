@@ -12,7 +12,6 @@ const LandingComponent = () => {
     return (
         <div className="Landing">
             <div className="LandingLeft">
-                {/* <h1>FOLIO</h1> */}
                 <h1><b>PRO</b><span>jects</span></h1>
                 <p>Creating a platform that connects juniors to non-profits organizations and small businesses.
                     The juniors will gain the experience they lack of and the businesses will receive the services they need.

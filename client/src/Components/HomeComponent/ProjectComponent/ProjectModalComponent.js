@@ -21,8 +21,8 @@ render() {
         </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p> Searching for help with: {this.props.modalField} </p>
-            <p> Description: {this.props.modalDescription} </p>
+            Searching for help with: {this.props.modalField} <br />
+            Description: {this.props.modalDescription}
         </Modal.Body>
         <Modal.Footer>
             <Row>

@@ -1,8 +1,6 @@
 import React from 'react';
 import {Row} from 'react-bootstrap';
-
 import ProjectComponent from './ProjectComponent';
-import './ProjectComponent.css';
 import './ProjectsComponent.css';
 
 export default function ProjectsComponent(props) {
@@ -13,7 +11,7 @@ export default function ProjectsComponent(props) {
                             cardTitle={project.company_name} 
                             cardText={project.description} 
                             cardField={project.field}
-                            cardLink="#"/>))}
+                            />))}
                 </Row>
     </div>
 }

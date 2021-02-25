@@ -1,5 +1,5 @@
 import React from 'react';
-import {MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardSu} from 'mdbreact';
+import {MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn} from 'mdbreact';
 import { FaFacebookSquare, FaLinkedin } from 'react-icons/fa';
 
 import './TeamComponent.css';

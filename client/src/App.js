@@ -4,10 +4,10 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import LandingComponent from './Components/LandingComponent/LandingComponent';
-import ProjectCarouselComponent from './Components/ProjectComponent/ProjectCarouselComponent';
+import ProjectCarouselComponent from './Components/HomeComponent/ProjectComponent/ProjectCarouselComponent';
 import RegisterComponent from './Components/RegisterComponent/RegisterComponent';
-import AllProjects from './Components/ProjectComponent/AllProjects';
-import AllJuniorsComponent from './Components/JuniorComponent/AllJuniorsComponent';
+import AllProjects from './Components/HomeComponent/ProjectComponent/AllProjects';
+import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
 
 
@@ -29,7 +29,7 @@ class App extends Component {
               <AllProjects />
             </Route>
             <Route path="/home/juniors">
-              <AllJuniorsComponent />
+              <AllJuniors />
             </Route>
             <Route path="/home/about">
               <AboutComponent />

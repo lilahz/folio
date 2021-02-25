@@ -8,3 +8,15 @@
     text-align: center;
     border-bottom: 2px solid black;
 }
+
+.FilterRow {
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+    background-color: blue;
+    align-content: center ;
+    justify-content: center;
+    /* align-items: center; */
+    width: 100%;
+}
+

@@ -1,0 +1,8 @@
+.emptyState {
+    background-color: green;
+    Display: flex;
+    Height: 100vh;
+    Width: 100vw; 
+    Align-Items: center;
+    Justify-Content: centre;
+}

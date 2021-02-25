@@ -10,4 +10,4 @@ else:
 
 if __name__ == '__main__':
     app.run()
-    return app.send_static_file('index.html')
+    app.send_static_file('index.html')

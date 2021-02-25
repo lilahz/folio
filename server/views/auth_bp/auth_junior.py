@@ -4,10 +4,11 @@ from flask_login import login_required, logout_user, current_user, login_user
 from server.models.Junior import Junior
 from server.models import login_manager
 
+
 def junior_register():
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return jsonify({'message' : 'User already logged in'})
+        return jsonify({'message': 'User already logged in'})
         
     data = request.form
     email = data.get('email')
@@ -28,9 +29,9 @@ def junior_register():
         Junior.add_new_junior(new_junior)
 
         if remember_me:
-            login_user(new_junior, remember=true) # Log in with the newly created user with remember me on
+            login_user(new_junior, remember=True)  # Log in with the newly created user with remember me on
         else: 
-            login_user(new_junior) # Log in with the newly created user with remember me off
+            login_user(new_junior)  # Log in with the newly created user with remember me off
         
         return jsonify({'message': 'user created successfully'}), 200
     else:
@@ -51,7 +52,7 @@ def junior_login():
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:
-            login_user(junior, remember=true) # Log in with the existing user with remember me on
+            login_user(junior, remember=True) # Log in with the existing user with remember me on
         else: 
             login_user(junior) # Log in with the existing user with remember me off
         return jsonify({'message': 'User logged in successfully'})
@@ -67,13 +68,15 @@ def load_user(user_id):  # Checks if user is logged-in on every page load.
         return Junior.query.get(user_id)
     return None
 
+
 @login_manager.unauthorized_handler
 def unauthorized(): # Redirect unauthorized users to Login page.
     return jsonify({'error': 'You must be logged in to view that page.'}), 403 
 
+
 @login_required 
- # @login_manager.user_loader determines wether or not the user is logged in 
- # & @login_manager.unauthorized_handler - if the user is not logged in 
+# @login_manager.user_loader determines wether or not the user is logged in
+# & @login_manager.unauthorized_handler - if the user is not logged in
 def junior_logout():
     logout_user()
     return jsonify({'message': 'User logged out successfully'})

@@ -14,17 +14,26 @@ const RegisterForm = props => {
       about: ""
     })
 
-    // const sendDetailsToServer = () => {
-    //   fetch('/')
-    // }
+    const sendDetailsToServer = () => {
+      fetch('/auth/company_register', {
+        method:"POST",
+        cache: "no-cache",
+        headers:{
+            "content_type":"application/json",
+        },
+        body:JSON.stringify(state)
+      })
+        .then(response => {
+          console.log(response)
+        })
+    }
 
-    // const handleSubmitClicked = (e) => {
-    //   e.preventDefault();
-    //   if (state.password === state.confirm_password) {
-    //     sendDetailsToServer();
-    //   }
-    //   console.log("current state ", state)
-    // }
+    const handleSubmitClicked = (e) => {
+      e.preventDefault();
+      console.log("current state ", state)
+      // TODO: add form validation - name cannot be empty, email validation, password validation, ... 
+      sendDetailsToServer();
+    }
 
     return (
       <div>
@@ -145,7 +154,7 @@ const RegisterForm = props => {
             href="/register/junior"
             variant="outline-secondary"
             style={{margin: "8px"}}
-            // onClick={handleSubmitClicked}
+            onClick={handleSubmitClicked}
             block>
               submit
           </Button>

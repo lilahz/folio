@@ -29,7 +29,7 @@ def company_register():
         Company.add_new_company(new_company)
 
         if remember_me:
-            login_user(new_company, remember=true) # Log in with the newly created user with remember me on
+            login_user(new_company, remember=True) # Log in with the newly created user with remember me on
         else: 
             login_user(new_company) # Log in with the newly created user with remember me off
         
@@ -52,7 +52,7 @@ def company_login():
     company = Company.query.filter_by(email=email).first()
     if company and company.check_password(password):
         if remember_me:
-            login_user(company, remember=true) # Log in with the existing user with remember me on
+            login_user(company, remember=True)  # Log in with the existing user with remember me on
         else: 
             login_user(company) # Log in with the existing user with remember me off
         return jsonify({'message': 'User logged in successfully'})
@@ -68,13 +68,15 @@ def load_user(user_id):  # Checks if user is logged-in on every page load.
         return Company.query.get(user_id)
     return None
 
+
 @login_manager.unauthorized_handler
 def unauthorized(): # Redirect unauthorized users to Login page.
     return jsonify({'error': 'You must be logged in to view that page.'}), 403 
 
+
 @login_required 
- # @login_manager.user_loader determines wether or not the user is logged in 
- # & @login_manager.unauthorized_handler - if the user is not logged in 
+# @login_manager.user_loader determines wether or not the user is logged in
+# & @login_manager.unauthorized_handler - if the user is not logged in
 def company_logout():
     logout_user()
     return jsonify({'message': 'User logged out successfully'})

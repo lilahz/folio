@@ -9,8 +9,7 @@ def company_register():
     # Bypass if user is logged in
     if current_user.is_authenticated:
         return jsonify({'message' : 'User already logged in'})
-        
-    data = request.form
+    data = request.json
     email = data.get('email')
 
     company = Company.query.filter_by(email=email).first() # check if this email is already registered
@@ -25,6 +24,7 @@ def company_register():
             data.get('website'),
             data.get('about_me')
         )
+
         new_company.set_password(password)
         Company.add_new_company(new_company)
 

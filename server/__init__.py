@@ -1,4 +1,3 @@
-
 from flask import Flask, config, Blueprint
 from flask_cors import CORS
 
@@ -11,9 +10,10 @@ from server.views.portfolio_bp.view import portfolio_bp
 from server.views.new_project_bp.view import new_project_bp
 from server.views.join_project_bp.view import join_project_bp
 
+
 def create_app(config_mode):
 
-    app = Flask(__name__, static_url_path='/', static_folder='../client/build')
+    app = Flask(__name__, static_url_path='', static_folder='build')
     app.config.from_object(config_by_mode[config_mode])
 
     cors = CORS(app)
@@ -29,5 +29,8 @@ def create_app(config_mode):
     app.register_blueprint(new_project_bp, url_prefix='/new_project')
     app.register_blueprint(join_project_bp, url_prefix='/join_project')
 
-  
+    @app.route('/')
+    def index():
+        return app.send_static_file('index.html')
+
     return app

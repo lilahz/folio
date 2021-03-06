@@ -104,7 +104,7 @@ class AllProjects extends Component {
                                 place_holder = "Filter by Field"
                                 filter_array = {field_array}
                                 handle_on_change = {this.projectFilterFieldOnChange}
-                                filter_value = {this.state.fieldFilter}
+                                filter_value = {this.state.projectsFieldFilter}
                             />
                         </div>
                         <div className="col-4 text-center" style={{marginLeft: '30px'}}>
@@ -112,7 +112,7 @@ class AllProjects extends Component {
                                 place_holder = "Filter by Status"
                                 filter_array = {status_array}
                                 handle_on_change = {this.projectFilterStatusOnChange}
-                                filter_value = {this.state.statusFilter} 
+                                filter_value = {this.state.projectsStatusFilter} 
                             />
                         </div>
                 </div>

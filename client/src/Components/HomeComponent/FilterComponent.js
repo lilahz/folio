@@ -41,7 +41,7 @@ export default function FilterComponent({place_holder, filter_array, handle_on_c
         <div>
             <div className="select_filter">
             <Select
-                value={filter_value}  onChange={handle_on_change} options={filter_array}
+                value={filter_value} onChange={handle_on_change} options={filter_array}
                 className="mt-4 col-md-8 col-offset-4 col-sm-4"
                 placeholder={place_holder}
                 isSearchable

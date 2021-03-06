@@ -1,0 +1,26 @@
+.Form {
+    margin-left: 32vw;
+    margin-right: 32vw;
+}
+
+.Buttons {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
+    min-width: 50%;
+    min-height: 25%;
+}
+
+.Button {
+    display: block;
+    margin: 28px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 12em;
+    background-color: transparent;
+}

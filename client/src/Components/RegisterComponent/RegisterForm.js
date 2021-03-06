@@ -28,6 +28,7 @@ const RegisterForm = props => {
         })
     }
 
+
     const handleSubmitClicked = (e) => {
       e.preventDefault();
       console.log("current state ", state)
@@ -154,7 +155,7 @@ const RegisterForm = props => {
             href="/register/junior"
             variant="outline-secondary"
             style={{margin: "8px"}}
-            onClick={handleSubmitClicked}
+            // onClick={handleSubmitClicked}
             block>
               submit
           </Button>

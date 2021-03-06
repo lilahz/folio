@@ -3,6 +3,7 @@ import {Carousel, Row} from 'react-bootstrap';
 import ProjectComponent from './ProjectComponent';
 import '../ItemComponent.css';
 
+
 class ProjectCarouselComponent extends Component {
     constructor(props) {
         super(props)
@@ -60,35 +61,41 @@ class ProjectCarouselComponent extends Component {
         else if (!isLoaded) {
             return <div>Loading...</div>}
         else { 
-            return (<div className="Carousel" style={this.state}>
-            <h3>Our Open Projects</h3>
-            <Carousel>
-                <Carousel.Item interval={1000} key={this.props.key}>
-                    <Row style={RowStyle}>
-                        {items.slice(0,3).map((project) => (
-                            <ProjectComponent key={project.id} 
-                                cardTitle={project.company_name} 
-                                cardText={project.description} 
-                                cardField={project.field}/>
-                            ))}
-                    </Row>
-                </Carousel.Item>
-                <Carousel.Item interval={500} key={this.props.key}>
-                    <Row style={RowStyle}>
-                    {items.slice(3,6).map((project) => (
-                            <ProjectComponent key={project.id} 
-                            cardTitle={project.company_name} cardText={project.description} cardField={project.field}/>))}
-                    </Row>
-                </Carousel.Item>
-                <Carousel.Item key={this.props.key}>
-                    <Row style={RowStyle}>
-                    {items.slice(6,9).map((project) => (
-                            <ProjectComponent key={project.id} 
-                            cardTitle={project.company_name} cardText={project.description} cardField={project.field}/>))}
-                    </Row>
-                </Carousel.Item>
-            </Carousel>
-        </div>)
+            if(items.length === 0)
+                return "";
+            else {
+                let carouselRow1 = <Carousel.Item interval={1500} key={this.props.key}>
+                                        <Row style={RowStyle}>
+                                            {items.slice(0,3).map((project) => (
+                                                <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
+                                        </Row>
+                                    </Carousel.Item>;
+                let carouselRow2 = "";
+                let carouselRow3 = "";
+                if(items.length > 3) {
+                    carouselRow2 = <Carousel.Item interval={1500} key={this.props.key}>
+                                        <Row style={RowStyle}>
+                                            {items.slice(3,6).map((project) => (
+                                                <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
+                                        </Row>
+                                    </Carousel.Item>;
+                    if(items.length > 6) {
+                        carouselRow3 = <Carousel.Item interval={1500} key={this.props.key}>
+                                        <Row style={RowStyle}>
+                                            {items.slice(6,9).map((project) => (
+                                                <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
+                                        </Row>
+                                    </Carousel.Item>;
+                    }
+                }
+                return (<div className="Carousel" style={this.state}>
+                <Carousel>
+                    {carouselRow1}
+                    {carouselRow2}
+                    {carouselRow3}
+                </Carousel>
+            </div>)
+            }  
         }            
     }
 }

@@ -54,7 +54,6 @@ class ProjectComponent extends Component {
                                 modalField={this.fieldArrayIcon(this.props.cardField)}
                             />
                         </MDBCardFooter>
-                                
                     </MDBCard>
                 </MDBCol>
             </div>

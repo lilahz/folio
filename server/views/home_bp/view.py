@@ -4,7 +4,7 @@ from server.models.Project import Project
 from server.models.Company import Company
 
 
-home_bp = Blueprint('home', __name__)
+home_bp = Blueprint('/api/home', __name__)
 
 
 def home_page():

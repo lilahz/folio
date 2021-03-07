@@ -29,12 +29,13 @@ def create_app(config_mode):
     app.register_blueprint(new_project_bp, url_prefix='/api/new_project')
     app.register_blueprint(join_project_bp, url_prefix='/api/join_project')
 
-    @app.route('/')
-    def index():
-        return app.send_static_file('index.html')
+    if config_mode == 'prod':
+        @app.route('/')
+        def index():
+            return app.send_static_file('index.html')
 
-    @app.errorhandler(404)
-    def not_found(e):
-        return app.send_static_file('index.html')
+        @app.errorhandler(404)
+        def not_found(e):
+            return app.send_static_file('index.html')
 
     return app

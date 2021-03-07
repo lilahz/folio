@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
 import ProjectsComponent from './ProjectsComponent';
 import FilterComponent from '../FilterComponent';
 import {field_array} from '../data';
@@ -21,9 +23,9 @@ class AllProjects extends Component {
     }
 
     componentDidMount() {
-        fetch("/api/home/projects")
-          .then(response => response.json())
-          .then(projects => this.setState({ allProjectsArray : projects }))
+        // TODO: set axios global url and have here only /home/projects
+        axios.get("http://127.0.0.1:5000/api/home/projects")
+            .then(response => this.setState({allProjectsArray: response.data}))
     }
 
 

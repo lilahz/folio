@@ -21,7 +21,7 @@ class AllProjects extends Component {
     }
 
     componentDidMount() {
-        fetch("/home/projects")
+        fetch("/api/home/projects")
           .then(response => response.json())
           .then(projects => this.setState({ allProjectsArray : projects }))
     }

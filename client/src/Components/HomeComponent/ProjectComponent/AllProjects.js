@@ -25,7 +25,7 @@ class AllProjects extends Component {
     componentDidMount() {
         // TODO: set axios global url and have here only /home/projects
         console.log('[AllProjects.js] componentDidMount');
-        axios.get("https://projects-21.herokuapp.com:5000/api/home/projects")
+        axios.get("https://projects-21.herokuapp.com/api/home/projects")
             .then(response => {
                 console.log(response.data);
                 this.setState({allProjectsArray: response.data});

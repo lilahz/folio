@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Carousel, Row} from 'react-bootstrap';
+import axios from 'axios';
+
 import ProjectComponent from './ProjectComponent';
 import '../ItemComponent.css';
 
@@ -32,8 +34,11 @@ class ProjectCarouselComponent extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.scrollEventHandler);
-        fetch("/home")
-            .then(res => res.json())
+        axios.get("http://127.0.0.1:5000/api/home/")
+            .then(res => {
+                console.log(res)
+                return res.data
+             })
             .then(
                 (result) => {
                 this.setState({
@@ -47,6 +52,21 @@ class ProjectCarouselComponent extends Component {
                     error
                 });
             });
+//        fetch("/home")
+//            .then(res => res.json())
+//            .then(
+//                (result) => {
+//                this.setState({
+//                    isLoaded: true,
+//                    items: result.projects_json
+//                });
+//            },
+//            (error) => {
+//                this.setState({
+//                    isLoaded: true,
+//                    error
+//                });
+//            });
     }
 
     render () {

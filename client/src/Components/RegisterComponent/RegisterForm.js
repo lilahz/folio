@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
 import { Form, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 import classes from './RegisterForm.module.css';
 
 const RegisterForm = props => {
     const [state, setState] = useState({
-      company_name: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-      phone_number: "",
-      website: "",
-      about: ""
+      register_info: {
+        company_name: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+        phone_number: "",
+        website: "",
+        about: ""
+      },
+      error: false
     })
+    const [validated, setValidated] = useState(false);
 
-    const sendDetailsToServer = () => {
-      fetch('/auth/company_register', {
-        method:"POST",
+    const sendDetailsToServer = (event) => {
+      const data = {
+        method: "POST",
         cache: "no-cache",
         headers:{
-            "content_type":"application/json",
+            "content_type": "application/json",
         },
-        body:JSON.stringify(state)
-      })
+        body: JSON.stringify(state)
+      };
+      console.log("sending data ", data)
+      
+      fetch('/auth/company_register', data)
         .then(response => {
           console.log(response)
         })
@@ -32,14 +40,14 @@ const RegisterForm = props => {
       e.preventDefault();
       console.log("current state ", state)
       // TODO: add form validation - name cannot be empty, email validation, password validation, ... 
-      sendDetailsToServer();
+      sendDetailsToServer(e);
     }
 
     return (
       <div>
         <h1>register</h1>
         <Form className={classes.Form}>
-          <InputGroup className="mb-3">
+          <InputGroup className="mb-3" validated={validated}>
             <FormControl
               id="company"
               placeholder="Company Name"
@@ -51,6 +59,9 @@ const RegisterForm = props => {
                 company_name: e.target.value})
               )}
             />
+            <FormControl.Feedback type="invalid">
+                  Please enter valid username. 
+            </FormControl.Feedback>
           </InputGroup>
 
           <InputGroup className="mb-3">

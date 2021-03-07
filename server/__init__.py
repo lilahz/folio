@@ -1,4 +1,4 @@
-from flask import Flask, config, Blueprint
+from flask import Flask, config, Blueprint, render_template
 from flask_cors import CORS
 
 from .config import config_by_mode
@@ -23,14 +23,18 @@ def create_app(config_mode):
 
     login_manager.init_app(app)
 
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    app.register_blueprint(home_bp, url_prefix='/home')
-    app.register_blueprint(portfolio_bp, url_prefix='/portfolio')
-    app.register_blueprint(new_project_bp, url_prefix='/new_project')
-    app.register_blueprint(join_project_bp, url_prefix='/join_project')
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(home_bp, url_prefix='/api/home')
+    app.register_blueprint(portfolio_bp, url_prefix='/api/portfolio')
+    app.register_blueprint(new_project_bp, url_prefix='/api/new_project')
+    app.register_blueprint(join_project_bp, url_prefix='/api/join_project')
 
     @app.route('/')
     def index():
+        return app.send_static_file('index.html')
+
+    @app.errorhandler(404)
+    def not_found(e):
         return app.send_static_file('index.html')
 
     return app

@@ -34,7 +34,7 @@ class ProjectCarouselComponent extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.scrollEventHandler);
-        axios.get("https://projects-21.herokuapp.com:5000/api/home/")
+        axios.get("https://projects-21.herokuapp.com/api/home/")
             .then(res => {
                 console.log(res)
                 return res.data

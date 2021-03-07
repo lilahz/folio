@@ -18,11 +18,11 @@ const customStyles = {
     ...provided,
     borderBottom: '1px dotted blue',
     padding: 10,
-    width: 350,
+    width: 400,
     fontSize: 15
     }),
     control: styles => ({
-        ...styles, backgroundColor: 'white', width: 350 }),
+        ...styles, backgroundColor: 'white', width: 400, margin: '15px' }),
     singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
     const transition = 'opacity 300ms';
@@ -30,13 +30,12 @@ const customStyles = {
     },
     menu: styles => ({
         ...styles,
-        width: 350,
+        width: 400,
         backgroundColor: 'white'
     }),
 }
 
-
-export default function FilterComponent({place_holder, filter_array, handle_on_change, filter_value}) {
+export default function FilterComponent({place_holder, filter_array, handle_on_change, filter_value}) { 
     return (
         <div>
             <div className="select_filter">

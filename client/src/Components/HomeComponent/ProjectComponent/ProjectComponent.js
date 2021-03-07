@@ -50,7 +50,8 @@ class ProjectComponent extends Component {
                                 isOpen={this.state.modal} 
                                 toggle={this.toggle}
                                 modalTitle={this.props.cardTitle}
-                                modalDescription={this.props.cardText}
+                                modalCardProjectDesc={this.props.cardProjectDesc}
+                                modalCardCompDesc={this.props.cardCompDesc}
                                 modalField={this.fieldArrayIcon(this.props.cardField)}
                             />
                         </MDBCardFooter>

@@ -87,6 +87,7 @@ class AllProjects extends Component {
     }
 
     render() {
+        console.log(this.state.currProjectsArray);
         const pageBody = (this.state.currProjectsArray === null) ? 
                         <div className="emptyState">
                             <img src={emptyState} alt=""/>
@@ -98,8 +99,8 @@ class AllProjects extends Component {
             <div className="AllProjects">
                 <h1 className="ProjectListHeader">All of Our Projects</h1>
                 <div className="container">
-                    <div className="row justify-content-center" style={{margin : '30px'}}>
-                        <div className="col-4 text-center" style={{marginRight : '30px'}}>
+                    <div className="row justify-content-center" >
+                        <div className="col-4 text-center" style={{margin : '30px'}}>
                             <FilterComponent    
                                 place_holder = "Filter by Field"
                                 filter_array = {field_array}
@@ -107,7 +108,7 @@ class AllProjects extends Component {
                                 filter_value = {this.state.projectsFieldFilter}
                             />
                         </div>
-                        <div className="col-4 text-center" style={{marginLeft: '30px'}}>
+                        <div className="col-4 text-center" style={{margin: '30px'}}>
                             <FilterComponent
                                 place_holder = "Filter by Status"
                                 filter_array = {status_array}

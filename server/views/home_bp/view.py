@@ -11,7 +11,9 @@ def home_page():
     all_juniors = Junior.get_juniors(9)
     all_projects = Project.get_projects(9)
     json_string_juniors = [junior.dump() for junior in all_juniors]
-    json_string_projects = [project.dump(Company.get_company_name_by_id(project.company_id)) for project in all_projects]
+    json_string_projects = [project.dump(Company.get_company_name_by_id(project.company_id), 
+                                         Company.get_company_description_by_id(project.company_id)) 
+                                         for project in all_projects]
     joint_json_string = {"juniors_json": json_string_juniors,
                          "projects_json": json_string_projects}
     return joint_json_string
@@ -23,7 +25,9 @@ def get_all_juniors():
     
 def get_all_projects():
     all_projects = Project.get_projects()
-    json_string = json.dumps([project.dump(Company.get_company_name_by_id(project.company_id)) for project in all_projects])
+    json_string = json.dumps([project.dump(Company.get_company_name_by_id(project.company_id), 
+                                           Company.get_company_description_by_id(project.company_id)) 
+                                           for project in all_projects])
     return json_string
 
 

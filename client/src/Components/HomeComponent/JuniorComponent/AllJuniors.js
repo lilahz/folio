@@ -20,7 +20,7 @@ class AllJuniors extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://projects-21.herokuapp.com:5000/api/home/juniors')
+        axios.get('https://projects-21.herokuapp.com:5000/api/home/juniors')
             .then(response => this.setState({ allJuniorsArray : response.data }))
 //        fetch("/home/juniors")
 //          .then(response => response.json())

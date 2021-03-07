@@ -24,12 +24,13 @@ render() {
         </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+            About Us: {this.props.modalCardCompDesc}<br /><br />
             Searching for help with: {this.props.modalField} <br />
-            Project Description: {this.props.modalDescription}
+            Project Description: {this.props.modalCardProjectDesc}
         </Modal.Body>
         <Modal.Footer>
             <Row>
-                <Tooltip title="Join Project" arrow placement="left-start" TransitionComponent={Fade} enterDelay={100} leaveDelay={100}>
+                <Tooltip title="Join Project" placement="left-start" TransitionComponent={Fade} enterDelay={100} leaveDelay={100}>
                     <MDBBtn className="float-left" href="#" >
                         <IoPersonAdd size={40}/></MDBBtn>
                 </Tooltip>

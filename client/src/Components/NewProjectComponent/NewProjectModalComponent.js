@@ -100,13 +100,13 @@ class NewProjectModalComponent extends Component {
                         <Form.Label>Company Name : </Form.Label>
                         <Form.Control type="text" placeholder="Company Name" readOnly/>  
             
-                        <Form.Label>* Description : </Form.Label>
-                        <Form.Control type="text" required
+                        <Form.Label>* Description : (200 max    )</Form.Label>
+                        <Form.Control type="text" required maxLength="200"
                             onChange={(e) => this.setState({description: e.target.value})} 
                             value={this.state.description} placeholder="What do you need help with?"/> 
                         <div style={{ color: 'red' }}>{this.state.descriptionError}</div><br/>
 
-                        <Form.Label>* field : </Form.Label>
+                        <Form.Label>* Fields : </Form.Label>
                          <FilterComponent    
                             place_holder = "Choose field of Work"
                             filter_array = {field_array}

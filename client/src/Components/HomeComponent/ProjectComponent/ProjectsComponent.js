@@ -9,7 +9,8 @@ export default function ProjectsComponent(props) {
                     {props.projects.map((project) => (
                         <ProjectComponent key={project.id} className="col-sm-4"
                             cardTitle={project.company_name} 
-                            cardText={project.description} 
+                            cardProjectDesc={project.description} 
+                            cardCompDesc={project.company_description}
                             cardField={project.field}
                             />))}
                 </Row>

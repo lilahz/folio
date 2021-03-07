@@ -27,9 +27,10 @@ class Project(db.Model):
         db.session.add(new_project)
         db.session.commit()
 
-    def dump(self,company_name):
+    def dump(self, company_name, company_description):
         return {'id': self.id,
                 'company_name': company_name,
+                'company_description': company_description,
                 'description': self.description,
                 'field': self.field,
                 'status': self.status}

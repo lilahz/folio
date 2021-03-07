@@ -24,8 +24,12 @@ class AllProjects extends Component {
 
     componentDidMount() {
         // TODO: set axios global url and have here only /home/projects
+        console.log('[AllProjects.js] componentDidMount');
         axios.get("http://127.0.0.1:5000/api/home/projects")
-            .then(response => this.setState({allProjectsArray: response.data}))
+            .then(response => {
+                console.log(response.data);
+                this.setState({allProjectsArray: response.data});
+            })
     }
 
 

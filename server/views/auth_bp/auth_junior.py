@@ -21,7 +21,7 @@ def junior_register():
             email,
             data.get('full_name'),
             data.get('phone_number'),
-            data.get('field'),
+            re.sub('[\[,\]]', '', data.get('field')).split(' '),
             data.get('website'),
             data.get('about_me')
         )

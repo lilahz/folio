@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
 import ProjectsComponent from './ProjectsComponent';
 import FilterComponent from '../FilterComponent';
 import {field_array} from '../data';
@@ -21,9 +23,13 @@ class AllProjects extends Component {
     }
 
     componentDidMount() {
-        fetch("/home/projects")
-          .then(response => response.json())
-          .then(projects => this.setState({ allProjectsArray : projects }))
+        // TODO: set axios global url and have here only /home/projects
+        console.log('[AllProjects.js] componentDidMount');
+        axios.get("https://projects-21.herokuapp.com/api/home/projects")
+            .then(response => {
+                console.log(response.data);
+                this.setState({allProjectsArray: response.data});
+            })
     }
 
 

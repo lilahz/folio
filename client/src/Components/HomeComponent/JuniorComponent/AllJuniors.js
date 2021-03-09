@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
 import JuniorsComponent from './JuniorsComponent';
 import FilterComponent from '../FilterComponent';
 import './JuniorsComponent.css';
@@ -18,9 +20,11 @@ class AllJuniors extends Component {
     }
 
     componentDidMount() {
-        fetch("/home/juniors")
-          .then(response => response.json())
-          .then(juniors => this.setState({ allJuniorsArray : juniors }))
+        axios.get('https://projects-21.herokuapp.com/api/home/juniors')
+            .then(response => this.setState({ allJuniorsArray : response.data }))
+//        fetch("/home/juniors")
+//          .then(response => response.json())
+//          .then(juniors => this.setState({ allJuniorsArray : juniors }))
     }
 
     juniorFilterFieldOnChange = selected => {

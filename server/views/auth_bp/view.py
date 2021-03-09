@@ -3,7 +3,7 @@ from flask import Blueprint, render_template
 from .auth_junior import junior_register, junior_login, junior_logout
 from .auth_company import company_register, company_login, company_logout
 
-auth_bp = Blueprint('auth', __name__)
+auth_bp = Blueprint('/api/auth', __name__)
 
 auth_bp.add_url_rule('/junior_register', 'junior_register', junior_register, methods=['POST'])
 auth_bp.add_url_rule('/junior_login', 'junior_login', junior_login, methods=['POST'])

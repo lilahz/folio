@@ -87,7 +87,6 @@ class AllProjects extends Component {
     }
 
     render() {
-        console.log(this.state.currProjectsArray);
         const pageBody = (this.state.currProjectsArray === null) ? 
                         <div className="emptyState">
                             <img src={emptyState} alt=""/>

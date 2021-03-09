@@ -12,7 +12,6 @@ def company_register():
         
     data = request.form
     email = data.get('email')
-
     company = Company.query.filter_by(email=email).first() # check if this email is already registered
     if company is None:
         password = data.get('password')

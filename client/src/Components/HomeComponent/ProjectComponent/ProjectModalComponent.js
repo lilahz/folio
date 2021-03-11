@@ -12,12 +12,10 @@ class ProjectModalComponent extends Component {
 render() {
   return (
     <Modal show={this.props.isOpen} onHide={this.props.toggle} key={this.props.key}
-        //size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
         dialogClassName="modal-70w"
-        className="projectModal"
-    >
+        className="projectModal">
         <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
             Project for {this.props.modalTitle}

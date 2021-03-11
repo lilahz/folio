@@ -2,52 +2,59 @@ import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 
 import classes from './RegisterComponent.module.css';
-import RegisterForm from './RegisterForm';
+import RegisterCompanyModalComponent from './RegisterCompanyModalComponent';
+import RegisterJuniorModalComponent from './RegisterJuniorModalComponent';
 
 class RegisterComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userType: null,
+            companyModal: false,
+            juniorModal: false
         }
     };
 
-    showCompanyForm = () => {
-        this.setState({userType: 'company'});
-        console.log("current state ", this.state)
+    toggleCompanyForm = () => {
+        this.setState({companyModal: !this.state.companyModal});
+    }
+
+    toggleJuniorForm = () => {
+        this.setState({juniorModal: !this.state.juniorModal});
     }
 
     render() {
         return (
             <div className={classes.RegisterComponent}>
-                {this.state.userType === null && (
-                    <div>
-                        <h1>register</h1>
-                        <h3>who are you?</h3>
-                        <div className={classes.Buttons}>
-                            <Button
-                                className={classes.Button}
-                                variant="outline-secondary"
-                                style={{margin: "8px"}}
-                                onClick={this.showCompanyForm}
-                                block>
-                                    company
-                            </Button>
-                            <Button
-                                className={classes.Button}
-                                href="/register/junior"
-                                variant="outline-secondary"
-                                style={{margin: "8px"}}
-                                block>
-                                    junior
-                            </Button>
-                        </div>
+                <div>
+                    <h1>Register</h1>
+                    <h3>Who are you?</h3>
+                    <div className={classes.Buttons}>
+                        <Button
+                            className={classes.Button}
+                            variant="outline-secondary"
+                            style={{margin: "8px"}}
+                            onClick={this.toggleCompanyForm}
+                            block>
+                                Company
+                        </Button>
+                        <Button
+                            className={classes.Button}
+                            variant="outline-secondary"
+                            style={{margin: "8px"}}
+                                onClick={this.toggleJuniorForm}
+                            block>
+                                Junior
+                        </Button>
                     </div>
-                )}
-
-                {this.state.userType === 'company' && (
-                    <RegisterForm />
-                )}
+                    {/* <RegisterCompanyModalComponent className="Modal"
+                        isOpen={this.state.companyModal} 
+                        toggle={this.toggleCompanyForm}
+                    />
+                    <RegisterJuniorModalComponent className="Modal"
+                        isOpen={this.state.juniorModal} 
+                        toggle={this.toggleJuniorForm}
+                    /> */}
+                </div>
             </div>
         )
     }

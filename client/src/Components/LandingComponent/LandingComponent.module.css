@@ -1,0 +1,83 @@
+.LandingLeft h1 {
+    padding-left: 0 20px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 4em;
+    text-align: center;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.LandingLeft p {
+    align-self: center;
+    text-align: center;
+    max-width: 88vh;
+    padding: 0 16px;
+}
+
+.LandingLeft div {
+    display: flex;
+    min-width: 40%;
+    margin: 16px;
+} 
+
+.LandingRight {
+    align-content: center;
+    padding: 0 24px;
+}
+
+.LandingRight img {
+    height: 28vh;
+    width: 88vw;
+}
+
+@media screen and (min-width: 1000px) and (min-height: 400px) {
+    .Landing {
+        display: flex;
+        flex-direction: row;
+        width: fit-content;
+        padding: 40px;
+        height: 100vh;
+    }
+    
+    .LandingLeft {
+        align-self: center;
+        padding: 20px;
+    }
+    
+    .LandingLeft h1 {
+        padding-left: 20px;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 5em;
+        text-align: left;
+        letter-spacing: -2px;
+        text-transform: uppercase;
+    }
+    
+    .LandingLeft h1 span {
+        font-size: 80%;
+    }
+    
+    .LandingLeft p {
+        align-self: center;
+        text-align: left;
+        max-width: 70%;
+        padding-left: 20px;
+    }
+    
+    .LandingLeft div {
+        display: flex;
+        /* flex-direction: row; */
+        min-width: 40%;
+        margin: 16px;
+    }
+    
+    .LandingRight {
+        align-self: center;
+        padding: 20px;
+    }
+
+    .LandingRight img {
+        height: 52vh;
+        width: 44vw;
+    }
+}

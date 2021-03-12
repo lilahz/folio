@@ -34,11 +34,8 @@ class ProjectCarouselComponent extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.scrollEventHandler);
-        axios.get("https://projects-21.herokuapp.com/api/home/")
-            .then(res => {
-                console.log(res)
-                return res.data
-             })
+        axios.get("/api/home/")
+            .then(res => res.data)
             .then(
                 (result) => {
                 this.setState({
@@ -52,21 +49,6 @@ class ProjectCarouselComponent extends Component {
                     error
                 });
             });
-//        fetch("/home")
-//            .then(res => res.json())
-//            .then(
-//                (result) => {
-//                this.setState({
-//                    isLoaded: true,
-//                    items: result.projects_json
-//                });
-//            },
-//            (error) => {
-//                this.setState({
-//                    isLoaded: true,
-//                    error
-//                });
-//            });
     }
 
     render () {

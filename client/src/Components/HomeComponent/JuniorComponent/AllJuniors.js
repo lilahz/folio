@@ -20,11 +20,8 @@ class AllJuniors extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://projects-21.herokuapp.com/api/home/juniors')
+        axios.get('/api/home/juniors')
             .then(response => this.setState({ allJuniorsArray : response.data }))
-//        fetch("/home/juniors")
-//          .then(response => response.json())
-//          .then(juniors => this.setState({ allJuniorsArray : juniors }))
     }
 
     juniorFilterFieldOnChange = selected => {

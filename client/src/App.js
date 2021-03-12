@@ -5,7 +5,7 @@ import './App.css';
 import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import LandingComponent from './Components/LandingComponent/LandingComponent';
 import RegisterComponent from './Components/RegisterComponent/RegisterComponent';
-// import NewProjectForm from './Components/NewProjectComponent/NewProjectForm';
+import LoginComponent from './Components/LoginComponent/LoginComponent';
 import AllProjects from './Components/HomeComponent/ProjectComponent/AllProjects';
 import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
@@ -24,9 +24,9 @@ class App extends Component {
             <Route path="/register">
               <RegisterComponent />
             </Route>
-            {/* <Route path="/new_project">
-              <NewProjectForm />
-            </Route> */}
+            <Route path="/login">
+              <LoginComponent />
+            </Route>
             <Route path="/home/projects">
               <AllProjects />
             </Route>

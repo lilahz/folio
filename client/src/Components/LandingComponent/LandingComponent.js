@@ -81,8 +81,6 @@ class LandingComponent extends Component {
             <NewProjectModalComponent className="Modal"
                 isOpen={this.state.modal} 
                 toggle={this.toggle}
-                modalTitle="Title"
-                modalDescription="Descp"
             />
             </div>
         )

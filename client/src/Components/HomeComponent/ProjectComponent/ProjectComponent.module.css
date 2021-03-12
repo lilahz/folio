@@ -1,0 +1,25 @@
+.ProjectComponent {
+    margin: 0 16px;
+    width: 28vw;
+    height: 20vh;
+}
+
+.ProjectTitle {
+    font-size: 20px;
+    text-align: center;
+}
+
+@media screen and (min-width: 1000px) and (min-height: 400px) {
+    .ProjectComponent {
+        width: 24vw;
+        height: 60vh;
+    }
+
+    .ProjectTitle {
+        font-size: 2em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 900;
+        text-align: center;
+        letter-spacing: -1px;
+    }
+}

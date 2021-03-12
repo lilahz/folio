@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+import axios from 'axios';
 
 import './App.css';
 import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
@@ -10,6 +11,7 @@ import AllProjects from './Components/HomeComponent/ProjectComponent/AllProjects
 import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
 
+axios.default.baseURL = 'http://127.0.0.1:5000';
 
 class App extends Component {
   render() {

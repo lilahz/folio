@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardFooter ,MDBBtn, MDBCardText} from 'mdbreact';
+
 import '../ItemComponent.css';
+import classes from './ProjectComponent.module.css';
 import ProjectModalComponent from './ProjectModalComponent';
 import {field_array} from '../data';
 
@@ -35,14 +37,14 @@ class ProjectComponent extends Component {
         return (
             <div className="Item">
                 <MDBCol style={{ maxWidth: "22rem"}}>
-                    <MDBCard style={{boxShadow: "0 8px 6px -6px #4d4d4d"}} background='white'>
+                    <MDBCard className={classes.ProjectComponent} style={{boxShadow: "0 8px 6px -6px #4d4d4d"}} background='white'>
                         <MDBCardImage
                             className="img-fluid rounded mb-0 "
                             src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                             waves />
                         <MDBCardBody className="ItemBody">
-                            <MDBCardTitle className="text-center">{this.props.cardTitle}</MDBCardTitle>
-                            <MDBCardText className="indigo-text">{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                            <MDBCardTitle className={classes.ProjectTitle}>{this.props.cardTitle}</MDBCardTitle>
+                            <MDBCardText className={"indigo-text"}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>
                         <MDBCardFooter className="ItemFooter">
                             <MDBBtn onClick = { this.toggle }>Learn More</MDBBtn>

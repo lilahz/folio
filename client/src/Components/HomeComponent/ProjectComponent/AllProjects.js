@@ -16,9 +16,9 @@ class AllProjects extends Component {
         this.state = {
             background: "lightskyblue",
             allProjectsArray: [],
-            currProjectsArray: localStorage.getItem('currProjectsArray')?JSON.parse(localStorage.getItem('currProjectsArray')):[],
-            projectsStatusFilter: localStorage.getItem('projectsStatusFilter')?JSON.parse(localStorage.getItem('projectsStatusFilter')):[],
-            projectsFieldFilter: localStorage.getItem('projectsFieldFilter')?JSON.parse(localStorage.getItem('projectsFieldFilter')):[]
+            currProjectsArray: localStorage.getItem('currProjectsArray')?JSON.parse(localStorage.getItem('currProjectsArray')):null,
+            projectsStatusFilter: localStorage.getItem('projectsStatusFilter')?JSON.parse(localStorage.getItem('projectsStatusFilter')):null,
+            projectsFieldFilter: localStorage.getItem('projectsFieldFilter')?JSON.parse(localStorage.getItem('projectsFieldFilter')):null
         }
     }
 
@@ -88,30 +88,32 @@ class AllProjects extends Component {
     }
 
     render() {
-        const pageBody = (this.state.currProjectsArray.length === 0) ? 
+        const pageBody = (this.state.currProjectsArray === null) ? 
                         <div className="emptyState">
                             <img src={emptyState} alt=""/>
                         </div> :
+                        // (this.state.projectsStatusFilter === null && this.state.projectsFieldFilter === null) ?
+                        // <ProjectsComponent projects = {this.state.allProjectsArray}/> : 
                         <ProjectsComponent projects = {this.state.currProjectsArray}/> ; 
         return (
             <div className="AllProjects">
                 <h1 className="ProjectListHeader">All of Our Projects</h1>
                 <div className="container">
-                    <div className="row justify-content-center" style={{margin: '30px'}}>
-                        <div className="col-4 text-center" style={{marginRight: '30px'}}>
+                    <div className="row justify-content-center" >
+                        <div className="col-4 text-center" style={{margin : '30px'}}>
                             <FilterComponent    
                                 place_holder = "Filter by Field"
                                 filter_array = {field_array}
                                 handle_on_change = {this.projectFilterFieldOnChange}
-                                filter_value = {this.state.fieldFilter}
+                                filter_value = {this.state.projectsFieldFilter}
                             />
                         </div>
-                        <div className="col-4 text-center" style={{marginLeft: '30px'}}>
+                        <div className="col-4 text-center" style={{margin: '30px'}}>
                             <FilterComponent
                                 place_holder = "Filter by Status"
                                 filter_array = {status_array}
                                 handle_on_change = {this.projectFilterStatusOnChange}
-                                filter_value = {this.state.statusFilter} 
+                                filter_value = {this.state.projectsStatusFilter} 
                             />
                         </div>
                 </div>

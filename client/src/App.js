@@ -5,8 +5,8 @@ import axios from 'axios';
 import './App.css';
 import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import LandingComponent from './Components/LandingComponent/LandingComponent';
-import ProjectCarouselComponent from './Components/HomeComponent/ProjectComponent/ProjectCarouselComponent';
 import RegisterComponent from './Components/RegisterComponent/RegisterComponent';
+import LoginComponent from './Components/LoginComponent/LoginComponent';
 import AllProjects from './Components/HomeComponent/ProjectComponent/AllProjects';
 import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
@@ -22,10 +22,12 @@ class App extends Component {
           <div className="App">
             <Route exact path="/" component={LandingComponent}>
               <LandingComponent />
-              <ProjectCarouselComponent />
             </Route>
             <Route path="/register">
               <RegisterComponent />
+            </Route>
+            <Route path="/login">
+              <LoginComponent />
             </Route>
             <Route path="/home/projects">
               <AllProjects />

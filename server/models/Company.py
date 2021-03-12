@@ -38,6 +38,10 @@ class Company(UserMixin, db.Model):
         result = db.session.query(Company.company_name).filter(Company.id==id).first()
         return result[0]
 
+    def get_company_description_by_id(id):
+        result = db.session.query(Company.about_me).filter(Company.id==id).first()
+        return result[0]
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

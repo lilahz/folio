@@ -11,7 +11,6 @@ def company_register():
         return jsonify({'message' : 'User already logged in'})
     data = request.json
     email = data.get('email')
-
     company = Company.query.filter_by(email=email).first() # check if this email is already registered
     if company is None:
         password = data.get('password')

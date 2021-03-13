@@ -46,14 +46,14 @@ class RegisterComponent extends Component {
                                 Junior
                         </Button>
                     </div>
-                    {/* <RegisterCompanyModalComponent className="Modal"
+                    <RegisterCompanyModalComponent className="Modal"
                         isOpen={this.state.companyModal} 
                         toggle={this.toggleCompanyForm}
                     />
                     <RegisterJuniorModalComponent className="Modal"
                         isOpen={this.state.juniorModal} 
                         toggle={this.toggleJuniorForm}
-                    /> */}
+                    />
                 </div>
             </div>
         )

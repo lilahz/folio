@@ -10,9 +10,8 @@ def junior_register():
     if current_user.is_authenticated:
         return jsonify({'message': 'User already logged in'})
         
-    data = request.form
+    data = request.json
     email = data.get('email')
-
     junior = Junior.query.filter_by(email=email).first() # check if this email is already registered
     if junior is None:
         password = data.get('password')
@@ -21,7 +20,7 @@ def junior_register():
             email,
             data.get('full_name'),
             data.get('phone_number'),
-            re.sub('[\[,\]]', '', data.get('field')).split(' '),
+            data.get('field'),
             data.get('website'),
             data.get('about_me')
         )

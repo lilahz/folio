@@ -4,6 +4,14 @@ from flask_login import login_required, logout_user, current_user, login_user
 from server.models.Company import Company
 from server.models import login_manager
 
+def check_if_user_exists():
+    data = request.json
+    email = data.get('email')
+    company = Company.query.filter_by(email=email).first() # check if this email is already registered
+    if company is None:
+        return jsonify({'message': 'User does not exists'}), 200
+    else:
+        return jsonify({'error': 'User already exists with that email address'}), 403
 
 def company_register():
     # Bypass if user is logged in
@@ -11,31 +19,27 @@ def company_register():
         return jsonify({'message' : 'User already logged in'})
     data = request.json
     email = data.get('email')
-    company = Company.query.filter_by(email=email).first() # check if this email is already registered
-    if company is None:
-        password = data.get('password')
-        remember_me = data.get('remember_me')
-        new_company = Company(
-            data.get('company_name'),
-            email,
-            data.get('phone_number'),
-            data.get('location'),
-            data.get('website'),
-            data.get('about_me')
-        )
+    password = data.get('password')
+    remember_me = data.get('remember_me')
+    new_company = Company(
+        data.get('company_name'),
+        email,
+        data.get('phone_number'),
+        data.get('location'),
+        data.get('website'),
+        data.get('about_me')
+    )
 
-        new_company.set_password(password)
-        Company.add_new_company(new_company)
+    new_company.set_password(password)
+    Company.add_new_company(new_company)
 
-        if remember_me:
-            login_user(new_company, remember=True) # Log in with the newly created user with remember me on
-        else: 
-            login_user(new_company) # Log in with the newly created user with remember me off
-        
-        return jsonify({'message': 'user created successfully'}), 200
-    else:
-        return jsonify({'error': 'User already exists with that email address'}), 403
-
+    if remember_me:
+        login_user(new_company, remember=True) # Log in with the newly created user with remember me on
+    else: 
+        login_user(new_company) # Log in with the newly created user with remember me off
+    
+    return jsonify({'message': 'user created successfully'}), 200
+    
 
 def company_login():
 

@@ -15,8 +15,10 @@ const NavBarComponent = () => {
                     <Nav.Link href="/home/about" className="ml-auto" style={{alignSelf: "right"}}>ABOUT</Nav.Link>
                 </Nav>
                 <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-dark">Search</Button>
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/register">REGISTER</Nav.Link>
+                        <Nav.Link href="/login">LOGIN</Nav.Link>
+                    </Nav>
                 </Form>
             </Navbar.Collapse>
         </Navbar>

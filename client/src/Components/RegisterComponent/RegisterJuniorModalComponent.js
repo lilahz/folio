@@ -71,20 +71,19 @@ class RegisterJuniorModalComponent extends Component {
         }
         else {
             let valuesArrObj = selected.reduce((acc, current) => acc.concat(current.value), []);
-            console.log(valuesArrObj);
             this.setState({field: valuesArrObj});
         }
     }
 
     submitForm = (data) => {
-        const url = 'https://projects-21.herokuapp.com/api/auth/junior_register';
+        const url = '/api/auth/junior_register';
         const requestOptions = {
             method: 'POST',
             cache: "no-cache",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         };
-        axios.post(url, {data})
+        axios.post(url, data)
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
@@ -104,7 +103,7 @@ class RegisterJuniorModalComponent extends Component {
 
         if (Object.keys(errors).length === 0) {
             console.log(data);
-            // this.submitForm(data); // send the data to the server
+            this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
         } else {
             this.setState({ errors : errors });

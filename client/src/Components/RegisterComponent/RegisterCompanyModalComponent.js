@@ -13,6 +13,20 @@ class RegisterCompanyModalComponent extends Component {
         this.state = this.getInitialState();
     }
 
+    getInitialState = () => ({
+        company_name: '',
+        email: '',
+        password: '',
+        confirm_password: '',
+        phone_number: '',
+        website: '',
+        about_me: '',
+        errors: {},
+        currentModal: 0,
+        visible: false,
+        userExists: false
+    });
+
     onShowAlert = (toggle) =>{
         this.setState({visible:true},()=>{
           window.setTimeout(()=>{
@@ -32,6 +46,28 @@ class RegisterCompanyModalComponent extends Component {
         return errors;
     }
 
+    checkIfUserExists = (errors) => {
+        const url = '/api/auth/check_if_user_exists';
+        const data = { "email":this.state.email };
+
+        const requestOptions = {
+            method: 'POST',
+            cache: "no-cache",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        };
+        axios.post(url, data)
+        .then(response => {
+           console.log(response.status);
+           return false;
+        })
+        .catch ((error) => {
+            console.log(error.response.status);
+            if(error.response.status === 403) return true; // email exists
+            else return false;
+        });
+    }
+
     validateFirst = () => {
         var emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
         let errors = {};
@@ -41,21 +77,11 @@ class RegisterCompanyModalComponent extends Component {
         if (this.state.password === '') errors.password = 'Please enter a password.';
         if(this.state.password !== this.state.confirm_password) errors.confirm_password = 'Passwords do not match.';
 
+        if(this.checkIfUserExists()) // if true than show an error
+            errors.email = 'A user already exists with the specified email address';
+       
         return errors;
     }
-
-    getInitialState = () => ({
-        company_name: '',
-        email: '',
-        password: '',
-        confirm_password: '',
-        phone_number: '',
-        website: '',
-        about_me: '',
-        errors: {},
-        currentModal: 0,
-        visible: false
-    });
 
     handleChange = event => {
         this.setState({
@@ -64,14 +90,14 @@ class RegisterCompanyModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        const url = 'https://projects-21.herokuapp.com/api/auth/company_register';
+        const url = '/api/auth/company_register';
         const requestOptions = {
             method: 'POST',
             cache: "no-cache",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         };
-        axios.post(url, {data})
+        axios.post(url, data)
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
@@ -90,7 +116,7 @@ class RegisterCompanyModalComponent extends Component {
 
         if (Object.keys(errors).length === 0) {
             console.log(data);
-            // this.submitForm(data); // send the data to the server
+            this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
         } else {
             this.setState({ errors });

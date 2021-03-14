@@ -31,19 +31,19 @@ const AboutComponent = () => {
                 <TeamComponent className="col-sm-4"
                             cardImage={picOron}
                             cardTitle="Oron Laufman" 
-                            cardText="Student bla bla"
+                            cardText="Student at BGU"
                             cardFB="https://www.facebook.com/oron.laufman"
                             cardLD="https://www.linkedin.com/in/oronlaufman/" />
                 <TeamComponent className="col-sm-4"
                             cardImage={picLilah}
                             cardTitle="Lilah Zitnitzky" 
-                            cardText="Student bla bla"
+                            cardText="Student at BGU"
                             cardFB="https://www.facebook.com/lilahz"
                             cardLD="https://www.linkedin.com/in/lilah-zitnitzky/" />
                 <TeamComponent className="col-sm-4"
                             cardImage={picAyelet}
                             cardTitle="Ayelet Biran" 
-                            cardText="Student bla bla"
+                            cardText="Student at BGU"
                             cardFB="https://www.facebook.com/ayelet.biran"
                             cardLD="https://www.linkedin.com/in/ayelet-biran-46b4ab147/" />
             </Row>

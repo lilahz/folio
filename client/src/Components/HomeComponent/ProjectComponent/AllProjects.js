@@ -23,7 +23,7 @@ class AllProjects extends Component {
     }
 
     componentDidMount() {
-        axios.get("/api/home/projects")
+        axios.get("http://projects-21.herokuapp.com/api/home/projects")
             .then(response => this.setState({allProjectsArray: response.data}))
     }
 

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.256d7890.chunk.css",
-    "main.js": "/static/js/main.51242f64.chunk.js",
-    "main.js.map": "/static/js/main.51242f64.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.66046989.js",
-    "runtime-main.js.map": "/static/js/runtime-main.66046989.js.map",
+    "main.css": "/static/css/main.5a75d77f.chunk.css",
+    "main.js": "/static/js/main.9d02906f.chunk.js",
+    "main.js.map": "/static/js/main.9d02906f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a13505cd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a13505cd.js.map",
     "static/css/2.20aa2d7b.chunk.css": "/static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.c9b7bc29.chunk.js": "/static/js/2.c9b7bc29.chunk.js",
-    "static/js/2.c9b7bc29.chunk.js.map": "/static/js/2.c9b7bc29.chunk.js.map",
-    "static/js/3.05e0b1e1.chunk.js": "/static/js/3.05e0b1e1.chunk.js",
-    "static/js/3.05e0b1e1.chunk.js.map": "/static/js/3.05e0b1e1.chunk.js.map",
+    "static/js/2.3cac62aa.chunk.js": "/static/js/2.3cac62aa.chunk.js",
+    "static/js/2.3cac62aa.chunk.js.map": "/static/js/2.3cac62aa.chunk.js.map",
+    "static/js/3.7fb952e8.chunk.js": "/static/js/3.7fb952e8.chunk.js",
+    "static/js/3.7fb952e8.chunk.js.map": "/static/js/3.7fb952e8.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.20aa2d7b.chunk.css.map": "/static/css/2.20aa2d7b.chunk.css.map",
-    "static/css/main.256d7890.chunk.css.map": "/static/css/main.256d7890.chunk.css.map",
-    "static/js/2.c9b7bc29.chunk.js.LICENSE.txt": "/static/js/2.c9b7bc29.chunk.js.LICENSE.txt",
+    "static/css/main.5a75d77f.chunk.css.map": "/static/css/main.5a75d77f.chunk.css.map",
+    "static/js/2.3cac62aa.chunk.js.LICENSE.txt": "/static/js/2.3cac62aa.chunk.js.LICENSE.txt",
     "static/media/ayelet.e7a4c539.jpg": "/static/media/ayelet.e7a4c539.jpg",
     "static/media/empty_state.9605c58b.png": "/static/media/empty_state.9605c58b.png",
     "static/media/landing_image.79e3ad09.png": "/static/media/landing_image.79e3ad09.png",
@@ -21,10 +21,10 @@
     "static/media/oron.cd858144.jpeg": "/static/media/oron.cd858144.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.66046989.js",
+    "static/js/runtime-main.a13505cd.js",
     "static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.c9b7bc29.chunk.js",
-    "static/css/main.256d7890.chunk.css",
-    "static/js/main.51242f64.chunk.js"
+    "static/js/2.3cac62aa.chunk.js",
+    "static/css/main.5a75d77f.chunk.css",
+    "static/js/main.9d02906f.chunk.js"
   ]
 }

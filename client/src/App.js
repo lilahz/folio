@@ -11,7 +11,7 @@ import AllProjects from './Components/HomeComponent/ProjectComponent/AllProjects
 import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
 
-axios.default.baseURL = 'http://projects-21.herokuapp.com';
+axios.default.baseURL = 'https://projects-21.herokuapp.com';
 
 class App extends Component {
   render() {

@@ -13,6 +13,20 @@ class RegisterCompanyModalComponent extends Component {
         this.state = this.getInitialState();
     }
 
+    getInitialState = () => ({
+        company_name: '',
+        email: '',
+        password: '',
+        confirm_password: '',
+        phone_number: '',
+        website: '',
+        about_me: '',
+        errors: {},
+        currentModal: 0,
+        visible: false,
+        userExists: false
+    });
+
     onShowAlert = (toggle) =>{
         this.setState({visible:true},()=>{
           window.setTimeout(()=>{
@@ -32,10 +46,35 @@ class RegisterCompanyModalComponent extends Component {
         return errors;
     }
 
-    validateFirst = () => {
-        var emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    checkIfUserExists () {
+        console.log("hello");
         let errors = {};
+        axios.post('/api/auth/check_if_user_exists', { "email":this.state.email })
+        .then(response => console.log(response.status))
+        .catch(error => console.log(error.response.status))
+        return errors;
+        //     const data = response.json();
+        //     console.log(data);
+        //     this.setState({userExistsCheck : false}, () => {this.validateFirst(errors)});
+        //     return errors;
+        // }
+        // catch (error) {
+        //     console.log("error!!")
+        //     errors.email = 'A user already exists with the specified email address';
+        //     this.setState({userExistsCheck : true},() => {this.validateFirst(errors)});
+        //     return errors;
+        // }
+        // .catch ((error) => {
+        //     console.log(error.response.status);
+        //     if(error.response.status === 403) return true; // email exists
+        //     else return false;
+        // });
+    }
 
+    validateFirst () {
+        const errors = {};
+        var emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        
         if (this.state.company_name === '') errors.company_name = 'Please enter your company name.';
         if(!emailPattern.test(this.state.email)) errors.email = 'Invalid email address.';
         if (this.state.password === '') errors.password = 'Please enter a password.';
@@ -44,19 +83,6 @@ class RegisterCompanyModalComponent extends Component {
         return errors;
     }
 
-    getInitialState = () => ({
-        company_name: '',
-        email: '',
-        password: '',
-        confirm_password: '',
-        phone_number: '',
-        website: '',
-        about_me: '',
-        errors: {},
-        currentModal: 0,
-        visible: false
-    });
-
     handleChange = event => {
         this.setState({
           [event.target.id]: event.target.value
@@ -64,16 +90,20 @@ class RegisterCompanyModalComponent extends Component {
     }
 
     submitForm = (data) => {
+<<<<<<< HEAD
         axios.post('/api/auth/company_register', data)
+=======
+        const url = 'http://projects-21.herokuapp.com/api/auth/company_register';
+        axios.post(url, data)
+>>>>>>> 62e3c4d8cb48b9cd6ce234f6bf3deb0d97b2bb85
         .then(response => {
             console.log(response);
             this.setState(this.getInitialState()); // if success, reset all fields
         })
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const errors = this.validateSecond();
+    handleSubmit = (toggle) => {
+        let errors = this.validateSecond();
         const data = { "company_name":this.state.company_name, 
                         "email":this.state.email,
                         "password":this.state.password,
@@ -82,17 +112,29 @@ class RegisterCompanyModalComponent extends Component {
                         "about_me":this.state.about_me };
 
         if (Object.keys(errors).length === 0) {
+<<<<<<< HEAD
             console.log(data);
             this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
+=======
+            // errors = this.checkIfUserExists();
+            // if(Object.keys(errors).length === 0) {
+                this.submitForm(data); // send the data to the server
+                this.setState(this.getInitialState()); // if success, reset all fields
+                this.onShowAlert(toggle);
+            // }
+            // else {
+            //     this.setState({ errors : errors });
+            // }
+           
+>>>>>>> 62e3c4d8cb48b9cd6ce234f6bf3deb0d97b2bb85
         } else {
-            this.setState({ errors });
+            this.setState({ errors : errors });
         }
-        //     this.onShowAlert(toggle);
-        //     console.log("submited");
     }
 
     handleNext = () => {
+        // const errors = this.checkIfUserExists();
         const errors = this.validateFirst();
         if (Object.keys(errors).length === 0) {
             this.setState({currentModal: 1 });
@@ -187,14 +229,14 @@ class RegisterCompanyModalComponent extends Component {
                 </FormGroup> <br></br>
                 <FormGroup>
                      <Input id="about_me" type="text" value={this.state.about_me} onChange={this.handleChange}
-                        invalid={errors.about_me ? true : false} placeholder="* Tell us about_me your company" />
+                        invalid={errors.about_me ? true : false} placeholder="* Tell us about your company" />
                     <FormFeedback>{errors.about_me}</FormFeedback>
                 </FormGroup> <br></br>
                 </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={this.handlePrev}> Prev </Button>    
-                    <Button variant="primary" onClick={this.handleSubmit}> Submit </Button>       
+                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> Submit </Button>       
                 </Modal.Footer>
                 {showAlert}
             </Modal> : null }

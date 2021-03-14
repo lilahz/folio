@@ -71,28 +71,20 @@ class RegisterJuniorModalComponent extends Component {
         }
         else {
             let valuesArrObj = selected.reduce((acc, current) => acc.concat(current.value), []);
-            console.log(valuesArrObj);
             this.setState({field: valuesArrObj});
         }
     }
 
     submitForm = (data) => {
-        const url = 'https://projects-21.herokuapp.com/api/auth/junior_register';
-        const requestOptions = {
-            method: 'POST',
-            cache: "no-cache",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        };
-        axios.post(url, {data})
+        const url = 'http://projects-21.herokuapp.com/api/auth/junior_register';
+        axios.post(url, data)
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
         })
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (toggle) => {
         const errors = this.validateSecond();
         const data = { "full_name":this.state.full_name, 
                         "email":this.state.email,
@@ -103,15 +95,12 @@ class RegisterJuniorModalComponent extends Component {
                         "about_me":this.state.about_me };
 
         if (Object.keys(errors).length === 0) {
-            console.log(data);
-            // this.submitForm(data); // send the data to the server
-            // this.setState(this.getInitialState()); // if success, reset all fields
+            this.submitForm(data); // send the data to the server
+            this.setState(this.getInitialState()); // if success, reset all fields
+            this.onShowAlert(toggle);
         } else {
             this.setState({ errors : errors });
         }
-
-        //     this.onShowAlert(toggle);
-        //     console.log("submited");
     }
 
     handleNext = () => {
@@ -201,7 +190,7 @@ class RegisterJuniorModalComponent extends Component {
                 </Modal.Body>
                 <Modal.Footer> 
                     <Button variant="primary" onClick={this.handlePrev}> Prev </Button>    
-                    <Button variant="primary" onClick={this.handleSubmit}> Submit </Button>    
+                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> Submit </Button>    
                 </Modal.Footer>
                 {showAlert}
             </Modal> : null }

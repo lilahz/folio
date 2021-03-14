@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import Form from 'react-bootstrap/Form'
-import {Button} from 'react-bootstrap';
-import { Alert } from 'reactstrap';
+import {Alert, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
 import FilterComponent from '../HomeComponent/FilterComponent';
 import {field_array} from '../HomeComponent/data';
+import axios from 'axios';
+
 
 class NewProjectModalComponent extends Component {
-    state = {
-        company_id: "2",
+    constructor(props) {
+        super(props);
+        this.state = this.getInitialState();
+    }
+
+    getInitialState = () => ({
+        company_id: "5",
         field: [],
         status: "todo",
         description: "",
-        fieldError: null,
-        descriptionError: null,
+        errors: {},
         visible : false
-    }
+    });
 
     onShowAlert = (toggle) =>{
         this.setState({visible:true},()=>{
@@ -26,49 +30,43 @@ class NewProjectModalComponent extends Component {
         });
     }
 
-    handleSubmit = (toggle) => {
-        // event.preventDefault();
-        if(this.state.description === "" && (this.state.field.length === 0 || this.state.field === null)){
-            this.setState({
-                descriptionError: 'Description is required',
-                fieldError: 'Field is required'
-            });
-        }
-        else if(this.state.field.length === 0 || this.state.field === null) {
-            this.setState({
-                fieldError: 'Field is required',
-                descriptionError: null
-            });
-        }
-        else if(this.state.description === "") {
-            this.setState({
-                descriptionError: 'Description is required',
-                fieldError: null
-            });
-        }
-        else {
-            const data = { "company_id":this.state.company_id, 
-                            "field":this.state.field,
-                            "status":this.state.status,
-                            "description":this.state.description
-                          }
+    validate = () => {
+        let errors = {};
+        
+        if (this.state.description === '') errors.description = 'Please tell us about your project.';
+        if (this.state.field === [] || this.state.field === null || this.state.field.length === 0) errors.field = 'Please enter the field of work.';
+        return errors;
+    }
 
-            const url = '/new_project';
-            const requestOptions = {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    };
-            fetch(url, requestOptions)
-                .then(res => res.json())
-                .catch(error => console.error("Error:", error))
-                .then(response => console.log("Success:", response));
-            this.setState({
-                fieldError: null,
-                descriptionError: null,
-            });
+    handleChange = event => {
+        this.setState({
+          [event.target.id]: event.target.value
+        });
+    }
+
+    submitForm = (data) => {
+        const url = 'http://projects-21.herokuapp.com/api/new_project';
+        axios.post(url, data)
+        .catch(error => console.error("Error:", error))
+        .then(response => console.log("Success:", response));
+    }
+
+    handleSubmit = (toggle) => {
+        const errors = this.validate();  
+        const data = { "company_id":this.state.company_id, 
+                        "field":this.state.field,
+                        "status":this.state.status,
+                        "description":this.state.description
+                        };
+        
+        if (Object.keys(errors).length === 0) {
+            console.log(data);
+            this.submitForm(data); // send the data to the server
+            this.setState(this.getInitialState()); // if success, reset all fields
             this.onShowAlert(toggle);
-        }
+        } else {
+            this.setState({ errors : errors });
+        }                
     }
 
     onChangefield = selected => {
@@ -82,6 +80,7 @@ class NewProjectModalComponent extends Component {
 
 
     render() {
+        const { errors } = this.state;
         const showAlert = this.state.visible ? 
                     <Alert style={{textAlign:"center"}} variant="success">
                         Project Created Successfully!</Alert> : null;
@@ -96,24 +95,22 @@ class NewProjectModalComponent extends Component {
                     <Modal.Title id="contained-modal-title-vcenter"> New Project Form </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group controlId="validationCustom03">
-                        <Form.Label>Company Name : </Form.Label>
-                        <Form.Control type="text" placeholder="Company Name" readOnly/>  
-            
-                        <Form.Label>* Description : (200 max    )</Form.Label>
-                        <Form.Control type="text" required maxLength="200"
-                            onChange={(e) => this.setState({description: e.target.value})} 
-                            value={this.state.description} placeholder="What do you need help with?"/> 
-                        <div style={{ color: 'red' }}>{this.state.descriptionError}</div><br/>
-
-                        <Form.Label>* Fields : </Form.Label>
-                         <FilterComponent    
-                            place_holder = "Choose field of Work"
-                            filter_array = {field_array}
-                            handle_on_change = {this.onChangefield} 
-                        />
-                        <div style={{ color: 'red' }}>{this.state.fieldError}</div>
-                    </Form.Group>
+                    <FormGroup>
+                        <Input id="company_name" type="text" value={this.state.company_name} 
+                                 placeholder="* Company Name" disabled/>
+                    </FormGroup>
+                    <FormGroup>
+                        <FilterComponent    
+                                place_holder = "Choose field of Work"
+                                filter_array = {field_array}
+                                handle_on_change = {this.onChangefield} />
+                        <FormFeedback>{errors.description}</FormFeedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <Input id="description" type="text" value={this.state.description} maxLength="200" onChange={this.handleChange}
+                                invalid={errors.description ? true : false} placeholder="* Description : (200 max)"/>
+                        <FormFeedback>{errors.description}</FormFeedback>
+                    </FormGroup>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> Submit </Button>       

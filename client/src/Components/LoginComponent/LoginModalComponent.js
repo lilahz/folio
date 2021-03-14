@@ -42,18 +42,15 @@ class LoginModalComponent extends Component {
     }
 
     submitForm = (data) => {
+        let errors = {};
         const url = this.props.url;
-        // const url = 'https://projects-21.herokuapp.com/api/auth/company_login';
-        const requestOptions = {
-            method: 'POST',
-            cache: "no-cache",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        };
-        axios.post(url, {data})
+        axios.post(url, data)
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
+        })
+        .catch(error => {
+            console.log(error.response.status); 
         })
     }
 
@@ -65,7 +62,7 @@ class LoginModalComponent extends Component {
 
         if (Object.keys(errors).length === 0) {
             console.log(data);
-            // this.submitForm(data); // send the data to the server
+            this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
         } else {
             this.setState({ errors });

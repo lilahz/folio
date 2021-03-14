@@ -43,6 +43,5 @@
         flex-direction: row;
         align-content: stretch;
         justify-content: center;
-        position: absolute;
     }
 }

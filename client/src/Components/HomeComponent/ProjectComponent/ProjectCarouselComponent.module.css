@@ -1,0 +1,9 @@
+.Carousel {
+    padding: 0 auto;
+}
+
+.CarouselItem {
+    background-color: lawngreen;
+    margin: 0 auto;
+    padding: 0 auto;
+}

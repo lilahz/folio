@@ -44,10 +44,10 @@ class ProjectComponent extends Component {
                             waves />
                         <MDBCardBody className="ItemBody">
                             <MDBCardTitle className={classes.ProjectTitle}>{this.props.cardTitle}</MDBCardTitle>
-                            <MDBCardText className={"indigo-text"}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                            <MDBCardText className={"indigo-text " + classes.ProjectText}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>
                         <MDBCardFooter className="ItemFooter">
-                            <MDBBtn onClick = { this.toggle }>Learn More</MDBBtn>
+                            <MDBBtn className={classes.Footer} onClick = { this.toggle }>Learn More</MDBBtn>
                             <ProjectModalComponent className="Modal"
                                 isOpen={this.state.modal} 
                                 toggle={this.toggle}

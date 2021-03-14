@@ -12,7 +12,6 @@ import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
 
 axios.default.baseURL = 'http://projects-21.herokuapp.com';
-// axios.default.baseURL = 'http://localhost:5000/'
 
 class App extends Component {
   render() {

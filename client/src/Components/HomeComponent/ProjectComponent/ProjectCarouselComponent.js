@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import ProjectComponent from './ProjectComponent';
 import '../ItemComponent.css';
+import classes from './ProjectCarouselComponent.module.css';
 
 
 class ProjectCarouselComponent extends Component {
@@ -66,7 +67,7 @@ class ProjectCarouselComponent extends Component {
             if(items.length === 0)
                 return "";
             else {
-                let carouselRow1 = <Carousel.Item interval={1500} key={this.props.key}>
+                let carouselRow1 = <Carousel.Item className={classes.CarouselItem} interval={1500} key={this.props.key}>
                                         <Row style={RowStyle}>
                                             {items.slice(0,3).map((project) => (
                                                 <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
@@ -91,7 +92,7 @@ class ProjectCarouselComponent extends Component {
                     }
                 }
                 return (<div className="Carousel" style={this.state}>
-                <Carousel>
+                <Carousel className={classes.Carousel}>
                     {carouselRow1}
                     {carouselRow2}
                     {carouselRow3}

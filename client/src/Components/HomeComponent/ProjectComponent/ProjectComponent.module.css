@@ -1,25 +1,46 @@
 .ProjectComponent {
     margin: 0 16px;
-    width: 28vw;
+    width: 20vw;
     height: 20vh;
 }
 
 .ProjectTitle {
     font-size: 20px;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ProjectText {
+    color: lightcoral;
+    font-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Footer {
+    background-color: lightblue;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (min-width: 1000px) and (min-height: 400px) {
     .ProjectComponent {
-        width: 24vw;
+        width: 20vw;
         height: 60vh;
     }
 
     .ProjectTitle {
-        font-size: 2em;
+        /* font-size: 2em;
         font-family: 'Roboto', sans-serif;
-        font-weight: 900;
+        font-weight: 900; */
         text-align: center;
-        letter-spacing: -1px;
+        /* letter-spacing: -1px; */
+    }
+
+    .ProjectText {
+        color: black;
+        font-size: 1em;
     }
 }

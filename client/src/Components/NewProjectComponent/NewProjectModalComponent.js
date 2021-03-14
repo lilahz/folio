@@ -45,7 +45,7 @@ class NewProjectModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        const url = 'http://projects-21.herokuapp.com/api/new_project';
+        const url = '/api/new_project';
         axios.post(url, data)
         .catch(error => console.error("Error:", error))
         .then(response => console.log("Success:", response));

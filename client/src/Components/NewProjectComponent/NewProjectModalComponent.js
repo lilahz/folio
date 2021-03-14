@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-// import {Button} from 'react-bootstrap';
-import {Alert, Form, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
+import {Alert, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
 import FilterComponent from '../HomeComponent/FilterComponent';
 import {field_array} from '../HomeComponent/data';
 import axios from 'axios';
@@ -14,7 +13,7 @@ class NewProjectModalComponent extends Component {
     }
 
     getInitialState = () => ({
-        company_id: "2",
+        company_id: "5",
         field: [],
         status: "todo",
         description: "",
@@ -35,7 +34,7 @@ class NewProjectModalComponent extends Component {
         let errors = {};
         
         if (this.state.description === '') errors.description = 'Please tell us about your project.';
-        if (this.state.field === [] || this.state.field === null || this.state.field.length === 0) errors.field = 'Please enter the field of work..';
+        if (this.state.field === [] || this.state.field === null || this.state.field.length === 0) errors.field = 'Please enter the field of work.';
         return errors;
     }
 
@@ -46,15 +45,8 @@ class NewProjectModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        const url = '/api/new_project';
-        const requestOptions = {
-            method: 'POST',
-            cache: "no-cache",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        };
+        const url = 'http://projects-21.herokuapp.com/api/new_project';
         axios.post(url, data)
-        .then(res => res.json())
         .catch(error => console.error("Error:", error))
         .then(response => console.log("Success:", response));
     }
@@ -111,7 +103,7 @@ class NewProjectModalComponent extends Component {
                         <FilterComponent    
                                 place_holder = "Choose field of Work"
                                 filter_array = {field_array}
-                                handle_on_change = {this.handleChangeField} />
+                                handle_on_change = {this.onChangefield} />
                         <FormFeedback>{errors.description}</FormFeedback>
                     </FormGroup>
                     <FormGroup>

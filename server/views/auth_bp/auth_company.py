@@ -16,7 +16,7 @@ def check_if_user_exists():
 def company_register():
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return jsonify({'message' : 'User already logged in'})
+        return jsonify({'message' : 'User already logged in'}), 401
     data = request.json
     email = data.get('email')
     password = data.get('password')
@@ -45,7 +45,7 @@ def company_login():
 
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return jsonify({'message' : 'User already logged in'})
+        return jsonify({'message' : 'User already logged in'}), 401
 
     data = request.form
     email = data.get('email')

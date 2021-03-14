@@ -14,12 +14,12 @@ const NavBarComponent = () => {
                     <Nav.Link href="/home/juniors">JUNIORS</Nav.Link>
                     <Nav.Link href="/home/about" className="ml-auto" style={{alignSelf: "right"}}>ABOUT</Nav.Link>
                 </Nav>
-                <Form inline>
-                    <Nav className="mr-auto">
+                {/* <Form inline> */}
+                    <Nav className="justify-content-end">
                         <Nav.Link href="/register">REGISTER</Nav.Link>
                         <Nav.Link href="/login">LOGIN</Nav.Link>
                     </Nav>
-                </Form>
+                {/* </Form> */}
             </Navbar.Collapse>
         </Navbar>
     )

@@ -92,12 +92,13 @@ class RegisterCompanyModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        const url = 'http://projects-21.herokuapp.com/api/auth/company_register';
-        axios.post(url, data)
+        axios.post('/api/auth/company_register', data)
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
             localStorage.setItem('currentUserCompanyEmail', data.email);
+            console.log(response);
+            this.setState(this.getInitialState()); // if success, reset all fields
         })
     }
 
@@ -120,6 +121,10 @@ class RegisterCompanyModalComponent extends Component {
             else {
                 this.setState({ errors : errors, currentModal : 0 });
             }
+            console.log(data);
+            this.submitForm(data); // send the data to the server
+            // this.setState(this.getInitialState()); // if success, reset all fields
+            // this.onShowAlert(toggle);
         } else {
             this.setState({ errors : errors });
         }

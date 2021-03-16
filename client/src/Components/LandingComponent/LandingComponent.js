@@ -54,7 +54,19 @@ class LandingComponent extends Component {
                     <img src={logo} alt=""/>
                 </div>
             </div>
-            <Row>
+            <div className={classes.LandingBottom}>
+                <Tooltip title="See all Projects" position="top" >
+                    <h2>Our Open Projects</h2>
+                </Tooltip>
+                <Tooltip title="New Project" position="right" >
+                    <Button 
+                        className={classes.NewProject}
+                        variant="outline-secondary">
+                            <VscNewFile size={16}/>
+                    </Button>
+                </Tooltip>
+            </div>
+            {/* <Row>
                 <Col xs={12} md={8} className="text-center"> 
                     <Tooltip title="See all Projects" placement="left-start" TransitionComponent={Fade} enterDelay={100} leaveDelay={100}>
                             <Button className="CarouselHeader"
@@ -77,7 +89,7 @@ class LandingComponent extends Component {
                         </Button>
                     </Tooltip>
                 </Col>
-            </Row>
+            </Row> */}
             <ProjectCarouselComponent/>
             <NewProjectModalComponent className="Modal"
                 isOpen={this.state.modal} 

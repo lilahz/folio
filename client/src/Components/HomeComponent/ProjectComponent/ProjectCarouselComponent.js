@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import ProjectComponent from './ProjectComponent';
 import '../ItemComponent.css';
+import classes from './ProjectCarouselComponent.module.css';
 
 
 class ProjectCarouselComponent extends Component {
@@ -35,7 +36,7 @@ class ProjectCarouselComponent extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.scrollEventHandler);
-        axios.get("http://projects-21.herokuapp.com/api/home/")
+        axios.get("/api/home/")
             .then(res => res.data)
             .then(
                 (result) => {
@@ -66,7 +67,7 @@ class ProjectCarouselComponent extends Component {
             if(items.length === 0)
                 return "";
             else {
-                let carouselRow1 = <Carousel.Item interval={1500} key={this.props.key}>
+                let carouselRow1 = <Carousel.Item className={classes.CarouselItem} interval={1500} key={this.props.key}>
                                         <Row style={RowStyle}>
                                             {items.slice(0,3).map((project) => (
                                                 <ProjectComponent key={project.id} 
@@ -106,7 +107,7 @@ class ProjectCarouselComponent extends Component {
                     }
                 }
                 return (<div className="Carousel" style={this.state}>
-                <Carousel>
+                <Carousel className={classes.Carousel}>
                     {carouselRow1}
                     {carouselRow2}
                     {carouselRow3}

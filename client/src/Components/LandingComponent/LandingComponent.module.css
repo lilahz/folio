@@ -30,6 +30,30 @@
     width: 88vw;
 }
 
+.LandingBottom {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.LandingBottom h2 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 2.5em;
+    letter-spacing: -2px;
+    text-align: center;
+    color: rgb(83, 93, 102);
+    cursor: pointer;
+}
+
+.NewProject {
+    min-height: min-content;
+    width: min-content;
+    align-content: center;
+    margin: 0 auto;
+}
+
 @media screen and (min-width: 1000px) and (min-height: 400px) {
     .Landing {
         display: flex;

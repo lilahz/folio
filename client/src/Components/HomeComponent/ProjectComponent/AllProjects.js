@@ -7,6 +7,7 @@ import {field_array} from '../data';
 import {status_array} from '../data';
 import './ProjectsComponent.css';
 import '../AllHomePage.css';
+import classes from './AllProjects.module.css';
 import emptyState from '../images/empty_state.png';
 
 
@@ -23,7 +24,7 @@ class AllProjects extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://projects-21.herokuapp.com/api/home/projects")
+        axios.get("/api/home/projects")
             .then(response => this.setState({allProjectsArray: response.data}))
     }
 
@@ -96,12 +97,13 @@ class AllProjects extends Component {
                         // <ProjectsComponent projects = {this.state.allProjectsArray}/> : 
                         <ProjectsComponent projects = {this.state.currProjectsArray}/> ; 
         return (
-            <div className="AllProjects">
-                <h1 className="ProjectListHeader">All of Our Projects</h1>
+            <div className={classes.AllProjects}>
+                <h1 className="ProjectListHeader">All Projects</h1>
                 <div className="container">
-                    <div className="row justify-content-center" >
-                        <div className="col-4 text-center" style={{margin : '30px'}}>
-                            <FilterComponent    
+                    <div className={classes.Filters} >
+                        <div className="col-4 text-center " style={{margin : 'auto 30px'}}>
+                            <FilterComponent  
+                                className={classes.Filter}
                                 place_holder = "Filter by Field"
                                 filter_array = {field_array}
                                 handle_on_change = {this.projectFilterFieldOnChange}
@@ -116,7 +118,7 @@ class AllProjects extends Component {
                                 filter_value = {this.state.projectsStatusFilter} 
                             />
                         </div>
-                </div>
+                    </div>
                 {pageBody}
             </div>
         </div>

@@ -48,12 +48,12 @@ class LoginComponent extends Component {
                     <LoginModalComponent className="Modal"
                         isOpen={this.state.companyModal} 
                         toggle={this.toggleCompanyForm}
-                        url="https://projects-21.herokuapp.com/api/auth/company_login"
+                        url="/api/auth/company_login"
                     />
                     <LoginModalComponent className="Modal"
                         isOpen={this.state.juniorModal} 
                         toggle={this.toggleJuniorForm}
-                        url="https://projects-21.herokuapp.com/api/auth/junior_login"
+                        url="/api/auth/junior_login"
                     />
                 </div>
             </div>

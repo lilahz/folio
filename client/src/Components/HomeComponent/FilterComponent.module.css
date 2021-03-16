@@ -1,0 +1,17 @@
+/* .FiltersDiv {
+    min-width: 100%;
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+} */
+
+.Filter {
+    /* TODO: make buttons look good on mobile display */
+    width: 10vw;
+}
+
+@media screen and (min-width: 1000px) and (min-height: 400px) {
+    .Filter {
+        width: auto;
+    }
+}

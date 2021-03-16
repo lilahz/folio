@@ -76,7 +76,7 @@ class RegisterJuniorModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        const url = 'http://projects-21.herokuapp.com/api/auth/junior_register';
+        const url = '/api/auth/junior_register';
         axios.post(url, data)
         .then(response => {
             console.log("respone" + response);

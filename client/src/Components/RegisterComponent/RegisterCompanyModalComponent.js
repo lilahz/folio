@@ -51,7 +51,9 @@ class RegisterCompanyModalComponent extends Component {
         let errors = {};
         axios.post('/api/auth/check_if_user_exists', { "email":this.state.email })
         .then(response => console.log(response.status))
-        .catch(error => console.log(error.response.status))
+        .catch(error => {console.log("Error!!");
+                        console.log(error.response.status); 
+                        errors.email = 'A user already exists with the specified email address'})
         return errors;
         //     const data = response.json();
         //     console.log(data);
@@ -95,6 +97,7 @@ class RegisterCompanyModalComponent extends Component {
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
+            localStorage.setItem('currentUserCompanyEmail', data.email);
         })
     }
 
@@ -108,16 +111,15 @@ class RegisterCompanyModalComponent extends Component {
                         "about_me":this.state.about_me };
 
         if (Object.keys(errors).length === 0) {
-            // errors = this.checkIfUserExists();
-            // if(Object.keys(errors).length === 0) {
+            errors = this.checkIfUserExists();
+            if(Object.keys(errors).length === 0) {
                 this.submitForm(data); // send the data to the server
                 this.setState(this.getInitialState()); // if success, reset all fields
                 this.onShowAlert(toggle);
-            // }
-            // else {
-            //     this.setState({ errors : errors });
-            // }
-           
+            }
+            else {
+                this.setState({ errors : errors, currentModal : 0 });
+            }
         } else {
             this.setState({ errors : errors });
         }

@@ -94,14 +94,14 @@ class LoginModalComponent extends Component {
 
                 <FormGroup>
                     <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                        invalid={errors.password ? true : false} placeholder="* Password" />
+                        invalid={errors.password ? true : false} placeholder="* סיסמא" />
                     <FormFeedback>{errors.password}</FormFeedback>
                 </FormGroup> <br></br>
 
                 </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={this.handleSubmit}> Submit </Button>       
+                    <Button variant="primary" onClick={this.handleSubmit}> אישור </Button>       
                 </Modal.Footer>
                 {showAlert}
             </Modal>

@@ -32,7 +32,7 @@ class LandingComponent extends Component {
                     <p>Creating a platform that connects juniors to non-profits organizations and small businesses.
                         The juniors will gain the experience they lack of and the businesses will receive the services they need.
                     </p>
-                    <div>
+                    {/* <div>
                         <Button 
                             href="/login"
                             variant="outline-secondary"
@@ -48,7 +48,7 @@ class LandingComponent extends Component {
                             onClick={this.registerClickHandler}>
                                 REGISTER
                         </Button>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={classes.LandingRight}>
                     <img src={logo} alt=""/>
@@ -56,7 +56,7 @@ class LandingComponent extends Component {
             </div>
             <div className={classes.LandingBottom}>
                 <Tooltip title="See all Projects" position="top" >
-                    <h2>Our Open Projects</h2>
+                    <h2>הפרוייקטים שלנו</h2>
                 </Tooltip>
                 <Tooltip title="New Project" position="right" >
                     <Button 

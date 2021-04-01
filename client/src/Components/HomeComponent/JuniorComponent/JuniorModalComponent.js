@@ -20,9 +20,9 @@ render() {
             {this.props.modalTitle}
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            Can help with: {this.props.modalField} <br />
-            About Me: {this.props.modalDescription}
+        <Modal.Body style={{textAlignVertical: "center",textAlign: "right"}} dir="rtl">
+            יכול/ה לסייע עם: {this.props.modalField} <br />
+            קצת עליי: {this.props.modalDescription}
         </Modal.Body>
         <Modal.Footer>
             <Row>

@@ -47,7 +47,7 @@ class ProjectComponent extends Component {
                             <MDBCardText className={"indigo-text " + classes.ProjectText}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>
                         <MDBCardFooter className="ItemFooter">
-                            <MDBBtn className={classes.Footer} onClick = { this.toggle }>Learn More</MDBBtn>
+                            <MDBBtn className={classes.Footer} onClick = { this.toggle }>קצת פרטים</MDBBtn>
                             <ProjectModalComponent className="Modal"
                                 isOpen={this.state.modal} 
                                 toggle={this.toggle}

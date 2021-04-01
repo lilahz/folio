@@ -25,8 +25,8 @@ class LoginComponent extends Component {
         return (
             <div className={classes.LoginComponent}>
                 <div>
-                    <h1>Login</h1>
-                    <h3>Who are you?</h3>
+                    <h1>התחברות</h1>
+                    <h3>?מי אתה</h3>
                     <div className={classes.Buttons}>
                         <Button
                             className={classes.Button}
@@ -34,7 +34,7 @@ class LoginComponent extends Component {
                             style={{margin: "8px"}}
                             onClick={this.toggleCompanyForm}
                             block>
-                                Company
+                                עמותה
                         </Button>
                         <Button
                             className={classes.Button}
@@ -42,7 +42,7 @@ class LoginComponent extends Component {
                             style={{margin: "8px"}}
                                 onClick={this.toggleJuniorForm}
                             block>
-                                Junior
+                                מתמחה
                         </Button>
                     </div>
                     <LoginModalComponent className="Modal"

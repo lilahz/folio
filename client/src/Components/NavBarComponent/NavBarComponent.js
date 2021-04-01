@@ -18,26 +18,31 @@ const NavBarComponent = () => {
         localStorage.removeItem('currentUserCompanyEmail');
     }
     const noUserLoggedIn = <Nav className="mr-auto">
-                                <Nav.Link href="/register">REGISTER</Nav.Link>
-                                <Nav.Link href="/login">LOGIN</Nav.Link>
+                                <Nav.Link href="/register">הירשם</Nav.Link>
+                                <Nav.Link href="/login">התחבר</Nav.Link>
                             </Nav>;
 
     const userLoggedIn = <Nav className="mr-auto">
-                            <Nav.Item onClick={handeLogout}>LOGOUT</Nav.Item>
+                            <Nav.Item onClick={handeLogout}>התנתק</Nav.Item>
                          </Nav>;
     return (
         <Navbar className="NavBar" variant="light" expand="lg" sticky="top">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/">HOME</Nav.Link>
-                    <Nav.Link href="/home/projects">PROJECTS</Nav.Link>
-                    <Nav.Link href="/home/juniors">JUNIORS</Nav.Link>
-                    <Nav.Link href="/home/about" className="ml-auto" style={{alignSelf: "right"}}>ABOUT</Nav.Link>
-                </Nav>
                 <Form inline>
-                   {localStorage.getItem('currentUserCompanyEmail') ? userLoggedIn : noUserLoggedIn}
+                    <Nav className="justify-content-end">
+                        {localStorage.getItem('currentUserCompanyEmail') ? userLoggedIn : noUserLoggedIn}
+                        <Nav.Link href="/register">הירשם</Nav.Link>
+                        <Nav.Link href="/login">התחבר</Nav.Link>
+                    </Nav>
                 </Form>
+                <Nav className="ml-auto">
+                    <Nav.Link href="/home/about" className="ml-auto" style={{alignSelf: "right"}}>עלינו</Nav.Link>
+                    <Nav.Link href="/home/juniors">מתמחים</Nav.Link>
+                    <Nav.Link href="/home/projects">פרוייקטים</Nav.Link>
+                    <Nav.Link href="/">דף הבית</Nav.Link>
+                </Nav>
+                {/* </Form> */}
             </Navbar.Collapse>
         </Navbar>
     )

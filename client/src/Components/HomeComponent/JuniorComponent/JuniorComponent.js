@@ -46,7 +46,7 @@ class JuniorComponent extends Component {
                             <MDBCardText className="indigo-text">{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>
                         <MDBCardFooter className="ItemFooter">
-                            <MDBBtn onClick = { this.toggle }>Learn More</MDBBtn>
+                            <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
                             <JuniorModalComponent className="Modal"
                                 isOpen={this.state.modal} 
                                 toggle={this.toggle}

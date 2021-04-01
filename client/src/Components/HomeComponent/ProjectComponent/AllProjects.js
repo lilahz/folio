@@ -98,13 +98,13 @@ class AllProjects extends Component {
                         <ProjectsComponent projects = {this.state.currProjectsArray}/> ; 
         return (
             <div className={classes.AllProjects}>
-                <h1 className="ProjectListHeader">All Projects</h1>
+                <h1 className="ProjectListHeader">כל הפרוייקטים </h1>
                 <div className="container">
                     <div className={classes.Filters} >
                         <div className="col-4 text-center " style={{margin : 'auto 30px'}}>
-                            <FilterComponent  
+                            <FilterComponent
                                 className={classes.Filter}
-                                place_holder = "Filter by Field"
+                                place_holder = "סנן לפי תחום"
                                 filter_array = {field_array}
                                 handle_on_change = {this.projectFilterFieldOnChange}
                                 filter_value = {this.state.projectsFieldFilter}
@@ -112,7 +112,7 @@ class AllProjects extends Component {
                         </div>
                         <div className="col-4 text-center" style={{margin: '30px'}}>
                             <FilterComponent
-                                place_holder = "Filter by Status"
+                                place_holder = "סנן לפי סטטוס"
                                 filter_array = {status_array}
                                 handle_on_change = {this.projectFilterStatusOnChange}
                                 filter_value = {this.state.projectsStatusFilter} 

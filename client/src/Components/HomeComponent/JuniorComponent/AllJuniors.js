@@ -52,12 +52,12 @@ class AllJuniors extends Component {
                         <JuniorsComponent juniors = {this.state.items}/> ; 
         return (
             <div className="AllJuniors">
-                <h1 className="JuniorListHeader">All of Our Juniors</h1>
+                <h1 className="JuniorListHeader">כל המתמחים</h1>
                 <div className="container">
                     <div className="row justify-content-center" style={{margin: '30px'}}>
                         <div className="col-4 text-center" style={{marginRight: '30px'}}>
                             <FilterComponent
-                                place_holder = "Filter by Field"
+                                place_holder = "סנן לפי תחום"
                                 filter_array = {field_array}
                                 handle_on_change = {this.juniorFilterFieldOnChange}
                                 filter_value = {this.state.juniorFieldFilter} 

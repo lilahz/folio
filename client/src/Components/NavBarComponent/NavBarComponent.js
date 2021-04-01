@@ -32,8 +32,6 @@ const NavBarComponent = () => {
                 <Form inline>
                     <Nav className="justify-content-end">
                         {localStorage.getItem('currentUserCompanyEmail') ? userLoggedIn : noUserLoggedIn}
-                        <Nav.Link href="/register">הירשם</Nav.Link>
-                        <Nav.Link href="/login">התחבר</Nav.Link>
                     </Nav>
                 </Form>
                 <Nav className="ml-auto">

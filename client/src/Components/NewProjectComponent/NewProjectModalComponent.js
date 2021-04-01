@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap"
 import {Alert, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
 import FilterComponent from '../HomeComponent/FilterComponent';
 import {field_array} from '../HomeComponent/data';
@@ -69,13 +70,15 @@ class NewProjectModalComponent extends Component {
         }                
     }
 
-    onChangefield = selected => {
-        let statusFilter = [];
-        if(selected != null && selected.length > 0) {
-            let valuesArrObj = selected.reduce((acc, current) => acc.concat(current.value), []);
-            statusFilter = valuesArrObj;
+    onChangefield = event => {
+        let opts = [], opt;
+        for (let i = 0 ; i < event.target.options.length; i++) {
+            opt = event.target.options[i];
+            if (opt.selected) {
+                opts.push(opt.value);
+            }
         }
-        this.setState({field: statusFilter});
+        this.setState({ field: opts });
     }
 
 
@@ -100,11 +103,13 @@ class NewProjectModalComponent extends Component {
                                  placeholder="* Company Name" disabled/>
                     </FormGroup>
                     <FormGroup>
-                        <FilterComponent    
-                                place_holder = "Choose field of Work"
-                                filter_array = {field_array}
-                                handle_on_change = {this.onChangefield} />
-                        <FormFeedback>{errors.description}</FormFeedback>
+                        <Input id="filter" type="select" multiple value={this.state.field} onChange={this.onChangefield}
+                                invalid={errors.description ? true : false} placeholder="* Field of work">
+                                {field_array.map(item => (
+                                <option value={item.id}>{item.label}</option>
+                                ))}
+                        </Input>
+                        <FormFeedback>{errors.field}</FormFeedback>
                     </FormGroup>
                     <FormGroup>
                         <Input id="description" type="text" value={this.state.description} maxLength="200" onChange={this.handleChange}

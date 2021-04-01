@@ -44,24 +44,28 @@ class LoginModalComponent extends Component {
     submitForm = (data) => {
         let errors = {};
         const url = this.props.url;
-        axios.post(url, data)
+        console.log("url : " + this.props.url);
+        console.log("email : " + this.state.email);
+        console.log("password : " + this.state.password);
+        axios.post(url,  {email:this.state.email, password:this.state.password })
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
         })
         .catch(error => {
             console.log(error.response.status); 
+            console.log(error.response);
         })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate();
-        const data = {  "email":this.state.email,
-                        "password":this.state.password };
+        const data = {"email":this.state.email,
+                      "password":this.state.password };
 
         if (Object.keys(errors).length === 0) {
-            console.log(data);
+            // console.log(data);
             this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
         } else {

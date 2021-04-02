@@ -119,41 +119,41 @@ class RegisterJuniorModalComponent extends Component {
 
     render() {
         const { errors } = this.state;
-        const showAlert = this.state.visible ? <Alert style={{textAlign:"center"}} variant="success"> Junior Created Successfully! </Alert> : null;        
+        const showAlert = this.state.visible ? <Alert style={{textAlign:"center"}} variant="success"> מתמחה נוצר בהצלחה! </Alert> : null;        
 
         return (
             <div> {this.state.currentModal === 0 ? 
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerJuniorModal">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> CREATE ACCOUNT </Modal.Title>
+                    <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body> 
                     <Form>
                     <FormGroup>
                         <Input id="full_name" type="text" value={this.state.full_name} onChange={this.handleChange} 
-                            invalid={errors.full_name ? true : false} placeholder="* Full Name"/>
+                            invalid={errors.full_name ? true : false} placeholder="שם מלא *"/>
                         <FormFeedback>{errors.full_name}</FormFeedback>
                     </FormGroup> <br></br>
                     <FormGroup>
                         <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                            invalid={errors.email ? true : false} placeholder="* Email" />
+                            invalid={errors.email ? true : false} placeholder="מייל *" />
                         <FormFeedback>{errors.email}</FormFeedback>
                     </FormGroup><br></br>
                     <FormGroup>
                         <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                            invalid={errors.password ? true : false} placeholder="* Password" />
+                            invalid={errors.password ? true : false} placeholder="סיסמא *" />
                         <FormFeedback>{errors.password}</FormFeedback>
                     </FormGroup> <br></br>
                     <FormGroup>
                         <Input id="confirm_password" type="password" value={this.state.confirm_password} onChange={this.handleChange}
-                            invalid={errors.confirm_password ? true : false} placeholder="* Confirm Password" />
+                            invalid={errors.confirm_password ? true : false} placeholder="חזור על הסיסמא *" />
                         <FormFeedback>{errors.confirm_password}</FormFeedback>
                     </FormGroup> <br></br>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer> 
-                    <Button variant="primary" onClick={this.handleNext}> Next </Button>
+                    <Button variant="primary" onClick={this.handleNext}> הבא </Button>
                 </Modal.Footer>
                 {showAlert}
             </Modal> 
@@ -162,35 +162,35 @@ class RegisterJuniorModalComponent extends Component {
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerJuniorModal">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> CREATE ACCOUNT </Modal.Title>
+                    <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body> 
                     <Form>  
                     <FormGroup>
-                        <Input id="phone_number" type="tel" value={this.state.phone_number} onChange={this.handleChange} placeholder="Phone Number" />
+                        <Input id="phone_number" type="tel" value={this.state.phone_number} onChange={this.handleChange} placeholder="מספר טלפון" />
                     </FormGroup> <br></br>
                     <FormGroup>
                         <FilterComponent    
-                                place_holder = "Choose field of Work"
+                                place_holder = "תחום עיסוק *"
                                 filter_array = {field_array}
                                 handle_on_change = {this.handleChangeField} 
                         />
                     </FormGroup> <br></br>
                     <FormGroup>
                         <Input id="website" type="text" value={this.state.website} onChange={this.handleChange}
-                            invalid={errors.website ? true : false} placeholder="* Your Vanity URL" />
+                            invalid={errors.website ? true : false} placeholder="אתר *" />
                         <FormFeedback>{errors.website}</FormFeedback>
                     </FormGroup> <br></br>
                     <FormGroup>
                         <Input id="about_me" type="text" value={this.state.about_me} onChange={this.handleChange}
-                            invalid={errors.about_me ? true : false} placeholder="* Tell us about yourself" />
+                            invalid={errors.about_me ? true : false} placeholder="ספר קצת על עצמך *" />
                         <FormFeedback>{errors.about_me}</FormFeedback>
                     </FormGroup> <br></br>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer> 
-                    <Button variant="primary" onClick={this.handlePrev}> Prev </Button>    
-                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> Submit </Button>    
+                    <Button variant="primary" onClick={this.handlePrev}> קודם </Button>    
+                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> הירשם </Button>    
                 </Modal.Footer>
                 {showAlert}
             </Modal> : null }

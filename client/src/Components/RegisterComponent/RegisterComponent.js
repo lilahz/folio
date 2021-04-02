@@ -26,8 +26,8 @@ class RegisterComponent extends Component {
         return (
             <div className={classes.RegisterComponent}>
                 <div>
-                    <h1>Register</h1>
-                    <h3>Who are you?</h3>
+                    <h1>הירשם</h1>
+                    <h3>?מי אתה</h3>
                     <div className={classes.Buttons}>
                         <Button
                             className={classes.Button}
@@ -35,7 +35,7 @@ class RegisterComponent extends Component {
                             style={{margin: "8px"}}
                             onClick={this.toggleCompanyForm}
                             block>
-                                Company
+                                עמותה
                         </Button>
                         <Button
                             className={classes.Button}
@@ -43,7 +43,7 @@ class RegisterComponent extends Component {
                             style={{margin: "8px"}}
                                 onClick={this.toggleJuniorForm}
                             block>
-                                Junior
+                                מתמחה
                         </Button>
                     </div>
                     <RegisterCompanyModalComponent className="Modal"

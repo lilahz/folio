@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
 import {Row, Col} from 'react-bootstrap';
+import {MDBBtn, MDBRow} from 'mdbreact';
 
 import ProjectCarouselComponent from '../HomeComponent/ProjectComponent/ProjectCarouselComponent';
 import NewProjectModalComponent from '../NewProjectComponent/NewProjectModalComponent'
@@ -8,7 +9,6 @@ import classes from  './LandingComponent.module.css';
 import logo from './images/landing_image.png';
 import { VscNewFile } from 'react-icons/vsc';
 import Tooltip from "@material-ui/core/Tooltip";
-import Fade from '@material-ui/core/Fade';
 
 class LandingComponent extends Component {
     state = {
@@ -29,16 +29,14 @@ class LandingComponent extends Component {
             <div className={classes.Landing}>
                 <div className={classes.LandingLeft}>
                     <h1><b>PRO</b><span>jects</span></h1>
-                    <p>Creating a platform that connects juniors to non-profits organizations and small businesses.
-                        The juniors will gain the experience they lack of and the businesses will receive the services they need.
-                    </p>
+                    <p>יצירת פלטפורמה המחברת בין זוטרים לעמותות ועסקים קטנים. הצעירים יצברו את הניסיון שחסר להם והעסקים יקבלו את השירותים להם הם זקוקים.</p>
                     {/* <div>
                         <Button 
                             href="/login"
                             variant="outline-secondary"
                             style={{margin: "8px"}}
                             block>
-                                LOG IN
+                            LOG IN
                         </Button>
                         <Button 
                             href="/register"
@@ -46,7 +44,7 @@ class LandingComponent extends Component {
                             style={{margin: "8px"}}
                             block
                             onClick={this.registerClickHandler}>
-                                REGISTER
+                            REGISTER
                         </Button>
                     </div> */}
                 </div>
@@ -56,13 +54,15 @@ class LandingComponent extends Component {
             </div>
             <div className={classes.LandingBottom}>
                 <Tooltip title="See all Projects" position="top" >
-                    <h2>הפרוייקטים שלנו</h2>
+                <MDBBtn className={classes.LandingBottomButton} href="/home/projects">הפרוייקטים שלנו</MDBBtn>
+                    {/* <h2>Our Open Projects</h2> */}
                 </Tooltip>
                 <Tooltip title="New Project" position="right" >
                     <Button 
                         className={classes.NewProject}
-                        variant="outline-secondary">
-                            <VscNewFile size={16}/>
+                        variant="outline-secondary"
+                        onClick = { this.toggle }>
+                        <VscNewFile size={16}/>
                     </Button>
                 </Tooltip>
             </div>

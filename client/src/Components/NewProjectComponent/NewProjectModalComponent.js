@@ -83,7 +83,7 @@ class NewProjectModalComponent extends Component {
         const { errors } = this.state;
         const showAlert = this.state.visible ? 
                     <Alert style={{textAlign:"center"}} variant="success">
-                        Project Created Successfully!</Alert> : null;
+                        פרוייקט נוצר בהצלחה!</Alert> : null;
         return (
             <div>
             <Modal show={this.props.isOpen} onHide={this.props.toggle} key={this.props.key}
@@ -91,24 +91,24 @@ class NewProjectModalComponent extends Component {
                 centered
                 dialogClassName="modal-70w"
                 className="newProjectModal">
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> New Project Form </Modal.Title>
+                <Modal.Header>
+                    <Modal.Title id="contained-modal-title-vcenter"> יצירת פרוייקט חדש </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <FormGroup>
                         <Input id="company_name" type="text" value={this.state.company_name} 
-                                 placeholder="* Company Name" disabled/>
+                                 placeholder="* שם העמותה" disabled/>
                     </FormGroup>
                     <FormGroup>
                         <FilterComponent    
-                                place_holder = "Choose field of Work"
+                                place_holder = "תחום עיסוק *"
                                 filter_array = {field_array}
                                 handle_on_change = {this.onChangefield} />
                         <FormFeedback>{errors.description}</FormFeedback>
                     </FormGroup>
                     <FormGroup>
                         <Input id="description" type="text" value={this.state.description} maxLength="200" onChange={this.handleChange}
-                                invalid={errors.description ? true : false} placeholder="* Description : (200 max)"/>
+                                invalid={errors.description ? true : false} placeholder="ספר קצת על הפרוייקט *"/>
                         <FormFeedback>{errors.description}</FormFeedback>
                     </FormGroup>
                 </Modal.Body>

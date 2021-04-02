@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardFooter ,MDBBtn, MDBCardText} from 'mdbreact';
+import {View, Mask, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardFooter ,MDBBtn, MDBCardText} from 'mdbreact';
 
 import '../ItemComponent.css';
 import classes from './ProjectComponent.module.css';
@@ -38,25 +38,27 @@ class ProjectComponent extends Component {
             <div className="Item">
                 <MDBCol style={{ maxWidth: "22rem"}}>
                     <MDBCard className={classes.ProjectComponent} style={{boxShadow: "0 8px 6px -6px #4d4d4d"}} background='white'>
+                    <View hover zoom>
                         <MDBCardImage
                             className="img-fluid rounded mb-0 "
                             src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                             waves />
-                        <MDBCardBody className="ItemBody">
+                        <Mask className="flex-center" overlay="white-light">
+                            <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
+                        </Mask>
+                    </View>
+                        <MDBCardBody className={classes.ProjectBody}>
                             <MDBCardTitle className={classes.ProjectTitle}>{this.props.cardTitle}</MDBCardTitle>
-                            <MDBCardText className={"indigo-text " + classes.ProjectText}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                            <MDBCardText className={classes.ProjectText}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>
-                        <MDBCardFooter className="ItemFooter">
-                            <MDBBtn className={classes.Footer} onClick = { this.toggle }>קצת פרטים</MDBBtn>
-                            <ProjectModalComponent className="Modal"
-                                isOpen={this.state.modal} 
-                                toggle={this.toggle}
-                                modalTitle={this.props.cardTitle}
-                                modalCardProjectDesc={this.props.cardProjectDesc}
-                                modalCardCompDesc={this.props.cardCompDesc}
-                                modalField={this.fieldArrayIcon(this.props.cardField)}
-                            />
-                        </MDBCardFooter>
+                        <ProjectModalComponent className="Modal"
+                            isOpen={this.state.modal} 
+                            toggle={this.toggle}
+                            modalTitle={this.props.cardTitle}
+                            modalCardProjectDesc={this.props.cardProjectDesc}
+                            modalCardCompDesc={this.props.cardCompDesc}
+                            modalField={this.fieldArrayIcon(this.props.cardField)}
+                        />
                     </MDBCard>
                 </MDBCol>
             </div>

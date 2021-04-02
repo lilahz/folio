@@ -15,22 +15,22 @@ render() {
         dialogClassName="modal-70w"
         className="JuniorModal"
     >
-        <Modal.Header closeButton>
+        <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
             {this.props.modalTitle}
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            Can help with: {this.props.modalField} <br />
-            About Me: {this.props.modalDescription}
+        <Modal.Body style={{textAlign: "right"}}>
+            יכול/ה לסייע עם: {this.props.modalField} <br />
+            קצת עליי: {this.props.modalDescription}
         </Modal.Body>
         <Modal.Footer>
             <Row>
-                <MDBBtn className="col-sm-4" href="#">
+                <MDBBtn className="col-sm-3" href="#">
                                 <FaFacebookSquare size={30}/></MDBBtn>
-                <MDBBtn className="col-sm-4" href="#">
+                <MDBBtn className="col-sm-3" href="#">
                                 <FaLinkedin size={30}/></MDBBtn>
-                <MDBBtn className="col-sm-4" href="#">
+                <MDBBtn className="col-sm-3" href="#">
                                 <FaEnvelopeSquare size={30}/></MDBBtn>
             </Row>        
         </Modal.Footer>

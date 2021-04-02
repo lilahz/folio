@@ -44,24 +44,28 @@ class LoginModalComponent extends Component {
     submitForm = (data) => {
         let errors = {};
         const url = this.props.url;
-        axios.post(url, data)
+        console.log("url : " + this.props.url);
+        console.log("email : " + this.state.email);
+        console.log("password : " + this.state.password);
+        axios.post(url,  {email:this.state.email, password:this.state.password })
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
         })
         .catch(error => {
             console.log(error.response.status); 
+            console.log(error.response);
         })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate();
-        const data = {  "email":this.state.email,
-                        "password":this.state.password };
+        const data = {"email":this.state.email,
+                      "password":this.state.password };
 
         if (Object.keys(errors).length === 0) {
-            console.log(data);
+            // console.log(data);
             this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
         } else {
@@ -82,19 +86,19 @@ class LoginModalComponent extends Component {
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerCompanyModal">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> Login </Modal.Title>
+                    <Modal.Title id="contained-modal-title-vcenter"> התחבר </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form> 
                 <FormGroup>
                     <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                        invalid={errors.email ? true : false} placeholder="* Email" />
+                        invalid={errors.email ? true : false} placeholder=" מייל *" />
                     <FormFeedback>{errors.email}</FormFeedback>
                 </FormGroup><br></br>
 
                 <FormGroup>
                     <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                        invalid={errors.password ? true : false} placeholder="* סיסמא" />
+                        invalid={errors.password ? true : false} placeholder=" סיסמא *" />
                     <FormFeedback>{errors.password}</FormFeedback>
                 </FormGroup> <br></br>
 

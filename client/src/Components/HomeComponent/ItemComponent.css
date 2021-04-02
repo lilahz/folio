@@ -2,7 +2,6 @@
     margin-top: auto;
 }
 
-
 .Item {
     padding: 16px;
     margin-left: auto;
@@ -14,7 +13,7 @@
 }
 
 .ItemBody {
-    height: 9em;
+    height: 8em;
 }
 
 .ItemFooter {

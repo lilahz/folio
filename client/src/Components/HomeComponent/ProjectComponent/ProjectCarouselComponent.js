@@ -70,7 +70,12 @@ class ProjectCarouselComponent extends Component {
                 let carouselRow1 = <Carousel.Item className={classes.CarouselItem} interval={1500} key={this.props.key}>
                                         <Row style={RowStyle}>
                                             {items.slice(0,3).map((project) => (
-                                                <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
+                                                <ProjectComponent key={project.id} 
+                                                cardTitle={project.company_name} 
+                                                cardProjectDesc={project.description} 
+                                                cardCompDesc={project.company_description}
+                                                cardField={project.field}
+                                                /> ))}
                                         </Row>
                                     </Carousel.Item>;
                 let carouselRow2 = "";
@@ -79,14 +84,24 @@ class ProjectCarouselComponent extends Component {
                     carouselRow2 = <Carousel.Item interval={1500} key={this.props.key}>
                                         <Row style={RowStyle}>
                                             {items.slice(3,6).map((project) => (
-                                                <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
+                                                <ProjectComponent key={project.id} 
+                                                cardTitle={project.company_name} 
+                                                cardProjectDesc={project.description} 
+                                                cardCompDesc={project.company_description}
+                                                cardField={project.field}
+                                                /> ))}
                                         </Row>
                                     </Carousel.Item>;
                     if(items.length > 6) {
                         carouselRow3 = <Carousel.Item interval={1500} key={this.props.key}>
                                         <Row style={RowStyle}>
                                             {items.slice(6,9).map((project) => (
-                                                <ProjectComponent key={project.id} cardTitle={project.company_name} cardText={project.description} cardField={project.field}/> ))}
+                                                <ProjectComponent key={project.id}
+                                                cardTitle={project.company_name} 
+                                                cardProjectDesc={project.description} 
+                                                cardCompDesc={project.company_description}
+                                                cardField={project.field}
+                                                /> ))}
                                         </Row>
                                     </Carousel.Item>;
                     }

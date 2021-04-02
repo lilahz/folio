@@ -51,7 +51,9 @@ class RegisterCompanyModalComponent extends Component {
         let errors = {};
         axios.post('/api/auth/check_if_user_exists', { "email":this.state.email })
         .then(response => console.log(response.status))
-        .catch(error => console.log(error.response.status))
+        .catch(error => {console.log("Error!!");
+                        console.log(error.response.status); 
+                        errors.email = 'A user already exists with the specified email address'})
         return errors;
         //     const data = response.json();
         //     console.log(data);
@@ -92,6 +94,9 @@ class RegisterCompanyModalComponent extends Component {
     submitForm = (data) => {
         axios.post('/api/auth/company_register', data)
         .then(response => {
+            console.log("respone" + response);
+            console.log("respone data" + response.data);
+            localStorage.setItem('currentUserCompanyEmail', data.email);
             console.log(response);
             this.setState(this.getInitialState()); // if success, reset all fields
         })
@@ -107,6 +112,15 @@ class RegisterCompanyModalComponent extends Component {
                         "about_me":this.state.about_me };
 
         if (Object.keys(errors).length === 0) {
+            errors = this.checkIfUserExists();
+            if(Object.keys(errors).length === 0) {
+                this.submitForm(data); // send the data to the server
+                this.setState(this.getInitialState()); // if success, reset all fields
+                this.onShowAlert(toggle);
+            }
+            else {
+                this.setState({ errors : errors, currentModal : 0 });
+            }
             console.log(data);
             this.submitForm(data); // send the data to the server
             // this.setState(this.getInitialState()); // if success, reset all fields
@@ -160,36 +174,36 @@ class RegisterCompanyModalComponent extends Component {
             <div> {this.state.currentModal === 0 ?
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerCompanyModal">
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> CREATE ACOUNT </Modal.Title>
+                <Modal.Header>
+                    <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {/* {googleButton} {fbButton} <br></br> */}
                 <Form> 
                 <FormGroup>
                     <Input id="company_name" type="text" value={this.state.company_name} onChange={this.handleChange} 
-                        invalid={errors.company_name ? true : false} placeholder="* Company Name"/>
+                        invalid={errors.company_name ? true : false} placeholder="שם העמותה *"/>
                     <FormFeedback>{errors.company_name}</FormFeedback>
                 </FormGroup> <br></br>
                 <FormGroup>
                     <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                        invalid={errors.email ? true : false} placeholder="* Email" />
+                        invalid={errors.email ? true : false} placeholder="מייל *" />
                     <FormFeedback>{errors.email}</FormFeedback>
                 </FormGroup><br></br>
                 <FormGroup>
                     <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                        invalid={errors.password ? true : false} placeholder="* Password" />
+                        invalid={errors.password ? true : false} placeholder="סיסמא *" />
                     <FormFeedback>{errors.password}</FormFeedback>
                 </FormGroup> <br></br>
                 <FormGroup>
                     <Input id="confirm_password" type="password" value={this.state.confirm_password} onChange={this.handleChange}
-                        invalid={errors.confirm_password ? true : false} placeholder="* Confirm Password" />
+                        invalid={errors.confirm_password ? true : false} placeholder="חזור על הסיסמא *" />
                     <FormFeedback>{errors.confirm_password}</FormFeedback>
                 </FormGroup> <br></br>
                 </Form>
                 </Modal.Body>
                 <Modal.Footer> 
-                    <Button variant="primary" onClick={this.handleNext}> Next </Button>
+                    <Button variant="primary" onClick={this.handleNext}> הבא </Button>
                 </Modal.Footer>
                 {showAlert}
             </Modal> 
@@ -198,7 +212,7 @@ class RegisterCompanyModalComponent extends Component {
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerCompanyModal">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> CREATE ACOUNT </Modal.Title>
+                    <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
@@ -207,19 +221,19 @@ class RegisterCompanyModalComponent extends Component {
                 </FormGroup> <br></br>
                 <FormGroup>
                     <Input id="website" type="text" value={this.state.website} onChange={this.handleChange}
-                        invalid={errors.website ? true : false} placeholder="* Your Vanity URL" />
+                        invalid={errors.website ? true : false} placeholder="מייל *" />
                     <FormFeedback>{errors.website}</FormFeedback>
                 </FormGroup> <br></br>
                 <FormGroup>
                      <Input id="about_me" type="text" value={this.state.about_me} onChange={this.handleChange}
-                        invalid={errors.about_me ? true : false} placeholder="* Tell us about your company" />
+                        invalid={errors.about_me ? true : false} placeholder="ספר קצת על העמותה *" />
                     <FormFeedback>{errors.about_me}</FormFeedback>
                 </FormGroup> <br></br>
                 </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={this.handlePrev}> Prev </Button>    
-                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> Submit </Button>       
+                    <Button variant="primary" onClick={this.handlePrev}> קודם </Button>    
+                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> הירשם </Button>       
                 </Modal.Footer>
                 {showAlert}
             </Modal> : null }

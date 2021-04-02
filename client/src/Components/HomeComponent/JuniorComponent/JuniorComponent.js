@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MDBCardFooter, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBBtn, MDBCardText} from 'mdbreact';
+import {View, Mask, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBBtn, MDBCardText} from 'mdbreact';
 import '../ItemComponent.css';
 import JuniorModalComponent from './JuniorModalComponent';
 import {field_array} from '../data';
@@ -37,24 +37,26 @@ class JuniorComponent extends Component {
             <div className="Item">
                 <MDBCol style={{ maxWidth: "22rem"}}>
                     <MDBCard style={{boxShadow: "0 8px 6px -6px #4d4d4d"}}>
+                    <View hover zoom>
                         <MDBCardImage 
                             className="img-fluid rounded mb-0" 
                             src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                             waves />
-                        <MDBCardBody className="ItemBody">
-                            <MDBCardTitle className="text-center">{this.props.cardTitle}</MDBCardTitle>
-                            <MDBCardText className="indigo-text">{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
-                        </MDBCardBody>
-                        <MDBCardFooter className="ItemFooter">
+                        <Mask className="flex-center"overlay="white-light">
                             <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
-                            <JuniorModalComponent className="Modal"
-                                isOpen={this.state.modal} 
-                                toggle={this.toggle}
-                                modalTitle={this.props.cardTitle}
-                                modalDescription={this.props.cardText}
-                                modalField={this.fieldArrayIcon(this.props.cardField)}
-                            />
-                        </MDBCardFooter>
+                        </Mask>
+                    </View>
+                    <MDBCardBody className="ItemBody">
+                        <MDBCardTitle className="text-center">{this.props.cardTitle}</MDBCardTitle>
+                        <MDBCardText>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                    </MDBCardBody>
+                    <JuniorModalComponent className="Modal"
+                        isOpen={this.state.modal} 
+                        toggle={this.toggle}
+                        modalTitle={this.props.cardTitle}
+                        modalDescription={this.props.cardText}
+                        modalField={this.fieldArrayIcon(this.props.cardField)}
+                    />
                     </MDBCard>
                 </MDBCol>
             </div>

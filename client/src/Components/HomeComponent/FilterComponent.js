@@ -22,16 +22,15 @@ const customStyles = {
     fontSize: 15
     }),
     control: styles => ({
-        ...styles, backgroundColor: 'white', width: 400, margin: '15px' }),
+        ...styles, backgroundColor: 'white', width: 400, margin: '15px'}),
     singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = 'opacity 300ms';
-    return { ...provided, opacity, transition };
-    },
+        const opacity = state.isDisabled ? 0.5 : 1;
+        const transition = 'opacity 300ms';
+        return { ...provided, opacity, transition };},
     menu: styles => ({
         ...styles,
         width: 400,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     }),
 }
 

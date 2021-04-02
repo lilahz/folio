@@ -47,7 +47,9 @@ def junior_login():
     email = data.get('email')
     password = data.get('password')
     remember_me = data.get('remember_me')
-
+    print("-------------------------------------------")
+    print(data)
+    print("-------------------------------------------")
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:

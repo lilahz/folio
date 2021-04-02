@@ -5,6 +5,7 @@
     text-align: center;
     letter-spacing: -2px;
     text-transform: uppercase;
+    margin-left: 1px;
 }
 
 .LandingLeft p {
@@ -12,12 +13,14 @@
     text-align: center;
     max-width: 88vh;
     padding: 0 16px;
+    direction: rtl;
 }
 
 .LandingLeft div {
     display: flex;
     min-width: 40%;
     margin: 16px;
+    direction: rtl;
 } 
 
 .LandingRight {
@@ -38,12 +41,13 @@
     flex-wrap: wrap;
 }
 
-.LandingBottom h2 {
+.LandingBottomButton {
     font-family: "Trebuchet MS", sans-serif;
     font-size: 2.5em;
     letter-spacing: -2px;
     text-align: center;
     color: rgb(83, 93, 102);
+    /* background-color: 'transparent'; */
     cursor: pointer;
 }
 

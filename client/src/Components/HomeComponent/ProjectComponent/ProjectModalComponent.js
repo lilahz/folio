@@ -16,28 +16,28 @@ render() {
         centered
         dialogClassName="modal-70w"
         className="projectModal">
-        <Modal.Header closeButton>
+        <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
-            Project for {this.props.modalTitle}
+            פרוייקט בשביל {this.props.modalTitle}
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            About Us: {this.props.modalCardCompDesc}<br /><br />
-            Searching for help with: {this.props.modalField} <br />
-            Project Description: {this.props.modalCardProjectDesc}
+        <Modal.Body style={{textAlign: "right"}}>
+            קצת עלינו: {this.props.modalCardCompDesc}<br /><br />
+            מחפשים עזרה בתחום: {this.props.modalField} <br />
+            קצת על הפרוייקט: {this.props.modalCardProjectDesc}
         </Modal.Body>
         <Modal.Footer>
             <Row>
                 <Tooltip title="Join Project" placement="left-start" TransitionComponent={Fade} enterDelay={100} leaveDelay={100}>
-                    <MDBBtn className="float-left" href="#" >
-                        <IoPersonAdd size={40}/></MDBBtn>
+                    <MDBBtn className="float-right col-sm-2" href="#" >
+                        <IoPersonAdd size={30}/></MDBBtn>
                 </Tooltip>
-                <div className="float-right">
-                    <MDBBtn className="col-sm-4" href="#">
+                <div className="float-left">
+                    <MDBBtn className="col-sm-2" href="#">
                                     <FaFacebookSquare size={30}/></MDBBtn>
-                    <MDBBtn className="col-sm-4" href="#">
+                    <MDBBtn className="col-sm-2" href="#">
                                     <FaLinkedin size={30}/></MDBBtn>
-                    <MDBBtn className="col-sm-4" href="#">
+                    <MDBBtn className="col-sm-2" href="#">
                                     <FaEnvelopeSquare size={30}/></MDBBtn>
                 </div>
             </Row>        

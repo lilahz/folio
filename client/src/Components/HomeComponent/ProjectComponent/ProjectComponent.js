@@ -47,7 +47,7 @@ class ProjectComponent extends Component {
                             <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
                         </Mask>
                     </View>
-                        <MDBCardBody>
+                        <MDBCardBody className={classes.ProjectBody}>
                             <MDBCardTitle className={classes.ProjectTitle}>{this.props.cardTitle}</MDBCardTitle>
                             <MDBCardText className={classes.ProjectText}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>

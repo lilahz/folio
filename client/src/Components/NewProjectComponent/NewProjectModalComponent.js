@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap"
 import {Alert, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
 import FilterComponent from '../HomeComponent/FilterComponent';
 import {field_array} from '../HomeComponent/data';
@@ -70,15 +69,13 @@ class NewProjectModalComponent extends Component {
         }                
     }
 
-    onChangefield = event => {
-        let opts = [], opt;
-        for (let i = 0 ; i < event.target.options.length; i++) {
-            opt = event.target.options[i];
-            if (opt.selected) {
-                opts.push(opt.value);
-            }
+    onChangefield = selected => {
+        let statusFilter = [];
+        if(selected != null && selected.length > 0) {
+            let valuesArrObj = selected.reduce((acc, current) => acc.concat(current.value), []);
+            statusFilter = valuesArrObj;
         }
-        this.setState({ field: opts });
+        this.setState({field: statusFilter});
     }
 
 
@@ -86,7 +83,7 @@ class NewProjectModalComponent extends Component {
         const { errors } = this.state;
         const showAlert = this.state.visible ? 
                     <Alert style={{textAlign:"center"}} variant="success">
-                        Project Created Successfully!</Alert> : null;
+                        פרוייקט נוצר בהצלחה!</Alert> : null;
         return (
             <div>
             <Modal show={this.props.isOpen} onHide={this.props.toggle} key={this.props.key}
@@ -94,26 +91,24 @@ class NewProjectModalComponent extends Component {
                 centered
                 dialogClassName="modal-70w"
                 className="newProjectModal">
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> New Project Form </Modal.Title>
+                <Modal.Header>
+                    <Modal.Title id="contained-modal-title-vcenter"> יצירת פרוייקט חדש </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <FormGroup>
                         <Input id="company_name" type="text" value={this.state.company_name} 
-                                 placeholder="* Company Name" disabled/>
+                                 placeholder="* שם העמותה" disabled/>
                     </FormGroup>
                     <FormGroup>
-                        <Input id="filter" type="select" multiple value={this.state.field} onChange={this.onChangefield}
-                                invalid={errors.description ? true : false} placeholder="* Field of work">
-                                {field_array.map(item => (
-                                <option value={item.id}>{item.label}</option>
-                                ))}
-                        </Input>
-                        <FormFeedback>{errors.field}</FormFeedback>
+                        <FilterComponent    
+                                place_holder = "תחום עיסוק *"
+                                filter_array = {field_array}
+                                handle_on_change = {this.onChangefield} />
+                        <FormFeedback>{errors.description}</FormFeedback>
                     </FormGroup>
                     <FormGroup>
                         <Input id="description" type="text" value={this.state.description} maxLength="200" onChange={this.handleChange}
-                                invalid={errors.description ? true : false} placeholder="* Description : (200 max)"/>
+                                invalid={errors.description ? true : false} placeholder="ספר קצת על הפרוייקט *"/>
                         <FormFeedback>{errors.description}</FormFeedback>
                     </FormGroup>
                 </Modal.Body>

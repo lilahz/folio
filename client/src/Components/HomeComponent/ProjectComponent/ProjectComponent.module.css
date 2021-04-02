@@ -1,9 +1,12 @@
 .ProjectComponent {
     margin: 0 16px;
     width: 20vw;
-    height: 5vh;
+    height: 2vh;
     text-align: center;
-    background-color: black;
+}
+
+.ProjectBody {
+    height: 30%;
 }
 
 .ProjectTitle {

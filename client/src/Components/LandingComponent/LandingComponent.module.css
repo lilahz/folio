@@ -5,6 +5,7 @@
     text-align: center;
     letter-spacing: -2px;
     text-transform: uppercase;
+    margin-left: 1px;
 }
 
 .LandingLeft p {
@@ -12,12 +13,14 @@
     text-align: center;
     max-width: 88vh;
     padding: 0 16px;
+    direction: rtl;
 }
 
 .LandingLeft div {
     display: flex;
     min-width: 40%;
     margin: 16px;
+    direction: rtl;
 } 
 
 .LandingRight {

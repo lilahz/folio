@@ -29,9 +29,7 @@ class LandingComponent extends Component {
             <div className={classes.Landing}>
                 <div className={classes.LandingLeft}>
                     <h1><b>PRO</b><span>jects</span></h1>
-                    <p>Creating a platform that connects juniors to non-profits organizations and small businesses.
-                        The juniors will gain the experience they lack of and the businesses will receive the services they need.
-                    </p>
+                    <p>יצירת פלטפורמה המחברת בין זוטרים לעמותות ועסקים קטנים. הצעירים יצברו את הניסיון שחסר להם והעסקים יקבלו את השירותים להם הם זקוקים.</p>
                     {/* <div>
                         <Button 
                             href="/login"

@@ -86,19 +86,19 @@ class LoginModalComponent extends Component {
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerCompanyModal">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter"> Login </Modal.Title>
+                    <Modal.Title id="contained-modal-title-vcenter"> התחבר </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form> 
                 <FormGroup>
                     <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                        invalid={errors.email ? true : false} placeholder="* Email" />
+                        invalid={errors.email ? true : false} placeholder=" מייל *" />
                     <FormFeedback>{errors.email}</FormFeedback>
                 </FormGroup><br></br>
 
                 <FormGroup>
                     <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                        invalid={errors.password ? true : false} placeholder="* סיסמא" />
+                        invalid={errors.password ? true : false} placeholder=" סיסמא *" />
                     <FormFeedback>{errors.password}</FormFeedback>
                 </FormGroup> <br></br>
 

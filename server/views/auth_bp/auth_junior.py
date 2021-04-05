@@ -3,7 +3,10 @@ from flask_login import login_required, logout_user, current_user, login_user
 
 from server.models.Junior import Junior
 from server.models import login_manager
+import logging
 
+logger = logging.getLogger('dev')
+logger.setLevel(logging.DEBUG)
 
 def junior_register():
     # Bypass if user is logged in
@@ -50,6 +53,7 @@ def junior_login():
     print("-------------------------------------------")
     print(data)
     print("-------------------------------------------")
+    logger.debug(data)
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:

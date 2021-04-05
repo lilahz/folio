@@ -29,7 +29,6 @@ def junior_register():
         )
         new_junior.set_password(password)
         Junior.add_new_junior(new_junior)
-        new_junior.is_authenticated = True
         if remember_me:
             login_user(new_junior, remember=True)  # Log in with the newly created user with remember me on
         else: 
@@ -83,7 +82,6 @@ def unauthorized(): # Redirect unauthorized users to Login page.
 # & @login_manager.unauthorized_handler - if the user is not logged in
 def junior_logout():
     # if current_user.is_authenticated:
-        current_user.is_authenticated = False
         logout_user()
         return jsonify({'message': 'User logged out successfully'})
     # else:

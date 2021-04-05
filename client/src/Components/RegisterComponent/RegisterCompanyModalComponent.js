@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Alert, Form, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
+import {Alert, Form, Button, FormGroup, FormFeedback, Input, Row, Col} from 'reactstrap';
 import axios from 'axios';
 // import FacebookLogin from 'react-facebook-login';
 // import GoogleLogin from 'react-google-login';
@@ -96,7 +96,8 @@ class RegisterCompanyModalComponent extends Component {
         .then(response => {
             console.log("respone" + response);
             console.log("respone data" + response.data);
-            localStorage.setItem('currentUserCompanyEmail', data.email);
+            localStorage.setItem('currentUserEmail', data.email);
+            localStorage.setItem('currentUserType', "company");
             console.log(response);
             this.setState(this.getInitialState()); // if success, reset all fields
         })
@@ -219,11 +220,25 @@ class RegisterCompanyModalComponent extends Component {
                 <FormGroup>
                     <Input id="phone_number" type="tel" value={this.state.phone_number} onChange={this.handleChange} placeholder="Phone Number" />
                 </FormGroup> <br></br>
-                <FormGroup>
-                    <Input id="website" type="text" value={this.state.website} onChange={this.handleChange}
-                        invalid={errors.website ? true : false} placeholder="מייל *" />
-                    <FormFeedback>{errors.website}</FormFeedback>
-                </FormGroup> <br></br>
+                <Row>
+                <Col>
+                    <FormGroup>
+                        <Input id="website_label" type="select" value={this.state.website_label} onChange={this.handleChange}
+                            invalid={errors.website ? true : false}>
+                                <option>Personal Website</option>
+                                <option>Facebook</option>
+                                <option>Instagram</option>
+                                </Input>
+                    </FormGroup>
+                </Col>
+                <Col>
+                    <FormGroup>
+                        <Input id="website" type="text" value={this.state.website} onChange={this.handleChange}
+                            invalid={errors.website ? true : false} placeholder="מייל *" />
+                        <FormFeedback>{errors.website}</FormFeedback>
+                    </FormGroup> <br></br>
+                </Col>
+                </Row>
                 <FormGroup>
                      <Input id="about_me" type="text" value={this.state.about_me} onChange={this.handleChange}
                         invalid={errors.about_me ? true : false} placeholder="ספר קצת על העמותה *" />

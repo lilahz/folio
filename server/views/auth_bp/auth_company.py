@@ -47,7 +47,7 @@ def company_login():
     if current_user.is_authenticated:
         return jsonify({'message' : 'User already logged in'}), 401
 
-    data = request.form
+    data = request.json
     email = data.get('email')
     password = data.get('password')
     remember_me = data.get('remember_me')

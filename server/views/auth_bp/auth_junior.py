@@ -47,7 +47,7 @@ def junior_login():
     if current_user.is_authenticated:
         return jsonify({'message' : 'User already logged in'}), 401
     data = request.json
-    logger.debug(data)
+    logger.debug(request)
     print(data)
     email = data.get('email')
     password = data.get('password')

@@ -58,9 +58,9 @@ def junior_login():
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:
-            login_user(junior, remember=True) # Log in with the existing user with remember me on
+            print(login_user(junior, remember=True)) # Log in with the existing user with remember me on
         else: 
-            login_user(junior) # Log in with the existing user with remember me off
+            print(login_user(junior)) # Log in with the existing user with remember me off
         return jsonify({'message': 'User logged in successfully'})
     elif not junior:
         return jsonify({'error': f'user {email} does not exist'}), 403

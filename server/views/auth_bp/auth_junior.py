@@ -83,6 +83,7 @@ def unauthorized(): # Redirect unauthorized users to Login page.
 # & @login_manager.unauthorized_handler - if the user is not logged in
 def junior_logout():
     # if current_user.is_authenticated:
+        current_user.is_authenticated = False
         logout_user()
         return jsonify({'message': 'User logged out successfully'})
     # else:

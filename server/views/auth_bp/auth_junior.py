@@ -5,8 +5,9 @@ from server.models.Junior import Junior
 from server.models import login_manager
 import logging
 
-logger = logging.getLogger('dev')
+logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
+
 
 def junior_register():
     # Bypass if user is logged in
@@ -47,6 +48,7 @@ def junior_login():
         return jsonify({'message' : 'User already logged in'}), 401
     data = request.json
     logger.debug(data)
+    print(data)
     email = data.get('email')
     password = data.get('password')
     remember_me = data.get('remember_me')

@@ -49,11 +49,13 @@ class LoginComponent extends Component {
                         isOpen={this.state.companyModal} 
                         toggle={this.toggleCompanyForm}
                         url="/api/auth/company_login"
+                        type="company"
                     />
                     <LoginModalComponent className="Modal"
                         isOpen={this.state.juniorModal} 
                         toggle={this.toggleJuniorForm}
-                        url="http://127.0.0.1:5000/api/auth/junior_login"
+                        url="/api/auth/junior_login"
+                        type="junior"
                     />
                 </div>
             </div>

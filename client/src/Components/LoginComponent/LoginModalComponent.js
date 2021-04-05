@@ -44,13 +44,14 @@ class LoginModalComponent extends Component {
     submitForm = (data) => {
         let errors = {};
         const url = this.props.url;
-        console.log("url : " + this.props.url);
-        console.log("email : " + this.state.email);
-        console.log("password : " + this.state.password);
-        axios.post(url,  {email:this.state.email, password:this.state.password })
+        console.log("data : " , data);
+        axios.post(url, data)
         .then(response => {
-            console.log("respone" + response);
-            console.log("respone data" + response.data);
+            console.log("respone :" + response);
+            console.log("respone data : " + response.data);
+            console.log("response status : " + response.status);
+            localStorage.setItem('currentUserEmail', data.email);
+            localStorage.setItem('currentUserType', this.props.type);
         })
         .catch(error => {
             console.log(error.response.status); 
@@ -80,7 +81,7 @@ class LoginModalComponent extends Component {
         const { errors } = this.state;
         const showAlert = this.state.visible ? 
                     <Alert style={{textAlign:"center"}} variant="success">
-                        Company logged in Successfully!</Alert> : null;
+                        Logged in Successfully!</Alert> : null;
         return (
             <div>
             <Modal show={this.props.isOpen} onHide={this.props.toggle}

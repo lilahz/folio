@@ -3,10 +3,6 @@ from flask_login import login_required, logout_user, current_user, login_user
 
 from server.models.Junior import Junior
 from server.models import login_manager
-import logging
-
-logger = logging.getLogger('dev')
-logger.setLevel(logging.DEBUG)
 
 def junior_register():
     # Bypass if user is logged in
@@ -45,13 +41,9 @@ def junior_login():
     if current_user.is_authenticated:
         return jsonify({'message' : 'User already logged in'}), 401
     data = request.json
-    logger.debug(data)
     email = data.get('email')
     password = data.get('password')
     remember_me = data.get('remember_me')
-    print("-------------------------------------------")
-    print(data)
-    print("-------------------------------------------")
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:

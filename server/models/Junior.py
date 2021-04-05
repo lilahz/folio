@@ -49,3 +49,6 @@ class Junior(UserMixin, db.Model):
                 'field': self.field,
                 'website': self.website,
                 'about_me': self.about_me}
+
+    def is_authenticated(self):
+        return True

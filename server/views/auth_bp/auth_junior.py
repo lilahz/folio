@@ -45,15 +45,14 @@ def junior_login():
     # Bypass if user is logged in
     if current_user.is_authenticated:
         return jsonify({'message' : 'User already logged in'}), 401
-
     data = request.json
+    logger.debug(data)
     email = data.get('email')
     password = data.get('password')
     remember_me = data.get('remember_me')
     print("-------------------------------------------")
     print(data)
     print("-------------------------------------------")
-    logger.debug(data)
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:

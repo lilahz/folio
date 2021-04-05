@@ -55,9 +55,9 @@ def junior_login():
     junior = Junior.query.filter_by(email=email).first()
     if junior and junior.check_password(password):
         if remember_me:
-            print(login_user(junior, remember=True)) # Log in with the existing user with remember me on
+            login_user(junior, remember=True) # Log in with the existing user with remember me on
         else: 
-            print(login_user(junior)) # Log in with the existing user with remember me off
+            login_user(junior) # Log in with the existing user with remember me off
         return jsonify({'message': 'User logged in successfully'})
     elif not junior:
         return jsonify({'error': f'user {email} does not exist'}), 403
@@ -77,12 +77,9 @@ def unauthorized(): # Redirect unauthorized users to Login page.
     return jsonify({'error': 'You must be logged in to view that page.'}), 403 
 
 
-# @login_required 
+@login_required 
 # @login_manager.user_loader determines wether or not the user is logged in
 # & @login_manager.unauthorized_handler - if the user is not logged in
 def junior_logout():
-    # if current_user.is_authenticated:
-        logout_user()
-        return jsonify({'message': 'User logged out successfully'})
-    # else:
-    #     return jsonify({'message': 'You must be logged in to view that page'}), 401
+    logout_user()
+    return jsonify({'message': 'User logged out successfully'})

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import {Form, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
 import { Alert } from 'reactstrap';
@@ -47,11 +48,10 @@ class LoginModalComponent extends Component {
         console.log("data : " , data);
         axios.post(url, data)
         .then(response => {
-            console.log("respone :" + response);
-            console.log("respone data : " + response.data);
-            console.log("response status : " + response.status);
+            console.log("respone :", response);
             localStorage.setItem('currentUserEmail', data.email);
             localStorage.setItem('currentUserType', this.props.type);
+            this.props.history.push('/');
         })
         .catch(error => {
             console.log(error.response.status); 
@@ -115,4 +115,4 @@ class LoginModalComponent extends Component {
     }
 }
 
-export default LoginModalComponent;
+export default withRouter(LoginModalComponent);

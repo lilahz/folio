@@ -5,19 +5,15 @@ import './NavBarComponent.css';
 
 
 const NavBarComponent = () => {
+    console.log(localStorage.getItem('currentUserEmail'));
+
     const handeLogout = () => {
         const type = localStorage.getItem('currentUserType');
-        let url;
-        if(type == "junior") {
-            url = '/api/auth/junior_logout';
-        }
-        else {
-            url = '/api/auth/company_logout';
-        }
+        const url = type === 'junior' ? '/api/auth/junior_logout' : '/api/auth/company_logout';
         axios.post(url)
         .then(response => {
-            console.log("respone" + response);
-            console.log("respone data" + response.data);
+            console.log("respone", response);
+            console.log("respone data", response.data);
         })
         .catch(error => {
             console.log("response error " , error.response.data); 
@@ -27,11 +23,13 @@ const NavBarComponent = () => {
         localStorage.removeItem('currentUserEmail');
     }
     const noUserLoggedIn = <Nav className="mr-auto">
+                                {console.log("user not logged in yet", localStorage.getItem('currentUserEmail'))}
                                 <Nav.Link className="mr-auto" href="/register">הירשם</Nav.Link>
                                 <Nav.Link className="ml-auto" href="/login">התחבר</Nav.Link>
-                                <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item>
+                                {/* <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item> */}
                             </Nav>;
     const userLoggedIn = <Nav className="mr-auto">
+                            {console.log("user is logged in", localStorage.getItem('currentUserEmail'))}
                             <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item>
                           </Nav>;
     return (

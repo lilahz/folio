@@ -35,20 +35,21 @@
 
 .LandingBottom {
     display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    justify-content: flex-start;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .LandingBottomButton {
     font-family: "Trebuchet MS", sans-serif;
     font-size: 2.5em;
-    letter-spacing: -2px;
+    /* letter-spacing: -2px; */
     text-align: center;
     color: rgb(83, 93, 102);
-    /* background-color: 'transparent'; */
+    background-color: 'transparent';
     cursor: pointer;
+    width: fit-content;
 }
 
 .NewProject {

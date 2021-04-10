@@ -16,9 +16,9 @@ class Company(UserMixin, db.Model):
     password_hash = db.Column(db.String(120), nullable=False)
     location = db.Column(db.String(120)) 
     # image = db.Column()
-    company_url = db.Column(db.String(120))
-    facebook_url = db.Column(db.String(120))
-    instagram_url = db.Column(db.String(120))
+    company_url = db.Column(db.String())
+    facebook_url = db.Column(db.String())
+    instagram_url = db.Column(db.String())
     about_me = db.Column(db.Text)
 
     def __init__(self,company_name, email, phone_number, location, company_url, facebook_url, instagram_url, about_me):

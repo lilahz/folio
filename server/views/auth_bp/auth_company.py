@@ -29,7 +29,7 @@ def company_register():
             email,
             data.get('phone_number'),
             data.get('location'),
-            data.get('personal_url'),
+            data.get('company_url'),
             data.get('facebook_url'),
             data.get('instagram_url'),
             data.get('about_me')

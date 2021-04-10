@@ -14,15 +14,23 @@ class Junior(UserMixin, db.Model):
     phone_number = db.Column(db.Text)
     field = db.Column(db.ARRAY(db.String(50))) 
     # image = db.Column()
-    website = db.Column(db.String(120))
+    personal_url = db.Column(db.String(120))
+    facebook_url = db.Column(db.String(120))
+    instagram_url = db.Column(db.String(120))
+    linkedIn_url = db.Column(db.String(120))
+    gitHub_url = db.Column(db.String(120))
     about_me = db.Column(db.Text)
 
-    def __init__(self, email, full_name, phone_number, field, website, about_me):
+    def __init__(self, email, full_name, phone_number, field, personal_url, facebook_url, instagram_url, linkedIn_url, gitHub_url ,about_me):
         self.email = email
         self.full_name = full_name
         self.phone_number = phone_number
         self.field = field
-        self.website = website
+        self.personal_url = personal_url
+        self.facebook_url = facebook_url
+        self.instagram_url = instagram_url
+        self.linkedIn_url = linkedIn_url
+        self.gitHub_url = gitHub_url
         self.about_me = about_me
 
     def __repr__(self):
@@ -47,7 +55,11 @@ class Junior(UserMixin, db.Model):
                 'full_name': self.full_name,
                 'phone_number': self.phone_number,
                 'field': self.field,
-                'website': self.website,
+                'personal_url': self.personal_url,
+                'facebook_url': self.facebook_url,
+                'instagram_url': self.instagram_url,
+                'linkedIn_url': self.linkedIn_url,
+                'gitHub_url': self.gitHub_url,
                 'about_me': self.about_me}
 
     def is_authenticated(self):

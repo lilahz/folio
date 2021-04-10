@@ -29,7 +29,9 @@ def company_register():
             email,
             data.get('phone_number'),
             data.get('location'),
-            data.get('website'),
+            data.get('personal_url'),
+            data.get('facebook_url'),
+            data.get('instagram_url'),
             data.get('about_me')
         )
         new_company.set_password(password)

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Form, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
-import { Alert } from 'reactstrap';
+import { Button, Spinner, Alert } from 'reactstrap';
 import axios from 'axios';
+import LoginForm from './LoginForm';
 
 class LoginModalComponent extends Component {
     constructor(props) {
@@ -10,30 +10,31 @@ class LoginModalComponent extends Component {
         this.state = this.getInitialState();
     }
 
-    onShowAlert = (toggle) =>{
-        this.setState({visible:true},()=>{
+    getInitialState = () => ({
+        email: '',
+        password: '',
+        errors: {},
+        submit_error: '',
+        visible_success: false,
+        visible_error: false,
+        loading: false
+    });
+
+    onShowAlert = () =>{
+        this.setState({visible_success:true},()=>{
           window.setTimeout(()=>{
-            toggle();
-            this.setState({visible:false})
+            // toggle();
+            this.setState({visible_success:false})
           },3000)
         });
     }
 
     validate = () => {
         let errors = {};
-
-        if (this.state.email === '') errors.email = 'Please enter your email.';
-        if (this.state.password === '') errors.password = 'Please enter a password.';
-
+        if (this.state.email === '') errors.email = 'שדה זה הינו חובה';
+        if (this.state.password === '') errors.password = 'שדה זה הינו חובה';
         return errors;
     }
-
-    getInitialState = () => ({
-        email: '',
-        password: '',
-        errors: {},
-        visible: false
-    });
 
     handleChange = event => {
         this.setState({
@@ -42,20 +43,26 @@ class LoginModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        let errors = {};
-        const url = this.props.url;
-        console.log("data : " , data);
-        axios.post(url, data)
-        .then(response => {
-            console.log("respone :" + response);
-            console.log("respone data : " + response.data);
-            console.log("response status : " + response.status);
-            localStorage.setItem('currentUserEmail', data.email);
-            localStorage.setItem('currentUserType', this.props.type);
-        })
-        .catch(error => {
-            console.log(error.response.status); 
-            console.log(error.response);
+        this.setState({loading:true}, () => {
+            const url = this.props.url;
+            console.log("data : " , data);
+            axios.post(url, data)
+            .then(response => {
+                this.setState({loading: false});
+                this.setState({visible_error : false});
+                console.log("respone :" + response);
+                console.log("respone data : " + response.data);
+                console.log("response status : " + response.status);
+                localStorage.setItem('currentUserEmail', data.email);
+                localStorage.setItem('currentUserType', this.props.type);
+            })
+            .catch(error => {
+                this.setState({submit_error: error.response.data.error});
+                this.setState({loading: false});
+                this.setState({visible_error : true});
+                console.log("response status : " , error.response.status); 
+                console.log("response error : " , error.response.data.error);
+            })
         })
     }
 
@@ -66,52 +73,50 @@ class LoginModalComponent extends Component {
                       "password":this.state.password };
 
         if (Object.keys(errors).length === 0) {
-            // console.log(data);
             this.submitForm(data); // send the data to the server
-            // this.setState(this.getInitialState()); // if success, reset all fields
         } else {
             this.setState({ errors });
         }
-
-        //     this.onShowAlert(toggle);
-        //     console.log("submited");
     }
 
+
     render() {
-        const { errors } = this.state;
-        const showAlert = this.state.visible ? 
-                    <Alert style={{textAlign:"center"}} variant="success">
-                        Logged in Successfully!</Alert> : null;
+        const { errors, loading, submit_error } = this.state;
+        const submit_button = <Button variant="primary" onClick={this.handleSubmit}>
+                            {!loading ? "אישור": null }
+                            {loading ? (<Spinner style={{ width: '1.1rem', height: '1.1rem' }} color="light"/> ) : null}
+                        </Button>
+
+        const showAlertSuccess = this.state.visible_success ? 
+            <Alert style={{textAlign:"center"}} color="success">
+                Logged in Successfully!</Alert> : null;
+
+        const error_message = 
+            submit_error === 'already_login' ? 'מישהו כבר מחובר לאתר' :
+            submit_error === 'no_exists' ? 'לא קיים חשבון עם המייל הזה' :
+            submit_error === 'wrong_password' ? 'סיסמא שגויה' : 
+            'אפוס, שגיאה כללית!' ;
+
+        const showAlertError = this.state.visible_error ? 
+                    <Alert style={{textAlign:"center"}} color="danger">
+                        {error_message}</Alert> : null;        
+
         return (
-            <div>
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerCompanyModal">
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter"> התחבר </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <Form> 
-                <FormGroup>
-                    <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                        invalid={errors.email ? true : false} placeholder=" מייל *" />
-                    <FormFeedback>{errors.email}</FormFeedback>
-                </FormGroup><br></br>
-
-                <FormGroup>
-                    <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                        invalid={errors.password ? true : false} placeholder=" סיסמא *" />
-                    <FormFeedback>{errors.password}</FormFeedback>
-                </FormGroup> <br></br>
-
-                </Form>
+                <LoginForm errors={errors} state={this.state} handleChange={this.handleChange}/>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={this.handleSubmit}> אישור </Button>       
-                </Modal.Footer>
-                {showAlert}
-            </Modal>
-            </div>
-        );
+                 <Modal.Footer>
+                     {submit_button}
+                 </Modal.Footer>
+                 {showAlertSuccess}
+                 {showAlertError}
+             </Modal>
+        )
     }
 }
 

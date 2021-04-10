@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Alert, Form, Button, FormGroup, FormFeedback, Input, Row, Col} from 'reactstrap';
+import {Alert, Button, Spinner} from 'reactstrap';
 import axios from 'axios';
-// import FacebookLogin from 'react-facebook-login';
-// import GoogleLogin from 'react-google-login';
-// import FontAwesome from 'react-fontawesome'
-
+import {RegisterCompanyFormFirst, RegisterCompanyFormSecond} from './RegisterCompanyForm';
 
 class RegisterCompanyModalComponent extends Component {
     constructor(props) {
@@ -19,58 +16,23 @@ class RegisterCompanyModalComponent extends Component {
         password: '',
         confirm_password: '',
         phone_number: '',
-        website: '',
+        website: [{label: 'אתר החברה', url: ''}],
         about_me: '',
         errors: {},
+        submit_error: '',
+        visible_success: false,
+        visible_error: false,
+        loading: false,
         currentModal: 0,
-        visible: false,
-        userExists: false
     });
 
-    onShowAlert = (toggle) =>{
+    onShowAlert = () =>{
         this.setState({visible:true},()=>{
           window.setTimeout(()=>{
-            toggle();
+            // toggle();
             this.setState({visible:false})
           },3000)
         });
-    }
-
-    validateSecond = () => {
-        var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        let errors = {};
-        
-        if(!linkPattern.test(this.state.website)) errors.website = 'Invalid URL.';
-        if (this.state.about_me === '') errors.about_me = 'Please tell us about_me your company.';
-
-        return errors;
-    }
-
-    checkIfUserExists () {
-        console.log("hello");
-        let errors = {};
-        axios.post('/api/auth/check_if_user_exists', { "email":this.state.email })
-        .then(response => console.log(response.status))
-        .catch(error => {console.log("Error!!");
-                        console.log(error.response.status); 
-                        errors.email = 'A user already exists with the specified email address'})
-        return errors;
-        //     const data = response.json();
-        //     console.log(data);
-        //     this.setState({userExistsCheck : false}, () => {this.validateFirst(errors)});
-        //     return errors;
-        // }
-        // catch (error) {
-        //     console.log("error!!")
-        //     errors.email = 'A user already exists with the specified email address';
-        //     this.setState({userExistsCheck : true},() => {this.validateFirst(errors)});
-        //     return errors;
-        // }
-        // .catch ((error) => {
-        //     console.log(error.response.status);
-        //     if(error.response.status === 403) return true; // email exists
-        //     else return false;
-        // });
     }
 
     validateFirst () {
@@ -85,6 +47,43 @@ class RegisterCompanyModalComponent extends Component {
         return errors;
     }
 
+    validateSecond = () => {
+        var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        let errors = {};
+        
+        // if(!linkPattern.test(this.state.website)) errors.website = 'Invalid URL.';
+        if (this.state.about_me === '') errors.about_me = 'Please tell us about_me your company.';
+
+        return errors;
+    }
+        
+    // handle input change
+    handleChangeWebsite = (e, index, field) => {
+        const { value } = e.target;
+        const values = this.state.website;
+        field === 'label' ? values[index]['label'] = value : values[index]['url'] = value;
+        this.setState({website: values});
+    };
+
+    // handle click event of the Remove button
+    handleRemoveClick = index => {
+        const list = [
+            ...this.state.website.slice(0, index),
+            ...this.state.website.slice(index + 1)
+        ]
+        this.setState({website: list});
+    };
+
+    // handle click event of the Add button
+    handleAddClick = () => {
+        const values = this.state.website;
+        values.push({
+            label: 'אתר החברה',
+            url: ''
+        });
+        this.setState({website : values});
+    };
+    
     handleChange = event => {
         this.setState({
           [event.target.id]: event.target.value
@@ -92,18 +91,30 @@ class RegisterCompanyModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        axios.post('/api/auth/company_register', data)
-        .then(response => {
-            console.log("respone" + response);
-            console.log("respone data" + response.data);
-            localStorage.setItem('currentUserEmail', data.email);
-            localStorage.setItem('currentUserType', "company");
-            console.log(response);
-            this.setState(this.getInitialState()); // if success, reset all fields
+        this.setState({loading:true}, () => {
+            const url = '/api/auth/company_register';
+            axios.post(url, data)
+            .then(response => {
+                this.setState({loading: false});
+                this.setState({visible_error : false});
+                this.setState({visible_success : true});
+                console.log("respone :" + response);
+                console.log("respone data : " + response.data);
+                console.log("response status : " + response.status);
+                localStorage.setItem('currentUserEmail', data.email);
+                localStorage.setItem('currentUserType', this.props.type);
+            })
+            .catch(error => {
+                this.setState({submit_error: error.response.data.error});
+                this.setState({loading: false});
+                this.setState({visible_error : true});
+                console.log("response status : " , error.response.status); 
+                console.log("response error : " , error.response.data.error);
+            })
         })
     }
 
-    handleSubmit = (toggle) => {
+    handleSubmit = () => {
         let errors = this.validateSecond();
         const data = { "company_name":this.state.company_name, 
                         "email":this.state.email,
@@ -112,27 +123,30 @@ class RegisterCompanyModalComponent extends Component {
                         "website":this.state.website,
                         "about_me":this.state.about_me };
 
+        for (var x in this.state.website) {
+            var datum = this.state.website[x];
+            switch(datum.label) {
+                case "אתר החברה" :
+                    data["company_url"] = datum.url;
+                    break;
+                case "פייסבוק" :
+                    data["facebook_url"] = datum.url;
+                    break;
+                case "אינסטגרם" :
+                    data["instagram_url"] = datum.url;
+                    break;
+            }
+        }   
+        console.log("data: "  , data);
+
         if (Object.keys(errors).length === 0) {
-            errors = this.checkIfUserExists();
-            if(Object.keys(errors).length === 0) {
-                this.submitForm(data); // send the data to the server
-                this.setState(this.getInitialState()); // if success, reset all fields
-                this.onShowAlert(toggle);
-            }
-            else {
-                this.setState({ errors : errors, currentModal : 0 });
-            }
-            console.log(data);
             this.submitForm(data); // send the data to the server
-            // this.setState(this.getInitialState()); // if success, reset all fields
-            // this.onShowAlert(toggle);
         } else {
             this.setState({ errors : errors });
         }
     }
 
     handleNext = () => {
-        // const errors = this.checkIfUserExists();
         const errors = this.validateFirst();
         if (Object.keys(errors).length === 0) {
             this.setState({currentModal: 1 });
@@ -146,30 +160,27 @@ class RegisterCompanyModalComponent extends Component {
         this.setState({currentModal: 0 });
     }
 
-    // responseFacebook = (response) => {
-    //     console.log(response);
-    // }
-  
-    // responseGoogle = (response) => {
-    //     console.log(response);
-    // }
-
     render() {
-        const { errors } = this.state;
-        const showAlert = this.state.visible ? 
-                    <Alert style={{textAlign:"center"}} variant="success">
-                        Company Created Successfully!</Alert> : null;
+        const { errors, loading, submit_error} = this.state;
+        const submit_button = <Button variant="primary" onClick={this.handleSubmit}>
+                                {!loading ? "אישור": null }
+                                {loading ? (<Spinner style={{ width: '1.1rem', height: '1.1rem' }} color="light"/> ) : null}
+                            </Button>
 
-        // const fbButton = <FacebookLogin
-        //                  appId="" //APP ID NOT CREATED YET
-        //                  fields="name,email,picture"
-        //                  callback={this.responseFacebook}/>;
-        // const googleButton = <GoogleLogin
-        //                     clientId="" //CLIENTID NOT CREATED YET
-        //                     buttonText="LOGIN WITH GOOGLE"
-        //                     onSuccess={this.responseGoogle}
-        //                     onFailure={this.responseGoogle} 
-        //                     isSignedIn={true}/>;
+        const showAlertSuccess = this.state.visible_success ? 
+            <Alert style={{textAlign:"center"}} color="success">
+            חשבון נוצר בהצלחה!</Alert> : null;
+
+        const error_message = 
+            submit_error === 'already_login' ? 'מישהו כבר מחובר לאתר' :
+            submit_error === 'no_exists' ? 'לא קיים חשבון עם המייל הזה' :
+            submit_error === 'wrong_password' ? 'סיסמא שגויה' : 
+            submit_error === 'already_exists' ? 'חשבון עם מייל זה כבר קיים' :
+            'אפוס, שגיאה כללית!' ;
+
+        const showAlertError = this.state.visible_error ? 
+            <Alert style={{textAlign:"center"}} color="danger">
+                {error_message}</Alert> : null;        
 
         return (
             <div> {this.state.currentModal === 0 ?
@@ -179,78 +190,30 @@ class RegisterCompanyModalComponent extends Component {
                     <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* {googleButton} {fbButton} <br></br> */}
-                <Form> 
-                <FormGroup>
-                    <Input id="company_name" type="text" value={this.state.company_name} onChange={this.handleChange} 
-                        invalid={errors.company_name ? true : false} placeholder="שם העמותה *"/>
-                    <FormFeedback>{errors.company_name}</FormFeedback>
-                </FormGroup> <br></br>
-                <FormGroup>
-                    <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                        invalid={errors.email ? true : false} placeholder="מייל *" />
-                    <FormFeedback>{errors.email}</FormFeedback>
-                </FormGroup><br></br>
-                <FormGroup>
-                    <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                        invalid={errors.password ? true : false} placeholder="סיסמא *" />
-                    <FormFeedback>{errors.password}</FormFeedback>
-                </FormGroup> <br></br>
-                <FormGroup>
-                    <Input id="confirm_password" type="password" value={this.state.confirm_password} onChange={this.handleChange}
-                        invalid={errors.confirm_password ? true : false} placeholder="חזור על הסיסמא *" />
-                    <FormFeedback>{errors.confirm_password}</FormFeedback>
-                </FormGroup> <br></br>
-                </Form>
+                <RegisterCompanyFormFirst errors={errors} state={this.state} handleChange={this.handleChange}/>
                 </Modal.Body>
                 <Modal.Footer> 
                     <Button variant="primary" onClick={this.handleNext}> הבא </Button>
                 </Modal.Footer>
-                {showAlert}
             </Modal> 
             :
             this.state.currentModal === 1 ? 
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerCompanyModal">
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <Form>
-                <FormGroup>
-                    <Input id="phone_number" type="tel" value={this.state.phone_number} onChange={this.handleChange} placeholder="Phone Number" />
-                </FormGroup> <br></br>
-                <Row>
-                <Col>
-                    <FormGroup>
-                        <Input id="website_label" type="select" value={this.state.website_label} onChange={this.handleChange}
-                            invalid={errors.website ? true : false}>
-                                <option>Personal Website</option>
-                                <option>Facebook</option>
-                                <option>Instagram</option>
-                                </Input>
-                    </FormGroup>
-                </Col>
-                <Col>
-                    <FormGroup>
-                        <Input id="website" type="text" value={this.state.website} onChange={this.handleChange}
-                            invalid={errors.website ? true : false} placeholder="מייל *" />
-                        <FormFeedback>{errors.website}</FormFeedback>
-                    </FormGroup> <br></br>
-                </Col>
-                </Row>
-                <FormGroup>
-                     <Input id="about_me" type="text" value={this.state.about_me} onChange={this.handleChange}
-                        invalid={errors.about_me ? true : false} placeholder="ספר קצת על העמותה *" />
-                    <FormFeedback>{errors.about_me}</FormFeedback>
-                </FormGroup> <br></br>
-                </Form>
+                <RegisterCompanyFormSecond errors={errors} state={this.state} handleChange={this.handleChange} 
+                        handleChangeField={this.handleChangeField} handleChangeWebsite={this.handleChangeWebsite}
+                        handleRemoveClick={this.handleRemoveClick} handleAddClick={this.handleAddClick}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={this.handlePrev}> קודם </Button>    
-                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> הירשם </Button>       
+                    {submit_button}    
                 </Modal.Footer>
-                {showAlert}
+                {showAlertSuccess}
+                {showAlertError}
             </Modal> : null }
             </div>
         );

@@ -97,7 +97,7 @@ class NewProjectModalComponent extends Component {
                 <Modal.Body>
                     <FormGroup>
                         <Input id="company_name" type="text" value={this.state.company_name} 
-                                 placeholder="* שם העמותה" disabled/>
+                                 placeholder={localStorage.getItem('currentUserEmail')} disabled/>
                     </FormGroup>
                     <FormGroup>
                         <FilterComponent    

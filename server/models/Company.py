@@ -16,17 +16,17 @@ class Company(UserMixin, db.Model):
     password_hash = db.Column(db.String(120), nullable=False)
     location = db.Column(db.String(120)) 
     # image = db.Column()
-    personal_url = db.Column(db.String(120))
+    company_url = db.Column(db.String(120))
     facebook_url = db.Column(db.String(120))
     instagram_url = db.Column(db.String(120))
     about_me = db.Column(db.Text)
 
-    def __init__(self,company_name, email, phone_number, location, personal_url, facebook_url, instagram_url, about_me):
+    def __init__(self,company_name, email, phone_number, location, company_url, facebook_url, instagram_url, about_me):
         self.company_name = company_name
         self.email = email
         self.phone_number = phone_number
         self.location = location
-        self.personal_url = personal_url
+        self.company_url = company_url
         self.facebook_url = facebook_url
         self.instagram_url = instagram_url
         self.about_me = about_me

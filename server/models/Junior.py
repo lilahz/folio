@@ -14,11 +14,11 @@ class Junior(UserMixin, db.Model):
     phone_number = db.Column(db.Text)
     field = db.Column(db.ARRAY(db.String(50))) 
     # image = db.Column()
-    personal_url = db.Column(db.String(120))
-    facebook_url = db.Column(db.String(120))
-    instagram_url = db.Column(db.String(120))
-    linkedIn_url = db.Column(db.String(120))
-    gitHub_url = db.Column(db.String(120))
+    personal_url = db.Column(db.String())
+    facebook_url = db.Column(db.String())
+    instagram_url = db.Column(db.String())
+    linkedIn_url = db.Column(db.String())
+    gitHub_url = db.Column(db.String())
     about_me = db.Column(db.Text)
 
     def __init__(self, email, full_name, phone_number, field, personal_url, facebook_url, instagram_url, linkedIn_url, gitHub_url ,about_me):

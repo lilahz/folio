@@ -5,11 +5,17 @@ import {Form, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
 import { Alert } from 'reactstrap';
 import axios from 'axios';
 
+import { UserContext } from '../../UserContext';
+
 class LoginModalComponent extends Component {
     constructor(props) {
         super(props);
+        // TODO: check if possible to use useContext() in some way in class components. 
+        this.user = UserContext;
         this.state = this.getInitialState();
     }
+
+    static contextType = UserContext;
 
     onShowAlert = (toggle) =>{
         this.setState({visible:true},()=>{
@@ -45,16 +51,19 @@ class LoginModalComponent extends Component {
     submitForm = (data) => {
         let errors = {};
         const url = this.props.url;
+        const context = this.context;
+
         console.log("data : " , data);
         axios.post(url, data)
         .then(response => {
             console.log("respone :", response);
-            localStorage.setItem('currentUserEmail', data.email);
-            localStorage.setItem('currentUserType', this.props.type);
+            context.setMail(data.email);
+            context.setType(this.props.type);
+            // localStorage.setItem('currentUserEmail', data.email);
+            // localStorage.setItem('currentUserType', this.props.type);
             this.props.history.push('/');
         })
-        .catch(error => {
-            console.log(error.response.status); 
+        .catch(error => { 
             console.log(error.response);
         })
     }

@@ -85,6 +85,9 @@ class RegisterJuniorModalComponent extends Component {
             localStorage.setItem('currentUserEmail', data.email);
             localStorage.setItem('currentUserType', "junior");
         })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     handleSubmit = (toggle) => {

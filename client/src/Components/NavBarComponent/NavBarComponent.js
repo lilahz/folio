@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 import axios from 'axios';
+
 import './NavBarComponent.css';
+import { UserContext } from '../../UserContext';
 
 
 const NavBarComponent = () => {
     console.log(localStorage.getItem('currentUserEmail'));
+    const user = useContext(UserContext);
 
     const handeLogout = () => {
-        const type = localStorage.getItem('currentUserType');
+        // const type = localStorage.getItem('currentUserType');
+        const type = user.type;
         const url = type === 'junior' ? '/api/auth/junior_logout' : '/api/auth/company_logout';
         axios.post(url)
         .then(response => {
@@ -21,15 +25,18 @@ const NavBarComponent = () => {
         })
         console.log(localStorage.getItem('currentUserEmail'));
         localStorage.removeItem('currentUserEmail');
+        user.setMail('');
+        user.setType('');
     }
     const noUserLoggedIn = <Nav className="mr-auto">
-                                {console.log("user not logged in yet", localStorage.getItem('currentUserEmail'))}
+                                {/* {console.log("user not logged in yet", localStorage.getItem('currentUserEmail'))}; */}
+                                {console.log("user not logged in yet", user.mail)}
                                 <Nav.Link className="mr-auto" href="/register">הירשם</Nav.Link>
                                 <Nav.Link className="ml-auto" href="/login">התחבר</Nav.Link>
                                 {/* <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item> */}
                             </Nav>;
     const userLoggedIn = <Nav className="mr-auto">
-                            {console.log("user is logged in", localStorage.getItem('currentUserEmail'))}
+                            {console.log("user is logged in", user.mail)}
                             <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item>
                           </Nav>;
     return (
@@ -42,7 +49,7 @@ const NavBarComponent = () => {
                     <Nav.Link href="/home/juniors">מתמחים</Nav.Link>
                     <Nav.Link href="/home/about" style={{alignSelf: "right"}}>עלינו</Nav.Link>
                 </Nav>
-                {localStorage.getItem('currentUserEmail') ? userLoggedIn : noUserLoggedIn}
+                {user.mail !== '' ? userLoggedIn : noUserLoggedIn}
             </Navbar.Collapse>
         </Navbar>
     )

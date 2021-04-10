@@ -1,48 +1,13 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Form, Button, FormGroup, FormFeedback, Input, Col, Row} from 'reactstrap';
-import { Alert } from 'reactstrap';
+import {Button, Spinner, Alert} from 'reactstrap';
 import axios from 'axios';
-import FilterComponent from '../HomeComponent/FilterComponent';
-import {field_array} from '../HomeComponent/data';
-
+import {RegisterJuniorFormFirst, RegisterJuniorFormSecond} from './RegisterJuniorForm';
 
 class RegisterJuniorModalComponent extends Component {
     constructor(props) {
         super(props);
         this.state = this.getInitialState();
-    }
-
-    onShowAlert = (toggle) =>{
-        this.setState({visible:true},()=>{
-          window.setTimeout(()=>{
-            toggle();
-            this.setState({visible:false})
-          },3000)
-        });
-    }
-
-    validateSecond = () => {
-        var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        let errors = {};
-        
-        if (this.state.field === [] | this.state.field === null) errors.field = 'Please enter your field of work.';
-        if(!linkPattern.test(this.state.website)) errors.website = 'Invalid URL.';
-        if (this.state.about_me === '') errors.about_me = 'Please tell us about_me your Junior.';
-
-        return errors;
-    }
-
-    validateFirst = () => {
-        var emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        let errors = {};
-
-        if (this.state.full_name === '') errors.full_name = 'Please enter your full name.';
-        if(!emailPattern.test(this.state.email)) errors.email = 'Invalid email address.';
-        if (this.state.password === '') errors.password = 'Please enter a password.';
-        if(this.state.password !== this.state.confirm_password) errors.confirm_password = 'Passwords do not match.';
-
-        return errors;
     }
 
     getInitialState = () => ({
@@ -52,13 +17,74 @@ class RegisterJuniorModalComponent extends Component {
         confirm_password: '',
         phone_number: '',
         field: [],
-        website_label: '',
-        website: '',
+        website: [{label: 'אתר אישי', url: ''}],
         about_me: '',
         errors: {},
-        visible: false,
+        submit_error: '',
+        visible_success: false,
+        visible_error: false,
+        loading: false,
         currentModal: 0,
     });
+
+    onShowAlert = () =>{
+        this.setState({visible_success:true},()=>{
+          window.setTimeout(()=>{
+            // toggle();
+            this.setState({visible_success:false})
+          },3000)
+        });
+    }
+
+    validateFirst = () => {
+        var emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        let errors = {};
+
+        if (this.state.full_name === '') errors.full_name = 'שדה זה הינו חובה.';
+        if(!emailPattern.test(this.state.email)) errors.email = 'שדה זה הינו חובה.';
+        if (this.state.password === '') errors.password = 'שדה זה הינו חובה.';
+        if(this.state.password !== this.state.confirm_password) errors.confirm_password = 'הסיסמאות לא תואמות.';
+
+        return errors;
+    }
+
+    validateSecond = () => {
+        var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        let errors = {};
+        
+        if (this.state.field === [] | this.state.field === null) errors.field = 'שדה זה הינו חובה.';
+        // if(!linkPattern.test(this.state.website)) errors.website = 'Invalid URL.';
+        if (this.state.about_me === '') errors.about_me = 'שדה זה הינו חובה.';
+
+        return errors;
+    }
+
+    // handle input change
+    handleChangeWebsite = (e, index, field) => {
+        const { value } = e.target;
+        const values = this.state.website;
+        field === 'label' ? values[index]['label'] = value : values[index]['url'] = value;
+        this.setState({website: values});
+    };
+
+    // handle click event of the Remove button
+    handleRemoveClick = index => {
+        const list = [
+            ...this.state.website.slice(0, index),
+            ...this.state.website.slice(index + 1)
+          ]
+        this.setState({website: list});
+    };
+    
+    // handle click event of the Add button
+    handleAddClick = () => {
+        const values = this.state.website;
+        values.push({
+            label: 'אתר אישי',
+            url: ''
+        });
+        this.setState({website : values});
+    };
 
     handleChange = event => {
         this.setState({
@@ -77,13 +103,25 @@ class RegisterJuniorModalComponent extends Component {
     }
 
     submitForm = (data) => {
-        const url = '/api/auth/junior_register';
-        axios.post(url, data)
-        .then(response => {
-            console.log("respone" + response);
-            console.log("respone data" + response.data);
-            localStorage.setItem('currentUserEmail', data.email);
-            localStorage.setItem('currentUserType', "junior");
+        this.setState({loading:true}, () => {
+            const url = '/api/auth/junior_register';
+            axios.post(url, data)
+            .then(response => {
+                this.setState({loading: false});
+                this.setState({visible_success : true});
+                console.log("respone :" + response);
+                console.log("respone data : " + response.data);
+                console.log("response status : " + response.status);
+                localStorage.setItem('currentUserEmail', data.email);
+                localStorage.setItem('currentUserType', this.props.type);
+            })
+            .catch(error => {
+                this.setState({submit_error: error.response.data.error});
+                this.setState({loading: false});
+                this.setState({visible_error : true});
+                console.log("response status : " , error.response.status); 
+                console.log("response error : " , error.response.data.error);
+            })
         })
         .catch(error => {
             console.log(error);
@@ -97,14 +135,31 @@ class RegisterJuniorModalComponent extends Component {
                         "password":this.state.password,
                         "phone_number":this.state.phone_number,
                         "field":this.state.field,
-                        "website_label":this.state.website_label,
-                        "website":this.state.website,
                         "about_me":this.state.about_me };
+
+        for (var x in this.state.website) {
+            var datum = this.state.website[x];
+            switch(datum.label) {
+                case "אתר אישי" :
+                    data["personal_url"] = datum.url;
+                    break;
+                case "פייסבוק" :
+                    data["facebook_url"] = datum.url;
+                    break;
+                case "אינסטגרם" :
+                    data["instagram_url"] = datum.url;
+                    break;
+                case "לינקדין" :
+                    data["linkedIn_url"] = datum.url;
+                    break; 
+                case "גיטהאב" :
+                    data["gitHub_url"] = datum.url;
+                    break; 
+            }
+        }
 
         if (Object.keys(errors).length === 0) {
             this.submitForm(data); // send the data to the server
-            this.setState(this.getInitialState()); // if success, reset all fields
-            this.onShowAlert(toggle);
         } else {
             this.setState({ errors : errors });
         }
@@ -125,96 +180,59 @@ class RegisterJuniorModalComponent extends Component {
     }
 
     render() {
-        const { errors } = this.state;
-        const showAlert = this.state.visible ? <Alert style={{textAlign:"center"}} variant="success"> מתמחה נוצר בהצלחה! </Alert> : null;        
+        const { errors, loading, submit_error} = this.state;
+        const submit_button = <Button variant="primary" onClick={this.handleSubmit}>
+                            {!loading ? "אישור": null }
+                            {loading ? (<Spinner style={{ width: '1.1rem', height: '1.1rem' }} color="light"/> ) : null}
+                        </Button>
+
+        const showAlertSuccess = this.state.visible_success ? 
+            <Alert style={{textAlign:"center"}} color="success">
+                חשבון נוצר בהצלחה!</Alert> : null;
+                
+        const error_message = 
+            submit_error === 'already_login' ? 'מישהו כבר מחובר לאתר' :
+            submit_error === 'no_exists' ? 'לא קיים חשבון עם המייל הזה' :
+            submit_error === 'wrong_password' ? 'סיסמא שגויה' : 
+            submit_error === 'already_exists' ? 'חשבון עם מייל זה כבר קיים' :
+            'אפוס, שגיאה כללית!' ;
+
+        const showAlertError = this.state.visible_error ? 
+                <Alert style={{textAlign:"center"}} color="danger">
+                    {error_message}</Alert> : null;        
 
         return (
             <div> {this.state.currentModal === 0 ? 
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerJuniorModal">
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body> 
-                    <Form>
-                    <FormGroup>
-                        <Input id="full_name" type="text" value={this.state.full_name} onChange={this.handleChange} 
-                            invalid={errors.full_name ? true : false} placeholder="שם מלא *"/>
-                        <FormFeedback>{errors.full_name}</FormFeedback>
-                    </FormGroup> <br></br>
-                    <FormGroup>
-                        <Input id="email" type="email" value={this.state.email} onChange={this.handleChange}
-                            invalid={errors.email ? true : false} placeholder="מייל *" />
-                        <FormFeedback>{errors.email}</FormFeedback>
-                    </FormGroup><br></br>
-                    <FormGroup>
-                        <Input id="password" type="password" value={this.state.password} onChange={this.handleChange}
-                            invalid={errors.password ? true : false} placeholder="סיסמא *" />
-                        <FormFeedback>{errors.password}</FormFeedback>
-                    </FormGroup> <br></br>
-                    <FormGroup>
-                        <Input id="confirm_password" type="password" value={this.state.confirm_password} onChange={this.handleChange}
-                            invalid={errors.confirm_password ? true : false} placeholder="חזור על הסיסמא *" />
-                        <FormFeedback>{errors.confirm_password}</FormFeedback>
-                    </FormGroup> <br></br>
-                    </Form>
+                    <RegisterJuniorFormFirst errors={errors} state={this.state} handleChange={this.handleChange}/>
                 </Modal.Body>
                 <Modal.Footer> 
                     <Button variant="primary" onClick={this.handleNext}> הבא </Button>
                 </Modal.Footer>
-                {showAlert}
             </Modal> 
             :
             this.state.currentModal === 1 ? 
             <Modal show={this.props.isOpen} onHide={this.props.toggle}
                 aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="modal-70w" className="registerJuniorModal">
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter"> יצירת חשבון </Modal.Title>
                 </Modal.Header>
                 <Modal.Body> 
-                    <Form>  
-                    <FormGroup>
-                        <Input id="phone_number" type="tel" value={this.state.phone_number} onChange={this.handleChange} placeholder="מספר טלפון" />
-                    </FormGroup> <br></br>
-                    <FormGroup>
-                        <FilterComponent    
-                                place_holder = "תחום עיסוק *"
-                                filter_array = {field_array}
-                                handle_on_change = {this.handleChangeField} 
-                        />
-                    </FormGroup><br></br>
-                    <Row>
-                    <Col>
-                        <FormGroup>
-                            <Input id="website_label" type="select" value={this.state.website_label} onChange={this.handleChange}
-                                invalid={errors.website ? true : false}>
-                                    <option>Personal Website</option>
-                                    <option>Facebook</option>
-                                    <option>Instagram</option>
-                                    <option>LinkedIn</option>
-                                    <option>GitHub</option>
-                                    </Input>
-                        </FormGroup>
-                    </Col>   
-                    <Col>
-                    <FormGroup>
-                        <Input id="website" type="text" value={this.state.website} onChange={this.handleChange}
-                                invalid={errors.website ? true : false} placeholder="אתר *" />
-                    </FormGroup> <br></br>
-                    </Col>
-                    </Row>
-                    <FormGroup>
-                        <Input id="about_me" type="text" value={this.state.about_me} onChange={this.handleChange}
-                            invalid={errors.about_me ? true : false} placeholder="ספר קצת על עצמך *" />
-                        <FormFeedback>{errors.about_me}</FormFeedback>
-                    </FormGroup> <br></br>
-                    </Form>
+                    <RegisterJuniorFormSecond errors={errors} state={this.state} handleChange={this.handleChange} 
+                        handleChangeField={this.handleChangeField} handleChangeWebsite={this.handleChangeWebsite}
+                        handleRemoveClick={this.handleRemoveClick} handleAddClick={this.handleAddClick}/>
                 </Modal.Body>
                 <Modal.Footer> 
                     <Button variant="primary" onClick={this.handlePrev}> קודם </Button>    
-                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> הירשם </Button>    
+                    {submit_button}               
                 </Modal.Footer>
-                {showAlert}
+                {showAlertSuccess}
+                {showAlertError}
             </Modal> : null }
             </div>
         );

@@ -8,12 +8,13 @@ import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import LandingComponent from './Components/LandingComponent/LandingComponent';
 import RegisterComponent from './Components/RegisterComponent/RegisterComponent';
 import LoginComponent from './Components/LoginComponent/LoginComponent';
+import LogoutComponent from './Components/LogoutComponent/LogoutComponent';
 import AllProjects from './Components/HomeComponent/ProjectComponent/AllProjects';
 import AllJuniors from './Components/HomeComponent/JuniorComponent/AllJuniors';
 import AboutComponent from './Components/AboutComponent/AboutComponent';
 
 // axios.default.baseURL = 'https://projects-21.herokuapp.com';
-axios.default.baseURL = 'http://127.0.0.1:5000/';
+axios.default.baseURL = 'http://127.0.0.1:5000';
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class App extends Component {
               </Route>
               <Route path="/login">
                 <LoginComponent />
+              </Route>
+              <Route path="/logout">
+                <LogoutComponent />
               </Route>
               <Route path="/home/projects">
                 <AllProjects />

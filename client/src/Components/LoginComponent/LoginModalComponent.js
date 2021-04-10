@@ -10,7 +10,6 @@ import { UserContext } from '../../UserContext';
 class LoginModalComponent extends Component {
     constructor(props) {
         super(props);
-        // TODO: check if possible to use useContext() in some way in class components. 
         this.user = UserContext;
         this.state = this.getInitialState();
     }
@@ -59,8 +58,6 @@ class LoginModalComponent extends Component {
             console.log("respone :", response);
             context.setMail(data.email);
             context.setType(this.props.type);
-            // localStorage.setItem('currentUserEmail', data.email);
-            // localStorage.setItem('currentUserType', this.props.type);
             this.props.history.push('/');
         })
         .catch(error => { 

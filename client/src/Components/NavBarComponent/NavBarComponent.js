@@ -1,38 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 import axios from 'axios';
+
 import './NavBarComponent.css';
+import { UserContext } from '../../UserContext';
 
 
 const NavBarComponent = () => {
-    const handeLogout = () => {
-        const type = localStorage.getItem('currentUserType');
-        let url;
-        if(type == "junior") {
-            url = '/api/auth/junior_logout';
-        }
-        else {
-            url = '/api/auth/company_logout';
-        }
-        axios.post(url)
-        .then(response => {
-            console.log("respone" + response);
-            console.log("respone data" + response.data);
-        })
-        .catch(error => {
-            console.log("response error " , error.response.data); 
-            console.log("response error status " , error.response.status); 
-        })
-        console.log(localStorage.getItem('currentUserEmail'));
-        localStorage.removeItem('currentUserEmail');
-    }
+    const user = useContext(UserContext);
+
+    // const handeLogout = () => {
+    //     const type = user.type;
+    //     const url = type === 'junior' ? '/api/auth/junior_logout' : '/api/auth/company_logout';
+    //     axios.post(url)
+    //     .then(response => {
+    //         console.log("respone", response);
+    //         console.log("respone data", response.data);
+    //     })
+    //     .catch(error => {
+    //         console.log("response error " , error.response.data); 
+    //         console.log("response error status " , error.response.status); 
+    //     })
+    //     user.setMail('');
+    //     user.setType('');
+    // }
+
     const noUserLoggedIn = <Nav className="mr-auto">
                                 <Nav.Link className="mr-auto" href="/register">הירשם</Nav.Link>
                                 <Nav.Link className="ml-auto" href="/login">התחבר</Nav.Link>
-                                <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item>
+                                {/* <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item> */}
                             </Nav>;
     const userLoggedIn = <Nav className="mr-auto">
-                            <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item>
+                            <Nav.Link className="mr-auto" href="/logout">התנתק</Nav.Link>
                           </Nav>;
     return (
         <Navbar className="NavBar" variant="light" expand="lg" sticky="top">
@@ -44,7 +43,7 @@ const NavBarComponent = () => {
                     <Nav.Link href="/home/juniors">מתמחים</Nav.Link>
                     <Nav.Link href="/home/about" style={{alignSelf: "right"}}>עלינו</Nav.Link>
                 </Nav>
-                {localStorage.getItem('currentUserEmail') ? userLoggedIn : noUserLoggedIn}
+                {user.mail !== '' ? userLoggedIn : noUserLoggedIn}
             </Navbar.Collapse>
         </Navbar>
     )

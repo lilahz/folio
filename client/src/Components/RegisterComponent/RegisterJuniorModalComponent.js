@@ -123,6 +123,9 @@ class RegisterJuniorModalComponent extends Component {
                 console.log("response error : " , error.response.data.error);
             })
         })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     handleSubmit = (toggle) => {

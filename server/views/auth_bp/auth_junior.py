@@ -1,14 +1,11 @@
 from flask import jsonify, request
-from flask_login import login_required, logout_user, current_user, login_user
+from flask_login import login_required, logout_user, login_user
 
 from server.models.Junior import Junior
 from server.models import login_manager
 
+
 def junior_register():
-    # Bypass if user is logged in
-    if current_user.is_authenticated:
-        return jsonify({'error': 'already_login'}), 401
-        
     data = request.json
     email = data.get('email')
     junior = Junior.query.filter_by(email=email).first() # check if this email is already registered
@@ -40,11 +37,6 @@ def junior_register():
 
 
 def junior_login():
-
-    # Bypass if user is logged in
-    if current_user.is_authenticated:
-        return jsonify({'error' : 'already_login'}), 401
-  
     data = request.json
     email = data.get('email')
     password = data.get('password')
@@ -79,5 +71,6 @@ def unauthorized(): # Redirect unauthorized users to Login page.
 # @login_manager.user_loader determines wether or not the user is logged in
 # & @login_manager.unauthorized_handler - if the user is not logged in
 def junior_logout():
+    # pdb.set_trace()
     logout_user()
     return jsonify({'message': 'success'})

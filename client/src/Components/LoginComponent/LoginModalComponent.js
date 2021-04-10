@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import { Button, Spinner, Alert } from 'reactstrap';
 import axios from 'axios';
 import LoginForm from './LoginForm';
 
+import { UserContext } from '../../UserContext';
+
 class LoginModalComponent extends Component {
     constructor(props) {
         super(props);
+        this.user = UserContext;
         this.state = this.getInitialState();
     }
 
@@ -20,8 +24,10 @@ class LoginModalComponent extends Component {
         loading: false
     });
 
-    onShowAlert = () =>{
-        this.setState({visible_success:true},()=>{
+    static contextType = UserContext;
+
+    onShowAlert = (toggle) =>{
+        this.setState({visible:true},()=>{
           window.setTimeout(()=>{
             // toggle();
             this.setState({visible_success:false})
@@ -45,22 +51,20 @@ class LoginModalComponent extends Component {
     submitForm = (data) => {
         this.setState({loading:true}, () => {
             const url = this.props.url;
-            console.log("data : " , data);
+            const context = this.context;
             axios.post(url, data)
             .then(response => {
+                console.log("respone data : " + response.data);
                 this.setState({loading: false});
                 this.setState({visible_error : false});
-                console.log("respone :" + response);
-                console.log("respone data : " + response.data);
-                console.log("response status : " + response.status);
-                localStorage.setItem('currentUserEmail', data.email);
-                localStorage.setItem('currentUserType', this.props.type);
+                context.setMail(data.email);
+                context.setType(this.props.type);
+                this.props.history.push('/');
             })
             .catch(error => {
                 this.setState({submit_error: error.response.data.error});
                 this.setState({loading: false});
                 this.setState({visible_error : true});
-                console.log("response status : " , error.response.status); 
                 console.log("response error : " , error.response.data.error);
             })
         })
@@ -116,8 +120,9 @@ class LoginModalComponent extends Component {
                  {showAlertSuccess}
                  {showAlertError}
              </Modal>
-        )
+        );
     }
 }
 
-export default LoginModalComponent;
+
+export default withRouter(LoginModalComponent);

@@ -41,9 +41,25 @@ class Company(UserMixin, db.Model):
     def get_company_name_by_id(id):
         result = db.session.query(Company.company_name).filter(Company.id==id).first()
         return result[0]
+    
+    def get_company_email_by_id(id):
+        result = db.session.query(Company.email).filter(Company.id==id).first()
+        return result[0]
 
     def get_company_description_by_id(id):
         result = db.session.query(Company.about_me).filter(Company.id==id).first()
+        return result[0]
+
+    def get_company_url_by_id(id):
+        result = db.session.query(Company.company_url).filter(Company.id==id).first()
+        return result[0]
+
+    def get_facebook_url_by_id(id):
+        result = db.session.query(Company.facebook_url).filter(Company.id==id).first()
+        return result[0]
+
+    def get_instagram_url_by_id(id):
+        result = db.session.query(Company.instagram_url).filter(Company.id==id).first()
         return result[0]
 
     def set_password(self, password):

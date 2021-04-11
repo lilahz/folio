@@ -13,6 +13,12 @@ export default function JuniorsComponent(props) {
                             cardTitle={junior.full_name} 
                             cardText={junior.about_me} 
                             cardField={junior.field}
+                            cardEmail={junior.email}
+                            cardPersonalURL={junior.personal_url}
+                            cardFacebookURL={junior.facebook_url}
+                            cardInstagramURL={junior.instagram_url}
+                            cardLinkedInURL={junior.linkedIn_url}
+                            cardGitHubURL={junior.gitHub_url}
                             />))}
                 </Row>
     </div>

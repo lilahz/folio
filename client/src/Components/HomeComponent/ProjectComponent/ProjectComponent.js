@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Mask, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardFooter ,MDBBtn, MDBCardText} from 'mdbreact';
+import {View, Mask, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle ,MDBBtn, MDBCardText} from 'mdbreact';
 
 import '../ItemComponent.css';
 import classes from './ProjectComponent.module.css';
@@ -58,6 +58,10 @@ class ProjectComponent extends Component {
                             modalCardProjectDesc={this.props.cardProjectDesc}
                             modalCardCompDesc={this.props.cardCompDesc}
                             modalField={this.fieldArrayIcon(this.props.cardField)}
+                            modalEmail={this.props.cardEmail}
+                            modalCompanyURL={this.props.cardCompanyURL}
+                            modalFacebookURL={this.props.cardFacebookURL}
+                            modalInstagramURL={this.props.cardInstagramURL}
                         />
                     </MDBCard>
                 </MDBCol>

@@ -56,6 +56,12 @@ class JuniorComponent extends Component {
                         modalTitle={this.props.cardTitle}
                         modalDescription={this.props.cardText}
                         modalField={this.fieldArrayIcon(this.props.cardField)}
+                        modalEmail={this.props.cardEmail}
+                        modalPersonalURL={this.props.cardPersonalURL}
+                        modalFacebookURL={this.props.cardFacebookURL}
+                        modalInstagramURL={this.props.cardInstagramURL}
+                        modalLinkInURL={this.props.cardLinkedInURL}
+                        modalGitHubURL={this.props.cardGitHubURL}
                     />
                     </MDBCard>
                 </MDBCol>

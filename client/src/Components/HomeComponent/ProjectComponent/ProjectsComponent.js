@@ -12,6 +12,10 @@ export default function ProjectsComponent(props) {
                             cardProjectDesc={project.description} 
                             cardCompDesc={project.company_description}
                             cardField={project.field}
+                            cardEmail={project.company_email}
+                            cardCompanyURL={project.company_url}
+                            cardFacebookURL={project.facebook_url}
+                            cardInstagramURL={project.instagram_url}
                             />))}
                 </Row>
     </div>

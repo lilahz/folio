@@ -49,7 +49,7 @@ class RegisterJuniorModalComponent extends Component {
     }
 
     validateSecond = () => {
-        var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        // var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
         let errors = {};
         
         if (this.state.field === [] | this.state.field === null) errors.field = 'שדה זה הינו חובה.';
@@ -123,9 +123,6 @@ class RegisterJuniorModalComponent extends Component {
                 console.log("response error : " , error.response.data.error);
             })
         })
-        .catch(error => {
-            console.log(error);
-        })
     }
 
     handleSubmit = (toggle) => {
@@ -155,6 +152,8 @@ class RegisterJuniorModalComponent extends Component {
                 case "גיטהאב" :
                     data["gitHub_url"] = datum.url;
                     break; 
+                default:
+                    break;
             }
         }
 

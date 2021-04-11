@@ -48,7 +48,7 @@ class RegisterCompanyModalComponent extends Component {
     }
 
     validateSecond = () => {
-        var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        // var linkPattern = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
         let errors = {};
         
         // if(!linkPattern.test(this.state.website)) errors.website = 'Invalid URL.';
@@ -134,6 +134,8 @@ class RegisterCompanyModalComponent extends Component {
                     break;
                 case "אינסטגרם" :
                     data["instagram_url"] = datum.url;
+                    break;
+                default:
                     break;
             }
         }   

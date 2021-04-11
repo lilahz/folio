@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
-import axios from 'axios';
+import {Navbar, Nav} from 'react-bootstrap';
 
 import './NavBarComponent.css';
 import { UserContext } from '../../UserContext';
@@ -8,22 +7,6 @@ import { UserContext } from '../../UserContext';
 
 const NavBarComponent = () => {
     const user = useContext(UserContext);
-
-    // const handeLogout = () => {
-    //     const type = user.type;
-    //     const url = type === 'junior' ? '/api/auth/junior_logout' : '/api/auth/company_logout';
-    //     axios.post(url)
-    //     .then(response => {
-    //         console.log("respone", response);
-    //         console.log("respone data", response.data);
-    //     })
-    //     .catch(error => {
-    //         console.log("response error " , error.response.data); 
-    //         console.log("response error status " , error.response.status); 
-    //     })
-    //     user.setMail('');
-    //     user.setType('');
-    // }
 
     const noUserLoggedIn = <Nav className="mr-auto">
                                 <Nav.Link className="mr-auto" href="/register">הירשם</Nav.Link>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
-import {Row, Col} from 'react-bootstrap';
-import {MDBBtn, MDBRow} from 'mdbreact';
+import {MDBBtn} from 'mdbreact';
 
 import ProjectCarouselComponent from '../HomeComponent/ProjectComponent/ProjectCarouselComponent';
 import NewProjectModalComponent from '../NewProjectComponent/NewProjectModalComponent'

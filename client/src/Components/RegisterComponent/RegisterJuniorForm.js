@@ -74,6 +74,10 @@ const RegisterJuniorFormSecond = (props) => (
                 invalid={props.errors.about_me ? true : false} placeholder="ספר קצת על עצמך *" />
             <FormFeedback>{props.errors.about_me}</FormFeedback>
         </FormGroup> <br></br>
+        <FormGroup>
+            <Input type="file" name="profile_picture" id="profile_picture" accept="image/* "
+                onChange={props.handleChangePicture}/>
+        </FormGroup> <br></br>
         </Form>   
 )
 

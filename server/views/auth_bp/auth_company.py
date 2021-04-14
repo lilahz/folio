@@ -23,12 +23,14 @@ def company_register():
     company = Company.query.filter_by(email=email).first() # check if this email is already registered
     if company is None:
         password = data.get('password')
-        remember_me = data.get('remember_me')
+        # remember_me = data.get('remember_me')
+        remember_me = True
         new_company = Company(
             data.get('company_name'),
             email,
             data.get('phone_number'),
             data.get('location'),
+            data.get('profile_picture'),
             data.get('company_url'),
             data.get('facebook_url'),
             data.get('instagram_url'),
@@ -55,7 +57,8 @@ def company_login():
     data = request.json
     email = data.get('email')
     password = data.get('password')
-    remember_me = data.get('remember_me')
+    # remember_me = data.get('remember_me')
+    remember_me = True
 
     company = Company.query.filter_by(email=email).first()
     if company and company.check_password(password):

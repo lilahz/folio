@@ -48,7 +48,7 @@ const RegisterCompanyFormSecond = (props) => (
                 <Col>
                     <FormGroup>
                         <Input id="website" type="text" value={x.url} onChange={e=>props.handleChangeWebsite(e,i,'url')}
-                            invalid={props.errors.website ? true : false} placeholder="מייל *" />
+                            invalid={props.errors.website ? true : false} placeholder="לינק *" />
                         <FormFeedback>{props.errors.website}</FormFeedback>
                     </FormGroup> <br></br>
                 </Col>
@@ -64,6 +64,10 @@ const RegisterCompanyFormSecond = (props) => (
                 <Input id="about_me" type="text" value={props.state.about_me} onChange={props.handleChange}
                 invalid={props.errors.about_me ? true : false} placeholder="ספר קצת על העמותה *" />
             <FormFeedback>{props.errors.about_me}</FormFeedback>
+        </FormGroup> <br></br>
+        <FormGroup>
+            <Input type="file" name="profile_picture" id="profile_picture" accept="image/* "
+                onChange={props.handleChangePicture}/>
         </FormGroup> <br></br>
     </Form>
 )

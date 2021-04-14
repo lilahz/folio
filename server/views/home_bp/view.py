@@ -29,6 +29,7 @@ def get_all_projects():
         [project.dump(Company.get_company_name_by_id(project.company_id), 
             Company.get_company_email_by_id(project.company_id),
             Company.get_company_description_by_id(project.company_id),
+            Company.get_profile_picture_by_id(project.company_id),
             Company.get_company_url_by_id(project.company_id),
             Company.get_facebook_url_by_id(project.company_id),
             Company.get_instagram_url_by_id(project.company_id)) 

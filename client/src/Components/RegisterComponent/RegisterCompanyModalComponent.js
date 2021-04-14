@@ -18,6 +18,7 @@ class RegisterCompanyModalComponent extends Component {
         phone_number: '',
         website: [{label: 'אתר החברה', url: ''}],
         about_me: '',
+        profile_picture: '',
         errors: {},
         submit_error: '',
         visible_success: false,
@@ -90,6 +91,20 @@ class RegisterCompanyModalComponent extends Component {
         });
     }
 
+    _handleReaderLoaded = (readerEvt) => {
+        let binaryString = btoa(readerEvt.target.result);
+        this.setState({profile_picture: binaryString});
+    }
+
+    handleChangePicture = selected => {
+        let file = selected.target.files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(file);
+        }
+    }
+
     submitForm = (data) => {
         this.setState({loading:true}, () => {
             const url = '/api/auth/company_register';
@@ -98,7 +113,6 @@ class RegisterCompanyModalComponent extends Component {
                 this.setState({loading: false});
                 this.setState({visible_error : false});
                 this.setState({visible_success : true});
-                console.log("respone :" + response);
                 console.log("respone data : " + response.data);
                 console.log("response status : " + response.status);
                 localStorage.setItem('currentUserEmail', data.email);
@@ -121,7 +135,8 @@ class RegisterCompanyModalComponent extends Component {
                         "password":this.state.password,
                         "phone_number":this.state.phone_number,
                         "website":this.state.website,
-                        "about_me":this.state.about_me };
+                        "about_me":this.state.about_me,
+                        "profile_picture":this.state.profile_picture };
 
         for (var x in this.state.website) {
             var datum = this.state.website[x];
@@ -208,7 +223,7 @@ class RegisterCompanyModalComponent extends Component {
                 <Modal.Body>
                 <RegisterCompanyFormSecond errors={errors} state={this.state} handleChange={this.handleChange} 
                         handleChangeField={this.handleChangeField} handleChangeWebsite={this.handleChangeWebsite}
-                        handleRemoveClick={this.handleRemoveClick} handleAddClick={this.handleAddClick}/>
+                        handleRemoveClick={this.handleRemoveClick} handleAddClick={this.handleAddClick} handleChangePicture={this.handleChangePicture}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={this.handlePrev}> קודם </Button>    

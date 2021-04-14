@@ -13,7 +13,7 @@ class NewProjectModalComponent extends Component {
     }
 
     getInitialState = () => ({
-        company_id: "5",
+        company_id: "1",
         field: [],
         status: "todo",
         description: "",
@@ -33,8 +33,8 @@ class NewProjectModalComponent extends Component {
     validate = () => {
         let errors = {};
         
-        if (this.state.description === '') errors.description = 'Please tell us about your project.';
-        if (this.state.field === [] || this.state.field === null || this.state.field.length === 0) errors.field = 'Please enter the field of work.';
+        if (this.state.description === '') errors.description = 'שדה זה הינו חובה.';
+        if (this.state.field === [] || this.state.field === null || this.state.field.length === 0) errors.field = 'שדה זה הינו חובה.';
         return errors;
     }
 
@@ -113,7 +113,7 @@ class NewProjectModalComponent extends Component {
                     </FormGroup>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> Submit </Button>       
+                    <Button variant="primary" onClick={() => this.handleSubmit(this.props.toggle)}> אישור </Button>       
                 </Modal.Footer>
                 {showAlert}
             </Modal>

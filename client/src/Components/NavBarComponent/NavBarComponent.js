@@ -11,7 +11,7 @@ const NavBarComponent = () => {
     const noUserLoggedIn = <Nav className="mr-auto">
                                 <Nav.Link className="mr-auto" href="/register">הירשם</Nav.Link>
                                 <Nav.Link className="ml-auto" href="/login">התחבר</Nav.Link>
-                                {/* <Nav.Item className="mr-auto" onClick={handeLogout}>התנתק</Nav.Item> */}
+                                <Nav.Link className="mr-auto" href="/logout">התנתק</Nav.Link>
                             </Nav>;
     const userLoggedIn = <Nav className="mr-auto">
                             <Nav.Link className="mr-auto" href="/logout">התנתק</Nav.Link>

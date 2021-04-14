@@ -19,6 +19,7 @@ class RegisterJuniorModalComponent extends Component {
         field: [],
         website: [{label: 'אתר אישי', url: ''}],
         about_me: '',
+        profile_picture: '',
         errors: {},
         submit_error: '',
         visible_success: false,
@@ -102,6 +103,22 @@ class RegisterJuniorModalComponent extends Component {
         }
     }
 
+    _handleReaderLoaded = (readerEvt) => {
+        let binaryString = btoa(readerEvt.target.result);
+        // console.log("binary string : " + binaryString);
+        this.setState({profile_picture: binaryString});
+    }
+
+    handleChangePicture = selected => {
+        let file = selected.target.files[0];
+        // console.log("selected : " , file);
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = this._handleReaderLoaded.bind(this);
+            reader.readAsBinaryString(file);
+        }
+    }
+
     submitForm = (data) => {
         this.setState({loading:true}, () => {
             const url = '/api/auth/junior_register';
@@ -109,7 +126,6 @@ class RegisterJuniorModalComponent extends Component {
             .then(response => {
                 this.setState({loading: false});
                 this.setState({visible_success : true});
-                console.log("respone :" + response);
                 console.log("respone data : " + response.data);
                 console.log("response status : " + response.status);
                 localStorage.setItem('currentUserEmail', data.email);
@@ -125,14 +141,15 @@ class RegisterJuniorModalComponent extends Component {
         })
     }
 
-    handleSubmit = (toggle) => {
+    handleSubmit = () => {
         const errors = this.validateSecond();
         const data = { "full_name":this.state.full_name, 
                         "email":this.state.email,
                         "password":this.state.password,
                         "phone_number":this.state.phone_number,
                         "field":this.state.field,
-                        "about_me":this.state.about_me };
+                        "about_me":this.state.about_me,
+                        "profile_picture":this.state.profile_picture };
 
         for (var x in this.state.website) {
             var datum = this.state.website[x];
@@ -158,6 +175,7 @@ class RegisterJuniorModalComponent extends Component {
         }
 
         if (Object.keys(errors).length === 0) {
+            console.log("data : ", data);
             this.submitForm(data); // send the data to the server
         } else {
             this.setState({ errors : errors });
@@ -224,7 +242,7 @@ class RegisterJuniorModalComponent extends Component {
                 <Modal.Body> 
                     <RegisterJuniorFormSecond errors={errors} state={this.state} handleChange={this.handleChange} 
                         handleChangeField={this.handleChangeField} handleChangeWebsite={this.handleChangeWebsite}
-                        handleRemoveClick={this.handleRemoveClick} handleAddClick={this.handleAddClick}/>
+                        handleRemoveClick={this.handleRemoveClick} handleAddClick={this.handleAddClick} handleChangePicture={this.handleChangePicture}/>
                 </Modal.Body>
                 <Modal.Footer> 
                     <Button variant="primary" onClick={this.handlePrev}> קודם </Button>    

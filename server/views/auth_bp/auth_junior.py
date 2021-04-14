@@ -17,6 +17,7 @@ def junior_register():
             data.get('full_name'),
             data.get('phone_number'),
             data.get('field'),
+            data.get('profile_picture'),
             data.get('personal_url'),
             data.get('facebook_url'),
             data.get('instagram_url'),

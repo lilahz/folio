@@ -27,12 +27,12 @@ render() {
             className="JuniorModal">
             <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter">
-                {this.props.modalTitle}
+               <b>{this.props.modalTitle}</b>
             </Modal.Title>
             </Modal.Header>
             <Modal.Body style={{textAlign: "right"}}>
-                יכול/ה לסייע עם: {this.props.modalField} <br />
-                קצת עליי: {this.props.modalDescription}
+                <u>יכול/ה לסייע עם</u><br/> {this.props.modalField} <br />
+                <u>קצת עליי</u><br/> {this.props.modalDescription}
             </Modal.Body>
             <Modal.Footer>
                 <Row>

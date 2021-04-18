@@ -60,7 +60,7 @@ class JuniorComponent extends Component {
                         modalPersonalURL={this.props.cardPersonalURL}
                         modalFacebookURL={this.props.cardFacebookURL}
                         modalInstagramURL={this.props.cardInstagramURL}
-                        modalLinkInURL={this.props.cardLinkedInURL}
+                        modalLinkedInURL={this.props.cardLinkedInURL}
                         modalGitHubURL={this.props.cardGitHubURL}
                     />
                     </MDBCard>

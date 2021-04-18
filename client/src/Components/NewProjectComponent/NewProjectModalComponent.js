@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
 import {Alert, Button, FormGroup, FormFeedback, Input} from 'reactstrap';
+import axios from 'axios';
+
 import FilterComponent from '../HomeComponent/FilterComponent';
 import {field_array} from '../HomeComponent/data';
-import axios from 'axios';
+import { UserContext } from '../../UserContext';
 
 
 class NewProjectModalComponent extends Component {
@@ -20,6 +22,8 @@ class NewProjectModalComponent extends Component {
         errors: {},
         visible : false
     });
+
+    static contextType = UserContext;
 
     onShowAlert = (toggle) =>{
         this.setState({visible:true},()=>{
@@ -80,6 +84,7 @@ class NewProjectModalComponent extends Component {
 
 
     render() {
+        const context = this.context;
         const { errors } = this.state;
         const showAlert = this.state.visible ? 
                     <Alert style={{textAlign:"center"}} variant="success">
@@ -97,7 +102,7 @@ class NewProjectModalComponent extends Component {
                 <Modal.Body>
                     <FormGroup>
                         <Input id="company_name" type="text" value={this.state.company_name} 
-                                 placeholder={localStorage.getItem('currentUserEmail')} disabled/>
+                                 placeholder={context.mail} disabled/>
                     </FormGroup>
                     <FormGroup>
                         <FilterComponent    

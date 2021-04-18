@@ -11,6 +11,7 @@ import classes from './LogoutComponent.module.css';
 const LogoutComponent = (props) => {
     const [open, setOpen] = useState(false);
     const user = useContext(UserContext);
+    console.log(user.type);
 
     useEffect(() => {
         const url = user.type === 'junior' ? '/api/auth/junior_logout' : '/api/auth/company_logout';
@@ -25,11 +26,12 @@ const LogoutComponent = (props) => {
             user.setType('');
 
             setTimeout(() => {
+                console.log("pushing to history");
                 props.history.push('/');
             }, 1500);
         })
         .catch(error => {
-            console.log("response error " , error.response); 
+            console.log("response error " , error.response.data);
         })
     }, []);
 

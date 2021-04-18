@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
-import {Row, Col} from 'react-bootstrap';
-import {MDBBtn, MDBRow} from 'mdbreact';
+import {MDBBtn} from 'mdbreact';
+import { VscNewFile } from 'react-icons/vsc';
+import Tooltip from "@material-ui/core/Tooltip";
 
 import ProjectCarouselComponent from '../HomeComponent/ProjectComponent/ProjectCarouselComponent';
 import NewProjectModalComponent from '../NewProjectComponent/NewProjectModalComponent'
 import classes from  './LandingComponent.module.css';
 import logo from './images/landing_image.png';
-import { VscNewFile } from 'react-icons/vsc';
-import Tooltip from "@material-ui/core/Tooltip";
+import { UserContext } from '../../UserContext';
 
 class LandingComponent extends Component {
     state = {
         modal: false
     }
+    static contextType = UserContext;
 
     registerClickHandler = () => {
         console.log("registering");
@@ -24,29 +25,14 @@ class LandingComponent extends Component {
     }
 
     render () {
+        const context = this.context;
+
         return (
             <div>
             <div className={classes.Landing}>
                 <div className={classes.LandingLeft}>
                     <h1><b>PRO</b><span>jects</span></h1>
                     <p>יצירת פלטפורמה המחברת בין זוטרים לעמותות ועסקים קטנים. הצעירים יצברו את הניסיון שחסר להם והעסקים יקבלו את השירותים להם הם זקוקים.</p>
-                    {/* <div>
-                        <Button 
-                            href="/login"
-                            variant="outline-secondary"
-                            style={{margin: "8px"}}
-                            block>
-                            LOG IN
-                        </Button>
-                        <Button 
-                            href="/register"
-                            variant="outline-secondary"
-                            style={{margin: "8px"}}
-                            block
-                            onClick={this.registerClickHandler}>
-                            REGISTER
-                        </Button>
-                    </div> */}
                 </div>
                 <div className={classes.LandingRight}>
                     <img src={logo} alt=""/>
@@ -57,14 +43,14 @@ class LandingComponent extends Component {
                 <MDBBtn className={classes.LandingBottomButton} href="/home/projects">הפרוייקטים שלנו</MDBBtn>
                     {/* <h2>Our Open Projects</h2> */}
                 </Tooltip>
-                <Tooltip title="New Project" position="right" >
+                {context.mail !== null && context.type === 'company' ? <Tooltip title="New Project" position="right" >
                     <Button 
                         className={classes.NewProject}
                         variant="outline-secondary"
                         onClick = { this.toggle }>
                         <VscNewFile size={16}/>
                     </Button>
-                </Tooltip>
+                </Tooltip> : null}
             </div>
             {/* <Row>
                 <Col xs={12} md={8} className="text-center"> 

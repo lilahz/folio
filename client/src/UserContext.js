@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-const UserContext = React.createContext();
+const UserContext = React.createContext({});
 
 const UserProvider = ({children}) => {
     const [mail, setMail] = useState('');

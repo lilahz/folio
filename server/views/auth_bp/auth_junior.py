@@ -71,6 +71,5 @@ def unauthorized(): # Redirect unauthorized users to Login page.
 # @login_manager.user_loader determines wether or not the user is logged in
 # & @login_manager.unauthorized_handler - if the user is not logged in
 def junior_logout():
-    # pdb.set_trace()
     logout_user()
     return jsonify({'message': 'success'})

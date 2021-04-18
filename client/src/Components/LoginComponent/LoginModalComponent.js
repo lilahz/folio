@@ -10,7 +10,6 @@ import { UserContext } from '../../UserContext';
 class LoginModalComponent extends Component {
     constructor(props) {
         super(props);
-        this.user = UserContext;
         this.state = this.getInitialState();
     }
 
@@ -54,7 +53,7 @@ class LoginModalComponent extends Component {
             const context = this.context;
             axios.post(url, data)
             .then(response => {
-                console.log("respone data : " + response.data);
+                console.log("respone data : ", response.data);
                 this.setState({loading: false});
                 this.setState({visible_error : false});
                 context.setMail(data.email);

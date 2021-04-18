@@ -98,7 +98,7 @@ class AllProjects extends Component {
                         <ProjectsComponent projects = {this.state.currProjectsArray}/> ; 
         return (
             <div className={classes.AllProjects}>
-                <h1 className="ProjectListHeader">כל הפרוייקטים </h1>
+                <h1 className="ListHeader">כל הפרוייקטים </h1>
                 <div className="container">
                     <div className={classes.Filters} >
                         <div className="col-4 text-center " style={{margin : 'auto 30px'}}>

@@ -1,6 +1,6 @@
 .App {
   background-color: #87cefa;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 /* .App-logo {

@@ -40,20 +40,20 @@ class JuniorComponent extends Component {
     render () {
         return (
             <div className="Item">
-                <MDBCol style={{ maxWidth: "22rem"}}>
-                    <MDBCard style={{boxShadow: "0 8px 6px -6px #4d4d4d"}}>
+                <MDBCol>
+                    <MDBCard className="Card">
                     <View hover zoom>
                         <MDBCardImage 
-                            className="img-fluid rounded mb-0" 
+                            className="Picture" 
                             src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                             waves />
                         <Mask className="flex-center"overlay="white-light">
                             <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
                         </Mask>
                     </View>
-                    <MDBCardBody className="ItemBody">
-                        <MDBCardTitle className="text-center">{this.props.cardTitle}</MDBCardTitle>
-                        <MDBCardText>{this.fieldArrayIconForCard(this.props.cardField)}</MDBCardText>
+                    <MDBCardBody className="Body">
+                        <MDBCardTitle className="Title">{this.props.cardTitle}</MDBCardTitle>
+                        <MDBCardText className="Fields">{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                     </MDBCardBody>
                     <JuniorModalComponent className="Modal"
                         isOpen={this.state.modal} 

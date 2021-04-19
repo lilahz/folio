@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {View, Mask, MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle ,MDBBtn, MDBCardText} from 'mdbreact';
-
 import '../ItemComponent.css';
-import classes from './ProjectComponent.module.css';
 import ProjectModalComponent from './ProjectModalComponent';
 import {field_array} from '../data';
 
@@ -36,20 +34,20 @@ class ProjectComponent extends Component {
     render () {
         return (
             <div className="Item">
-                <MDBCol style={{ maxWidth: "22rem"}}>
-                    <MDBCard className={classes.ProjectComponent} style={{boxShadow: "0 8px 6px -6px #4d4d4d"}} background='white'>
+                <MDBCol>
+                    <MDBCard className="Card">
                     <View hover zoom>
                         <MDBCardImage
-                            className="img-fluid rounded mb-0 "
+                            className="Picture"
                             src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                             waves />
                         <Mask className="flex-center" overlay="white-light">
                             <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
                         </Mask>
                     </View>
-                        <MDBCardBody className={classes.ProjectBody}>
-                            <MDBCardTitle className={classes.ProjectTitle}>{this.props.cardTitle}</MDBCardTitle>
-                            <MDBCardText className={classes.ProjectText}>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                        <MDBCardBody className="Body">
+                            <MDBCardTitle className="Title">{this.props.cardTitle}</MDBCardTitle>
+                            <MDBCardText className="Fields">{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                         </MDBCardBody>
                         <ProjectModalComponent className="Modal"
                             isOpen={this.state.modal} 

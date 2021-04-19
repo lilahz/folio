@@ -27,11 +27,12 @@ class Project(db.Model):
         db.session.add(new_project)
         db.session.commit()
 
-    def dump(self, company_name, company_email, company_description, company_url, facebook_url, instagram_url):
+    def dump(self, company_name, company_email, company_description, company_profile_picture=None, company_url=None, facebook_url=None, instagram_url=None):
         return {'id': self.id,
                 'company_name': company_name,
                 'company_email': company_email,
                 'company_description': company_description,
+                'company_profile_picture' : company_profile_picture,
                 'description': self.description,
                 'field': self.field,
                 'status': self.status,

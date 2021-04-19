@@ -39,7 +39,9 @@ class ProjectComponent extends Component {
                     <View hover zoom>
                         <MDBCardImage
                             className="Picture"
-                            src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
+                            src={this.props.cardImage 
+                                ? `data:image/jpeg;base64,${this.props.cardImage}` 
+                                : "https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"} 
                             waves />
                         <Mask className="flex-center" overlay="white-light">
                             <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>

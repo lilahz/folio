@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import { MDBBtn} from 'mdbreact';
-import { FaFacebookSquare, FaLinkedinIn, FaEnvelopeSquare, FaGithubSquare, FaInstagramSquare, FaHome } from 'react-icons/fa';
 import {Row} from 'react-bootstrap';
 import Modal from "react-bootstrap/Modal";
+import { SocialIcon } from 'react-social-icons';
 
 class JuniorModalComponent extends Component {
 
 render() {
 
-    const email_button = 
-        <MDBBtn className="col-sm-2" href={"mailto:" + this.props.modalEmail + "?subject=Bla"}>
-            <FaEnvelopeSquare size={25}/>
-        </MDBBtn>
-    const personalURL_button = this.props.modalPersonalURL ? <MDBBtn className="col-sm-2" href={this.props.modalCompanyURL} target="_blank"><FaHome size={25}/></MDBBtn> : null;
-    const facebookURL_button = this.props.modalFacebookURL ? <MDBBtn className="col-sm-2" href={this.props.modalFacebookURL} target="_blank"><FaFacebookSquare size={25}/></MDBBtn> : null;
-    const instagramURL_button = this.props.modalInstagramURL ? <MDBBtn className="col-sm-2" href={this.props.modalInstagramURL} target="_blank"><FaInstagramSquare size={25}/></MDBBtn> : null;
-    const linkedInURL_button = this.props.modalLinkedInURL ? <MDBBtn className="col-sm-2" href={this.props.modalLinkedInURL} target="_blank"><FaLinkedinIn size={25}/></MDBBtn> : null;
-    const gitHubURL_button = this.props.modalGitHubURL ? <MDBBtn className="col-sm-2" href={this.props.modalGitHubURL} target="_blank"><FaGithubSquare size={25}/></MDBBtn> : null;
+    const email_button = <SocialIcon network="mailto" url={"mailto:" + this.props.modalEmail + "?subject=Bla"} />;
+
+    const personalURL_button = this.props.modalPersonalURL 
+                                ? <SocialIcon url={this.props.modalCompanyURL} target="_blank" />
+                                : null;
+    const facebookURL_button = this.props.modalFacebookURL
+                                ? <SocialIcon url={this.props.modalFacebookURL} target="_blank" />
+                                : null;
+    const instagramURL_button = this.props.modalInstagramURL
+                                ? <SocialIcon url={this.props.modalInstagramURL} target="_blank" />
+                                : null;
+    const linkedInURL_button = this.props.modalLinkInURL 
+                                ? <SocialIcon url={this.props.modalLinkInURL} target="_blank" />
+                                : null;
+    const gitHubURL_button = this.props.modalGitHubURL
+                                ? <SocialIcon url={this.props.modalGitHubURL} target="_blank" />
+                                : null;
 
     return (
         <Modal show={this.props.isOpen} onHide={this.props.toggle} key={this.props.key}
@@ -27,12 +34,12 @@ render() {
             className="JuniorModal">
             <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter">
-                {this.props.modalTitle}
+               <b>{this.props.modalTitle}</b>
             </Modal.Title>
             </Modal.Header>
             <Modal.Body style={{textAlign: "right"}}>
-                יכול/ה לסייע עם: {this.props.modalField} <br />
-                קצת עליי: {this.props.modalDescription}
+                <u>יכול/ה לסייע עם</u><br/> {this.props.modalField} <br />
+                <u>קצת עליי</u><br/> {this.props.modalDescription}
             </Modal.Body>
             <Modal.Footer>
                 <Row>

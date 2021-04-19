@@ -17,6 +17,7 @@ def junior_register():
             data.get('full_name'),
             data.get('phone_number'),
             data.get('field'),
+            data.get('profile_picture'),
             data.get('personal_url'),
             data.get('facebook_url'),
             data.get('instagram_url'),
@@ -53,6 +54,16 @@ def junior_login():
         return jsonify({'error': 'no_exists'}), 403
     else:
         return jsonify({'error': 'wrong_password'}), 403
+
+
+def junior_delete():
+    data = request.json
+    email = data.get('email')
+    junior = Junior.query.filter_by(email=email).first() # check if this email exists
+    if junior is not None:
+        Junior.delete_junior(email)
+        return jsonify({'message': 'success'}), 200
+    return jsonify({'error': 'email_doesnt_exist'}), 403
 
 
 @login_manager.user_loader

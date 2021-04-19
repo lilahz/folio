@@ -13,7 +13,7 @@ class Junior(UserMixin, db.Model):
     full_name = db.Column(db.String(120), nullable=False)
     phone_number = db.Column(db.Text)
     field = db.Column(db.ARRAY(db.String(50))) 
-    # image = db.Column()
+    profile_picture = db.Column(db.String())
     personal_url = db.Column(db.String())
     facebook_url = db.Column(db.String())
     instagram_url = db.Column(db.String())
@@ -21,11 +21,12 @@ class Junior(UserMixin, db.Model):
     gitHub_url = db.Column(db.String())
     about_me = db.Column(db.Text)
 
-    def __init__(self, email, full_name, phone_number, field, personal_url, facebook_url, instagram_url, linkedIn_url, gitHub_url ,about_me):
+    def __init__(self, email, full_name, phone_number, field, profile_picture, personal_url, facebook_url, instagram_url, linkedIn_url, gitHub_url ,about_me):
         self.email = email
         self.full_name = full_name
         self.phone_number = phone_number
         self.field = field
+        self.profile_picture = profile_picture
         self.personal_url = personal_url
         self.facebook_url = facebook_url
         self.instagram_url = instagram_url
@@ -49,12 +50,17 @@ class Junior(UserMixin, db.Model):
         db.session.add(new_junior)
         db.session.commit()
 
+    def delete_junior(junior_email):
+        d = Junior.delete().where(Junior.email == junior_email)
+        d.execute()
+
     def dump(self):
         return {'id': self.id,
                 'email': self.email,
                 'full_name': self.full_name,
                 'phone_number': self.phone_number,
                 'field': self.field,
+                'profile_picture': self.profile_picture,
                 'personal_url': self.personal_url,
                 'facebook_url': self.facebook_url,
                 'instagram_url': self.instagram_url,

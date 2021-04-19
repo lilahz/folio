@@ -17,9 +17,9 @@ const TeamComponent = props => {
                     <MDBCardBody>
                         <MDBCardTitle>{props.cardTitle}</MDBCardTitle>
                         <MDBCardText>{props.cardText}</MDBCardText>
-                        <MDBBtn className="col-sm-4" href={props.cardFB}>
+                        <MDBBtn className="col-sm-4" href={props.cardFB} target="_blank">
                             <FaFacebookSquare size={30}/></MDBBtn>
-                        <MDBBtn className="col-sm-4" href={props.cardLD}>
+                        <MDBBtn className="col-sm-4" href={props.cardLD} target="_blank">
                             <FaLinkedin size={30}/></MDBBtn>
                     </MDBCardBody>
                 </MDBCard>

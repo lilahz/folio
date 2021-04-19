@@ -27,8 +27,13 @@ class JuniorComponent extends Component {
         })
     );
     
-    fieldArrayIcon = (juniorFields) => (
+    fieldArrayIconForCard = (juniorFields) => (
         juniorFields.slice(0,3).map((field) => (
+                (this.findArrayElementByField(field) === undefined ? "" : this.ValueOption(this.findArrayElementByField(field)))))
+    );
+
+    fieldArrayIconForLearnMore = (juniorFields) => (
+        juniorFields.map((field) => (
                 (this.findArrayElementByField(field) === undefined ? "" : this.ValueOption(this.findArrayElementByField(field)))))
     );
 
@@ -55,12 +60,12 @@ class JuniorComponent extends Component {
                         toggle={this.toggle}
                         modalTitle={this.props.cardTitle}
                         modalDescription={this.props.cardText}
-                        modalField={this.fieldArrayIcon(this.props.cardField)}
+                        modalField={this.fieldArrayIconForLearnMore(this.props.cardField)}
                         modalEmail={this.props.cardEmail}
                         modalPersonalURL={this.props.cardPersonalURL}
                         modalFacebookURL={this.props.cardFacebookURL}
                         modalInstagramURL={this.props.cardInstagramURL}
-                        modalLinkInURL={this.props.cardLinkedInURL}
+                        modalLinkedInURL={this.props.cardLinkedInURL}
                         modalGitHubURL={this.props.cardGitHubURL}
                     />
                     </MDBCard>

@@ -14,9 +14,9 @@ class ProjectModalComponent extends Component {
         <MDBBtn className="col-sm-2" href={"mailto:" + this.props.modalEmail + "?subject=Bla"}>
             <FaEnvelopeSquare size={25}/>
         </MDBBtn>
-        const companyURL_button = this.props.modalCompanyURL ? <MDBBtn className="col-sm-2" href={this.props.modalCompanyURL}><FaHome size={25}/></MDBBtn> : null;
-        const facebookURL_button = this.props.modalFacebookURL ? <MDBBtn className="col-sm-2" href={this.props.modalFacebookURL}><FaFacebookSquare size={25}/></MDBBtn> : null;
-        const instagramURL_button = this.props.modalInstagramURL ? <MDBBtn className="col-sm-2" href={this.props.modalInstagramURL}><FaInstagramSquare size={25}/></MDBBtn> : null;
+        const companyURL_button = this.props.modalCompanyURL ? <MDBBtn className="col-sm-2" href={this.props.modalCompanyURL} target="_blank"><FaHome size={25}/></MDBBtn> : null;
+        const facebookURL_button = this.props.modalFacebookURL ? <MDBBtn className="col-sm-2" href={this.props.modalFacebookURL} target="_blank"><FaFacebookSquare size={25}/></MDBBtn> : null;
+        const instagramURL_button = this.props.modalInstagramURL ? <MDBBtn className="col-sm-2" href={this.props.modalInstagramURL} target="_blank"><FaInstagramSquare size={25}/></MDBBtn> : null;
 
         return (
             <Modal show={this.props.isOpen} onHide={this.props.toggle} key={this.props.key}

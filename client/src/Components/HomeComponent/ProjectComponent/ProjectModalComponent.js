@@ -13,13 +13,13 @@ class ProjectModalComponent extends Component {
     render() {
         const email_button = <SocialIcon network="mailto" url={"mailto:" + this.props.modalEmail + "?subject=Bla"} />
         const companyURL_button = this.props.modalCompanyURL
-                                    ? <SocialIcon url={this.props.modalCompanyURL} />
+                                    ? <SocialIcon url={this.props.modalCompanyURL} target="_blank" />
                                     : null;
         const facebookURL_button = this.props.modalFacebookURL
-                                    ? <SocialIcon url={this.props.modalFacebookURL} />
+                                    ? <SocialIcon url={this.props.modalFacebookURL} target="_blank" />
                                     : null;
         const instagramURL_button = this.props.modalInstagramURL
-                                    ? <SocialIcon url={this.props.modalInstagramURL} />
+                                    ? <SocialIcon url={this.props.modalInstagramURL} target="_blank" />
                                     : null;
 
         return (

@@ -27,19 +27,24 @@ class JuniorComponent extends Component {
         })
     );
     
-    fieldArrayIcon = (juniorFields) => (
+    fieldArrayIconForCard = (juniorFields) => (
         juniorFields.slice(0,3).map((field) => (
+                (this.findArrayElementByField(field) === undefined ? "" : this.ValueOption(this.findArrayElementByField(field)))))
+    );
+
+    fieldArrayIconForLearnMore = (juniorFields) => (
+        juniorFields.map((field) => (
                 (this.findArrayElementByField(field) === undefined ? "" : this.ValueOption(this.findArrayElementByField(field)))))
     );
 
     render () {
         return (
             <div className="Item">
-                <MDBCol style={{ maxWidth: "22rem"}}>
-                    <MDBCard style={{boxShadow: "0 8px 6px -6px #4d4d4d"}}>
+                <MDBCol>
+                    <MDBCard className="Card">
                     <View hover zoom>
                         <MDBCardImage 
-                            className="img-fluid rounded mb-0" 
+                            className="Picture" 
                             src={this.props.cardImage ?
                                 `data:image/jpeg;base64,${this.props.cardImage}` :
                                 "https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"}
@@ -48,21 +53,21 @@ class JuniorComponent extends Component {
                             <MDBBtn onClick = { this.toggle }>קצת פרטים</MDBBtn>
                         </Mask>
                     </View>
-                    <MDBCardBody className="ItemBody">
-                        <MDBCardTitle className="text-center">{this.props.cardTitle}</MDBCardTitle>
-                        <MDBCardText>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                    <MDBCardBody className="Body">
+                        <MDBCardTitle className="Title">{this.props.cardTitle}</MDBCardTitle>
+                        <MDBCardText className="Fields">{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
                     </MDBCardBody>
                     <JuniorModalComponent className="Modal"
                         isOpen={this.state.modal} 
                         toggle={this.toggle}
                         modalTitle={this.props.cardTitle}
                         modalDescription={this.props.cardText}
-                        modalField={this.fieldArrayIcon(this.props.cardField)}
+                        modalField={this.fieldArrayIconForLearnMore(this.props.cardField)}
                         modalEmail={this.props.cardEmail}
                         modalPersonalURL={this.props.cardPersonalURL}
                         modalFacebookURL={this.props.cardFacebookURL}
                         modalInstagramURL={this.props.cardInstagramURL}
-                        modalLinkInURL={this.props.cardLinkedInURL}
+                        modalLinkedInURL={this.props.cardLinkedInURL}
                         modalGitHubURL={this.props.cardGitHubURL}
                     />
                     </MDBCard>

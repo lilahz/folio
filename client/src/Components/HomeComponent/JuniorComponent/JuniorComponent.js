@@ -27,8 +27,13 @@ class JuniorComponent extends Component {
         })
     );
     
-    fieldArrayIcon = (juniorFields) => (
+    fieldArrayIconForCard = (juniorFields) => (
         juniorFields.slice(0,3).map((field) => (
+                (this.findArrayElementByField(field) === undefined ? "" : this.ValueOption(this.findArrayElementByField(field)))))
+    );
+
+    fieldArrayIconForLearnMore = (juniorFields) => (
+        juniorFields.map((field) => (
                 (this.findArrayElementByField(field) === undefined ? "" : this.ValueOption(this.findArrayElementByField(field)))))
     );
 
@@ -48,14 +53,14 @@ class JuniorComponent extends Component {
                     </View>
                     <MDBCardBody className="ItemBody">
                         <MDBCardTitle className="text-center">{this.props.cardTitle}</MDBCardTitle>
-                        <MDBCardText>{this.fieldArrayIcon(this.props.cardField)}</MDBCardText>
+                        <MDBCardText>{this.fieldArrayIconForCard(this.props.cardField)}</MDBCardText>
                     </MDBCardBody>
                     <JuniorModalComponent className="Modal"
                         isOpen={this.state.modal} 
                         toggle={this.toggle}
                         modalTitle={this.props.cardTitle}
                         modalDescription={this.props.cardText}
-                        modalField={this.fieldArrayIcon(this.props.cardField)}
+                        modalField={this.fieldArrayIconForLearnMore(this.props.cardField)}
                         modalEmail={this.props.cardEmail}
                         modalPersonalURL={this.props.cardPersonalURL}
                         modalFacebookURL={this.props.cardFacebookURL}

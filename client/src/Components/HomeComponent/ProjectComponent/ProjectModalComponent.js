@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import { MDBBtn} from 'mdbreact';
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from '@material-ui/core/Fade';
-import { FaFacebookSquare, FaInstagramSquare, FaEnvelopeSquare, FaHome} from 'react-icons/fa';
 import {IoPersonAdd} from 'react-icons/io5'
 import {Row} from 'react-bootstrap';
 import Modal from "react-bootstrap/Modal";
+import { SocialIcon } from 'react-social-icons';
+
 
 class ProjectModalComponent extends Component {
 
     render() {
-        const email_button = 
-        <MDBBtn className="col-sm-2" href={"mailto:" + this.props.modalEmail + "?subject=Bla"}>
-            <FaEnvelopeSquare size={25}/>
-        </MDBBtn>
-        const companyURL_button = this.props.modalCompanyURL ? <MDBBtn className="col-sm-2" href={this.props.modalCompanyURL}><FaHome size={25}/></MDBBtn> : null;
-        const facebookURL_button = this.props.modalFacebookURL ? <MDBBtn className="col-sm-2" href={this.props.modalFacebookURL}><FaFacebookSquare size={25}/></MDBBtn> : null;
-        const instagramURL_button = this.props.modalInstagramURL ? <MDBBtn className="col-sm-2" href={this.props.modalInstagramURL}><FaInstagramSquare size={25}/></MDBBtn> : null;
+        const email_button = <SocialIcon network="mailto" url={"mailto:" + this.props.modalEmail + "?subject=Bla"} />
+        const companyURL_button = this.props.modalCompanyURL
+                                    ? <SocialIcon url={this.props.modalCompanyURL} />
+                                    : null;
+        const facebookURL_button = this.props.modalFacebookURL
+                                    ? <SocialIcon url={this.props.modalFacebookURL} />
+                                    : null;
+        const instagramURL_button = this.props.modalInstagramURL
+                                    ? <SocialIcon url={this.props.modalInstagramURL} />
+                                    : null;
 
         return (
             <Modal show={this.props.isOpen} onHide={this.props.toggle} key={this.props.key}
@@ -36,10 +40,10 @@ class ProjectModalComponent extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Row>
-                        <Tooltip title="Join Project" placement="left-start" TransitionComponent={Fade} enterDelay={100} leaveDelay={100}>
+                        {/* <Tooltip title="Join Project" placement="left-start" TransitionComponent={Fade} enterDelay={100} leaveDelay={100}>
                             <MDBBtn className="float-left col-sm-2" href="#" >
                                 <IoPersonAdd size={25}/></MDBBtn>
-                        </Tooltip>
+                        </Tooltip> */}
                         <div className="float-right">
                            {email_button}
                            {companyURL_button}

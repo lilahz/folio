@@ -56,6 +56,16 @@ def junior_login():
         return jsonify({'error': 'wrong_password'}), 403
 
 
+def junior_delete():
+    data = request.json
+    email = data.get('email')
+    junior = Junior.query.filter_by(email=email).first() # check if this email exists
+    if junior is not None:
+        Junior.delete_junior(email)
+        return jsonify({'message': 'success'}), 200
+    return jsonify({'error': 'email_doesnt_exist'}), 403
+
+
 @login_manager.user_loader
 def load_user(user_id):  # Checks if user is logged-in on every page load.
     if user_id is not None:

@@ -39,6 +39,10 @@ class Company(UserMixin, db.Model):
         db.session.add(new_company)
         db.session.commit()
 
+    def delete_company(company_email):
+        d = Company.delete().where(Company.email == company_email)
+        d.execute()
+
     def get_company_name_by_id(id):
         result = db.session.query(Company.company_name).filter(Company.id==id).first()
         return result[0]

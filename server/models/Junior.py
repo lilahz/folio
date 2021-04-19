@@ -50,6 +50,10 @@ class Junior(UserMixin, db.Model):
         db.session.add(new_junior)
         db.session.commit()
 
+    def delete_junior(junior_email):
+        d = Junior.delete().where(Junior.email == junior_email)
+        d.execute()
+
     def dump(self):
         return {'id': self.id,
                 'email': self.email,

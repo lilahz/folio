@@ -26,13 +26,14 @@ def get_all_juniors():
 def get_all_projects():
     all_projects = Project.get_projects()
     json_string = json.dumps(
-        [project.dump(Company.get_company_name_by_id(project.company_id), 
-            Company.get_company_email_by_id(project.company_id),
-            Company.get_company_description_by_id(project.company_id),
-            Company.get_profile_picture_by_id(project.company_id),
-            Company.get_company_url_by_id(project.company_id),
-            Company.get_facebook_url_by_id(project.company_id),
-            Company.get_instagram_url_by_id(project.company_id)) 
+        [project.dump(
+            company_name=Company.get_company_name_by_id(project.company_id), 
+            company_email=Company.get_company_email_by_id(project.company_id),
+            company_description=Company.get_company_description_by_id(project.company_id),
+            company_profile_picture=Company.get_profile_picture_by_id(project.company_id),
+            company_url=Company.get_company_url_by_id(project.company_id),
+            facebook_url=Company.get_facebook_url_by_id(project.company_id),
+            instagram_url=Company.get_instagram_url_by_id(project.company_id)) 
             for project in all_projects])
     return json_string
 

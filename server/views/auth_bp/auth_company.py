@@ -4,15 +4,6 @@ from flask_login import login_required, logout_user, current_user, login_user
 from server.models.Company import Company
 from server.models import login_manager
 
-def check_if_user_exists():
-    data = request.json
-    email = data.get('email')
-    company = Company.query.filter_by(email=email).first() # check if this email is already registered
-    if company is None:
-        return jsonify({'message': 'User does not exists'}), 200
-    else:
-        return jsonify({'error': 'User already exists with that email address'}), 403
-
 def company_register():
     # Bypass if user is logged in
     if current_user.is_authenticated:
@@ -71,6 +62,16 @@ def company_login():
         return jsonify({'error': 'no_exists'}), 403
     else:
         return jsonify({'error': 'wrong_password'}), 403
+
+
+def company_delete():
+    data = request.json
+    email = data.get('email')
+    company = Company.query.filter_by(email=email).first() # check if this email exists
+    if company is not None:
+        Company.delete_company(email)
+        return jsonify({'message': 'success'}), 200
+    return jsonify({'error': 'email_doesnt_exist'}), 403
 
 
 @login_manager.user_loader
